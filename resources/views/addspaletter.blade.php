@@ -43,17 +43,17 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="selectError">Наименование организаций</label>
+                        <label class="control-label" for="selectError">Ходатайство организаций</label>
                         <div class="controls">
                             <select id="selectError" name="company" data-rel="chosen">
+
                                 <option name="" selected></option>
-                                @foreach(\App\Http\Controllers\IndexController::$companylist as $key=>$value)
-                                    <option name="{{ $key }}">{{ $value }}</option>
+                                @foreach($completters as $completter)
+                                    <option name="{{ $completter->number }}">{{ $completter->number }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-
 
                     <div class="control-group">
                         <label class="control-label" for="doc">Прикрепите документ</label>

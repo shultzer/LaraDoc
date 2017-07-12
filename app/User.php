@@ -33,4 +33,7 @@
   public function completters (){
     return $this->hasMany('App\Completter');
   }
+    public function spaletters (){
+      return $this->hasMany('App\Spaletter');
+    }
   }

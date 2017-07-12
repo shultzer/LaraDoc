@@ -13,7 +13,8 @@
       'company',
       'volume',
       'reason',
-      'user_id'
+      'user_id',
+      'spaletter_id'
     ];
 
     public function spaletters() {

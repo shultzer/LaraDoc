@@ -15,6 +15,7 @@ Route::get('/', 'IndexController@index');
 Route::get('/addcompletter', 'AdminController@addcompletter')->name('addcompletter');
 Route::post('/addcompletter', 'AdminController@storecompletter')->name('storecompletter');
 Route::get('/addspaletter', 'AdminController@addspaletter')->name('addspaletter');
+  Route::post('/addspaletter', 'AdminController@storespaletter')->name('storespaletter');
 
 Auth::routes();
 
