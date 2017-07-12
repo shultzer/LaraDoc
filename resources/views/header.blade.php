@@ -7,7 +7,8 @@
     <title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
     <meta name="description" content="Bootstrap Metro Dashboard">
     <meta name="author" content="Dennis Ji">
-    <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="keyword"
+          content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <!-- end: Meta -->
     <link href="img/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 
@@ -21,7 +22,8 @@
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link id="base-style" href="css/style.css" rel="stylesheet">
     <link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext'
+          rel='stylesheet' type='text/css'>
     <!-- end: CSS -->
 
 
@@ -47,12 +49,13 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+            <a class="btn btn-navbar" data-toggle="collapse"
+               data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/"><span>JANUX</span></a>
+            <a class="brand" href="/"><span>Белэнерго</span></a>
 
             <!-- start: Header Menu -->
             <div class="nav-no-collapse header-nav">
@@ -99,7 +102,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('addspaletter') }}">
                                     Внесение письма ГПО "Белэнерго"
                                 </a>
                             </li>
@@ -117,20 +120,19 @@
                     </li>
 
                     <!-- start: User Dropdown -->
-                    <li class="dropdown">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="halflings-icon white user"></i> Dennis Ji
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu-title">
-                                <span>Account Settings</span>
-                            </li>
-                            <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-                            <li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                    <!-- end: User Dropdown -->
+
+                    @if (Route::has('login'))
+                        <div class="top-right links">
+                            @if (Auth::check())
+                                <a href="{{ url('/home') }}">Home</a>
+                            @else
+                                <a href="{{ url('/login') }}">Login</a>
+                                <a href="{{ url('/register') }}">Register</a>
+                            @endif
+                        </div>
+                @endif
+
+                <!-- end: User Dropdown -->
                 </ul>
             </div>
             <!-- end: Header Menu -->
@@ -140,21 +142,26 @@
 </div>
 <!-- start: Header -->
 
-<div class="container-fluid-full" >
+<div class="container-fluid-full">
     <div class="row-fluid">
 
         <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+                    <li><a href="/"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a>
+                    </li>
 
                     <li>
-                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>
+                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
+                                    class="label label-important"> 3 </span></a>
                         <ul>
-                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 1</span></a></li>
-                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 2</span></a></li>
-                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li>
+                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span
+                                            class="hidden-tablet"> Sub Menu 1</span></a></li>
+                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span
+                                            class="hidden-tablet"> Sub Menu 2</span></a></li>
+                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
+                                            class="hidden-tablet"> Sub Menu 3</span></a></li>
                         </ul>
                     </li>
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
@@ -167,7 +174,8 @@
         <noscript>
             <div class="alert alert-block span10">
                 <h4 class="alert-heading">Warning!</h4>
-                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                    enabled to use this site.</p>
             </div>
         </noscript>
         <div id="content" class="span10">

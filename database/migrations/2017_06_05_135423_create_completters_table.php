@@ -18,9 +18,9 @@
         $table->text('date');
         $table->text('doc');
         $table->text('company');
-        $table->text('property');
-        $table->text('volume');
+        $table->text('volume')->nullable();
         $table->text('reason');
+        $table->integer('user_id')->foreign()->references('id')->on('users')->onDelete('cascade');
         $table->timestamps();
       });
     }

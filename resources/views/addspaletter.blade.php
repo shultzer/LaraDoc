@@ -2,7 +2,7 @@
 <div class="row-fluid sortable">
     <div class="box span12">
         <div class="box-header" data-original-title>
-            <h2><i class="halflings-icon white edit"></i><span class="break"></span>Внесение ходатайства организации
+            <h2><i class="halflings-icon white edit"></i><span class="break"></span>Внесение ходатайства ГПО "Белэнерго"
             </h2>
             <div class="box-icon">
                 <a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="box-content">
-            <form class="form-horizontal" method="post" action="{{ route('storecompletter') }}"
+            <form class="form-horizontal" method="post" action="{{ route('storespaletter') }}"
                   enctype="multipart/form-data">
                 <fieldset>
                     {{-- <div class="control-group">
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="selectError">Наименование организации</label>
+                        <label class="control-label" for="selectError">Наименование организаций</label>
                         <div class="controls">
                             <select id="selectError" name="company" data-rel="chosen">
                                 <option name="" selected></option>
@@ -54,37 +54,6 @@
                         </div>
                     </div>
 
-
-                    <div class="control-group">
-                        <label class="control-label">Категория имущества</label>
-                        <div class="controls">
-                            @foreach($item as $key=> $value)
-
-                                <label class="checkbox inline">
-                                    <input type="checkbox" name="property[]" value="{{ $key }}"> {{ $value }}
-                                </label>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="volume">Длинна инженерных сетей, метры</label>
-                        <div class="controls">
-                            <input type="text" name="volume" class="input-xlarge" id="volume">
-                        </div>
-                    </div>
-                    {{--основание (радио)--}}
-                    <div class="control-group">
-                        <label class="control-label" for="selectError">Основание</label>
-                        <div class="controls">
-                            <select id="selectError" name="reason" data-rel="chosen">
-                                <option name="" selected></option>
-                                <option value="231">231 Распоряжение</option>
-                                <option value="294">294 Указ</option>
-                                <option value="50">50 Указ</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="control-group">
                         <label class="control-label" for="doc">Прикрепите документ</label>

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
+
+  protected $table = 'propertys';
     public function completters(){
 
-      $this->belongsToMany('App\Completter');
+      return $this->belongsToMany('App\Completter');
 
     }
 }

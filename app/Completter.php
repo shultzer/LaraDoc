@@ -11,9 +11,9 @@
       'date',
       'doc',
       'company',
-      'property',
       'volume',
       'reason',
+      'user_id'
     ];
 
     public function spaletters() {
@@ -23,12 +23,12 @@
     }
     public function users(){
 
-      $this->belongsTo('App\User');
+      return $this->belongsTo('App\User');
 
     }
     public function propertys(){
 
-      $this->belongsToMany('App\Property');
+      return $this->belongsToMany('App\Property');
 
     }
   }

@@ -2,6 +2,9 @@
 
   namespace App\Http\Controllers;
 
+  use App\Completter;
+  use App\Order;
+  use App\Spaletter;
   use Illuminate\Http\Request;
 
   class IndexController extends Controller {
@@ -36,15 +39,15 @@
 
     public function index() {
 
-
-      return view('index');
+      $companyletters = Completter::latest('created_at')->paginate(5);
+      $spaletters     = Spaletter::latest('created_at')->paginate(5);
+      $orders         = Order::latest('created_at')->paginate(5);
+      return view('index', [
+        'companyletters' => $companyletters,
+        'spaletters'     => $spaletters,
+        'orders'         => $orders,
+      ]);
 
     }
 
-    public function addcompletter() {
-
-
-      return view('addcompletter');
-
-    }
   }

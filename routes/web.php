@@ -12,5 +12,10 @@
 */
 
 Route::get('/', 'IndexController@index');
-Route::get('/addcompletter', 'IndexController@addcompletter')->name('addcompletter');
-Route::post('/addcompletter', 'IndexController@storecompletter')->name('storecompletter');
+Route::get('/addcompletter', 'AdminController@addcompletter')->name('addcompletter');
+Route::post('/addcompletter', 'AdminController@storecompletter')->name('storecompletter');
+Route::get('/addspaletter', 'AdminController@addspaletter')->name('addspaletter');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
