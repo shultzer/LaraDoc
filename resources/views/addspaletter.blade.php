@@ -45,7 +45,7 @@
                     <div class="control-group">
                         <label class="control-label" for="selectError">Ходатайство организаций</label>
                         <div class="controls">
-                            <select id="selectError" name="company" data-rel="chosen">
+                            <select id="selectError" name="company[]" data-rel="chosen" multiple>
 
                                 <option name="" selected></option>
                                 @foreach($completters as $completter)
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                        <button type="reset" class="btn">отмена</button>
+                        <button type="submit" class="btn btn-large btn-info">Сохранить</button>
+                        <button type="reset" class="btn btn-large btn-danger">отмена</button>
                     </div>
                 </fieldset>
             </form>

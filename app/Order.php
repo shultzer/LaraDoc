@@ -10,17 +10,26 @@
       'number',
       'date',
       'doc',
-      'spaletter_id'
+      'user_id'
     ];
+    public function completters() {
+
+      return $this->hasMany('App\Completter');
+
+    }
     public function spaletters() {
 
       return $this->hasMany('App\Spaletter');
 
     }
+    public function users(){
 
+      return $this->belongsTo('App\User');
+
+    }
     public function reports() {
 
-      return $this->belongsToMany('App\Report');
+      return $this->belongsToMany('App\Report', 'order_report', 'order_id','report_id');
 
     }
   }

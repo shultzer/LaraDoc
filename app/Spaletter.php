@@ -10,12 +10,16 @@ class Spaletter extends Model
     'number',
     'date',
     'doc',
-    'comletter_id'
+    'order_id'
   ];
     public function completters(){
 
       return $this->hasMany( 'App\Completter' );
 
+    }
+    public function  users(){
+
+      return $this->belongsTo('App\User');
     }
   public function orders(){
 

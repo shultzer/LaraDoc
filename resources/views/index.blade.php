@@ -1,53 +1,118 @@
 @include('header')
 <div class="box-content">
-    <h1>Приложение для контроля оборота документов по вопросам распоряжения государственным имуществом</h1>
+    @if(session('status') !== NULL)
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
+    <div class="row-fluid">
+        <div class="box span6">
+            <div class="box-header">
+                <h2>Последние письма организаций</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-stripped">
+                    <tr>
+                        <th>Ссылка</th>
+                        <th>Номер письма</th>
+                        <th>Дата письма</th>
+                        <th>Наименование организации</th>
+                        <th>Категория имущества</th>
+                    </tr>
+                    @foreach($companyletters as $row)
+                        <tr>
+                            <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
+                            <td><?=$row->number?></td>
+                            <td><?=$row->date?></td>
+                            <td><?=$row->company?></td>
+                            <td>@foreach($row->propertys as $property)
+                                <?=$property->name?> <br>
+                                @endforeach
+                            </td>
+                        </tr>
 
-    <table style="border: solid">
-        <b>
-            <caption>Последние письма организаций</caption>
-        </b>
-        <tr>
-            <th>Наименование организации</th>
-            <th>Категория имущества</th>
-            <th>Дата письма</th>
-            <th>Ссылка</th>
-            <th>Номер письма</th>
-        </tr>
-
-        @foreach($companyletters as $row)
-            <tr>
-                <td><?=$row->company?></td>
-                <td>@foreach($row->propertys as $property)
-                    <?=$property->name?>
                     @endforeach
-                </td>
-                <td><?=$row->date?></td>
-                <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
-                <td><?=$row->number?></td>
-            </tr>
-        @endforeach
-    </table>
-
-    <table style=" float: right; border: solid">
-        <b>
-            <caption>Последние приказы</caption>
-        </b>
-        <tr>
-
-            <th>Дата приказа</th>
-            <th>Ссылка</th>
-            <th>Номер приказа</th>
-        </tr>
-
-        @foreach($orders as $row)
-            <tr>
-
-                <td><?=$row->date?></td>
-                <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
-                <td><?=$row->number?></td>
-            </tr>
-        @endforeach
-    </table>
-
+                    <tr>
+                        <td>Общее количество писем</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ $numletters }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="box span6">
+            <div class="box-header">
+                <h2>Не направленные ходатайства</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-stripped">
+                    <tr>
+                        <th>Ссылка</th>
+                        <th>Номер ходатайства</th>
+                        <th>дата хобатайства</th>
+                        <th>Наименование организации</th>
+                    </tr>
+                    @foreach($complettersWhithoutspaletter as $row)
+                        <tr>
+                            <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
+                            <td><?=$row->number?></td>
+                            <td><?=$row->date?></td>
+                            <td><?=$row->company?></td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="box span6">
+            <div class="box-header">
+                <h2> Неисполненные приказы</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-stripped">
+                    <tr>
+                        <th>Ссылка</th>
+                        <th>Номер приказа</th>
+                        <th>Дата приказа</th>
+                    </tr>
+                    @foreach($orderswhithoutreports as $row)
+                        <tr>
+                            <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
+                            <td><?=$row->number?></td>
+                            <td><?=$row->date?></td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+        <div class="box span6">
+            <div class="box-header">
+                <h2>Ходатайства без приказов</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-stripped">
+                    <tr>
+                        <th>Ссылка</th>
+                        <th>Номер ходатайства</th>
+                        <th>дата хобатайства</th>
+                        <th>Наименование организации</th>
+                        <th>Категория имущества</th>
+                    </tr>
+                    @foreach($complettersWhithoutorder as $row)
+                        <tr>
+                            <td><a href="<?=$row->doc?>"><img src="img/doc_pic.jpg"></a></td>
+                            <td><?=$row->number?></td>
+                            <td><?=$row->date?></td>
+                            <td><?=$row->company?></td>
+                            <td>@foreach($row->propertys as $property)
+                                <?=$property->name?> <br>
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 @include('footer')

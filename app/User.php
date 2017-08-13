@@ -36,4 +36,13 @@
     public function spaletters (){
       return $this->hasMany('App\Spaletter');
     }
+
+    public function orders (){
+
+      return $this->hasMany('App\Order');
+    }
+    public function reports(){
+
+      return $this->hasMany('App\Report');
+    }
   }

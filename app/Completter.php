@@ -17,6 +17,11 @@
       'spaletter_id'
     ];
 
+    public function orders() {
+
+      return $this->belongsTo('App\Order', 'order_id');
+
+    }
     public function spaletters() {
 
       return $this->belongsTo('App\Spaletter');
@@ -31,5 +36,9 @@
 
       return $this->belongsToMany('App\Property');
 
+    }
+    public function reports(){
+
+      return$this->belongsTo('App\Report', 'report_id');
     }
   }
