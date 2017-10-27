@@ -13,6 +13,7 @@
 
 Route::get('/', 'IndexController@index');
 Route::get('/table', 'IndexController@table')->name('table');
+Route::get('/toexcel', 'IndexController@exportUserList')->name('toexcel');
 Route::get('/addcompletter', 'AdminController@addcompletter')->name('addcompletter');
 Route::post('/addcompletter', 'AdminController@storecompletter')->name('storecompletter');
 

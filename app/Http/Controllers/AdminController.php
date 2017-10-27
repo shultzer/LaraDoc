@@ -11,12 +11,24 @@
 
   class AdminController extends Controller {
 
+    public function __construct() {
+
+      $this->middleware('auth');
+
+    }
     public function addcompletter(Property $property) {
       $item = $property->pluck('name', 'id');
       return view('addcompletter', ['item' => $item]);
     }
 
     public function storecompletter(Request $request) {
+      $this->validate($request, [
+        'number'  => 'required|unique:completters|max:10',
+        'date'    => 'required',
+        'doc'     => 'required',
+        'company' => 'required',
+        'reason'  => 'required',
+      ]);
       $user = Auth::user();
 
       if ($request->hasFile('doc')) {
@@ -36,12 +48,8 @@
                          ]);
         $comlet->propertys()->attach($request->get('property'));
       }
-
-
       $request->session()->flash('status', 'Запись внесена!!!');
-
       return redirect('/');
-
     }
 
     public function addspaletter(Property $property) {
@@ -57,6 +65,11 @@
     }
 
     public function storespaletter(Spaletter $spaletter, Request $request) {
+      $this->validate($request, [
+        'number' => 'required|unique:spaletters|max:10',
+        'date'   => 'required',
+        'doc'    => 'required',
+      ]);
       $user              = Auth::user();
       $doc               = $request->file('doc');
       $fileName          = time() . '_' . $doc->getClientOriginalName();
@@ -71,31 +84,34 @@
       $assoc_completters = Completter::whereIn('number', $request->company)
                                      ->get();
       foreach ($assoc_completters as $assoc_completter) {
-        //dd($assoc_completter);
         $res = $assoc_completter->spaletters()->associate($spalet);
         $res->save();
       }
       $request->session()->flash('status', 'Запись внесена!!!');
-
       return redirect('/');
     }
 
     public function addorder() {
 
-      $complettersWhithoutorder = Completter::has('spaletters')->whereIn('order_id', [0, NULL])
+      $complettersWhithoutorder = Completter::has('spaletters')
+                                            ->whereIn('order_id', [0, NULL])
                                             ->get();
-      dump(Completter::has('spaletters')->whereIn('order_id', [0, NULL])->get());
       return view('addorder', [
         'completters' => $complettersWhithoutorder,
       ]);
     }
 
     public function storeorder(Request $request) {
-      $user     = Auth::user();
-      $doc      = $request->file('doc');
-      $fileName = time() . '_' . $doc->getClientOriginalName();
-      $r        = $doc->storeAs('orders', $fileName, ['disk' => 'docs']);
-      $storedoc = 'docs/' . $r;
+      $this->validate($request, [
+        'number' => 'required|unique:orders|max:10',
+        'date'   => 'required',
+        'doc'    => 'required',
+      ]);
+      $user              = Auth::user();
+      $doc               = $request->file('doc');
+      $fileName          = time() . '_' . $doc->getClientOriginalName();
+      $r                 = $doc->storeAs('orders', $fileName, ['disk' => 'docs']);
+      $storedoc          = 'docs/' . $r;
       $order             = $user->orders()->create([
         'doc'    => $storedoc,
         'number' => $request->number,
@@ -113,7 +129,9 @@
     }
 
     public function addreport(Order $order) {
-      $ordersWhithoutreport = $order->with('completters.orders')->doesntHave('reports')->get();
+      $ordersWhithoutreport = $order->with('completters.orders')
+                                    ->doesntHave('reports')
+                                    ->get();
 
       return (view('addreport', [
         'orders' => $ordersWhithoutreport,
@@ -121,16 +139,21 @@
     }
 
     public function storereport(Request $request) {
-      $user     = Auth::user();
-      $doc      = $request->file('doc');
-      $fileName = time() . '_' . $doc->getClientOriginalName();
-      $r        = $doc->storeAs('reports', $fileName, ['disk' => 'docs']);
-      $storedoc = 'docs/' . $r;
-      $report   = $user->reports()->create([
-        'doc'    => $storedoc,
-        'number' => $request->number,
-        'date'   => $request->date,
-        'company' => $request->company
+      $this->validate($request, [
+        'number' => 'required|unique:reports|max:10',
+        'date'   => 'required',
+        'doc'    => 'required',
+      ]);
+      $user              = Auth::user();
+      $doc               = $request->file('doc');
+      $fileName          = time() . '_' . $doc->getClientOriginalName();
+      $r                 = $doc->storeAs('reports', $fileName, ['disk' => 'docs']);
+      $storedoc          = 'docs/' . $r;
+      $report            = $user->reports()->create([
+        'doc'     => $storedoc,
+        'number'  => $request->number,
+        'date'    => $request->date,
+        'company' => $request->company,
       ]);
       $assoc_completters = Completter::whereIn('number', $request->company)
                                      ->get();
