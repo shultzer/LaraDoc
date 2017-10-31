@@ -111,6 +111,7 @@
                                     Внесение отчета об исполнении приказа
                                 </a>
                             </li>
+
                         </ul>
                     </li>
                 </ul>
@@ -165,6 +166,7 @@
                     <li><a href="/"><i class="icon-bar-chart"></i><span class="hidden-tablet">Оперативная информация</span></a>
                     </li>
                     <li><a href="/table"><i class="icon-align-justify"></i><span class="hidden-tablet">Сводная таблица</span></a>
+                    <li><a href="/search"><i class="icon-align-justify"></i><span class="hidden-tablet">Поиск</span></a>
                     </li>
                    {{-- <li>
                         <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span

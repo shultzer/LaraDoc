@@ -8,6 +8,8 @@
   use App\Spaletter;
   use Illuminate\Http\Request;
   use Illuminate\Support\Facades\Auth;
+  use SoapClient;
+  use ZipArchive;
 
   class AdminController extends Controller {
 
@@ -16,6 +18,7 @@
       $this->middleware('auth');
 
     }
+
     public function addcompletter(Property $property) {
       $item = $property->pluck('name', 'id');
       return view('addcompletter', ['item' => $item]);
@@ -65,30 +68,61 @@
     }
 
     public function storespaletter(Spaletter $spaletter, Request $request) {
-      $this->validate($request, [
-        'number' => 'required|unique:spaletters|max:10',
-        'date'   => 'required',
-        'doc'    => 'required',
-      ]);
-      $user              = Auth::user();
-      $doc               = $request->file('doc');
-      $fileName          = time() . '_' . $doc->getClientOriginalName();
-      $r                 = $doc->storeAs('spaletters', $fileName, ['disk' => 'docs']);
-      $storedoc          = 'docs/' . $r;
-      $spalet            = $user->spaletters()
-                                ->create([
-                                  'doc'    => $storedoc,
-                                  'number' => $request->number,
-                                  'date'   => $request->date,
-                                ]);
-      $assoc_completters = Completter::whereIn('number', $request->company)
-                                     ->get();
-      foreach ($assoc_completters as $assoc_completter) {
-        $res = $assoc_completter->spaletters()->associate($spalet);
-        $res->save();
+      /* $this->validate($request, [
+         'number' => 'required|unique:spaletters|max:10',
+         'date'   => 'required',
+         'doc'    => 'required',
+       ]);
+       $user              = Auth::user();
+       $doc               = $request->file('doc');
+       $fileName          = time() . '_' . $doc->getClientOriginalName();
+       $r                 = $doc->storeAs('spaletters', $fileName, ['disk' => 'docs']);
+       $storedoc          = 'docs/' . $r;
+       $spalet            = $user->spaletters()
+                                 ->create([
+                                   'doc'    => $storedoc,
+                                   'number' => $request->number,
+                                   'date'   => $request->date,
+                                 ]);
+       $assoc_completters = Completter::whereIn('number', $request->company)
+                                      ->get();
+       foreach ($assoc_completters as $assoc_completter) {
+         $res = $assoc_completter->spaletters()->associate($spalet);
+         $res->save();
+       }
+       $request->session()->flash('status', 'Запись внесена!!!');*/
+        $company = Completter::where('number', $request->company)->first()->company;
+        $date = Completter::where('number', $request->company)->first()->date;
+        $number = Completter::where('number', $request->company)->first()->number;
+
+
+      $zip = new ZipArchive;
+      copy('template.docx', 'doc.docx');
+      if ($zip->open('doc.docx') === TRUE) {
+        /*открываем наш шаблон для чтения (он находится вне документа)
+        и помещаеем его содержимое в переменную $content*/
+        $zip->extractTo('doc');
+        $handle  = fopen("doc/word/document.xml", "r");
+        $content = fread($handle, filesize("doc/word/document.xml"));
+        fclose($handle);
+        /*Далее заменяем все что нам нужно например так */
+        $content = str_replace(["company", "date", "number"], ["$company","$date","$number"], $content);
+
+        /*Удаляем имеющийся в архиве document.xml*/
+        $zip->deleteName('word/document.xml');
+        /*Пакуем созданный нами ранее и закрываем*/
+        $zip->addFromString('word/document.xml', $content);
+        $zip->close();
       }
-      $request->session()->flash('status', 'Запись внесена!!!');
-      return redirect('/');
+      // Отдаём вордовский файл
+      header("Cache-Control: public");
+      header("Content-Description: File Transfer");
+      $fileName = "doc.docx";
+      header("Content-Disposition: attachment; filename=$fileName");
+      header("Content-Type: application/msword");
+      header("Content-Transfer-Encoding: binary");
+      readfile($fileName);
+      //return redirect('/');
     }
 
     public function addorder() {

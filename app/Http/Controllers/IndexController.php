@@ -11,13 +11,13 @@
   class IndexController extends Controller {
 
     public static $companylist = [
-      'brestenergo'        => 'Брестэнерго',
-      'vitebskenergo'      => 'Витебскэнерго',
-      'grodnoenergo'       => 'Гродноэнерго',
-      'gomelenergo'        => 'Гомельэнерго',
-      'minskenergo'        => 'Минскэнерго',
-      'mogilevenergo'      => 'Могилевэнерго',
-      'belenergostroy'     => 'Белэнергострой',
+      'brestenergo'        => 'РУП «Брестэнерго»',
+      'vitebskenergo'      => 'РУП «Витебскэнерго»',
+      'grodnoenergo'       => 'РУП «Гродноэнерго»',
+      'gomelenergo'        => 'РУП «Гомельэнерго»',
+      'minskenergo'        => 'РУП «Минскэнерго»',
+      'mogilevenergo'      => 'РУП «Могилевэнерго»',
+      'belenergostroy'     => 'РУП «Белэнергострой»',
       'beltei'             => 'БелТЭИ',
       'belnipi'            => 'Белнипиэнергопром',
       'belenergosetproekt' => 'Белэнергосетьпроект',
@@ -45,6 +45,8 @@
       ])->get();
       $orderswhithoutreports        = Order::doesntHave('reports')->get();
 
+
+
       return view('index', [
         'companyletters'               => $companyletters,
         'spaletters'                   => $spaletters,
@@ -64,7 +66,7 @@
        *
        * */
       $brestcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Брестэнерго'])
+                                       ->where(['company' => 'РУП «Брестэнерго»'])
                                        ->get();
       /*
        * формируем массив данных для передачи во вьюху
@@ -126,7 +128,7 @@
        *
        * */
       $vitebskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Витебскэнерго'])
+                                         ->where(['company' => 'РУП «Витебскэнерго»'])
                                          ->get();
       foreach ($vitebskcompanyletters as $item) {
 
@@ -165,7 +167,7 @@
        *
        * */
       $grodnokcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Гродноэнерго'])
+                                         ->where(['company' => 'РУП «Гродноэнерго»'])
                                          ->get();
       foreach ($grodnokcompanyletters as $item) {
 
@@ -204,7 +206,7 @@
        *
        * */
       $gomelcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Гомельэнерго'])
+                                       ->where(['company' => 'РУП «Гомельэнерго»'])
                                        ->get();
       foreach ($gomelcompanyletters as $item) {
 
@@ -243,7 +245,7 @@
        *
        * */
       $mogilevcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Могилевэнерго'])
+                                         ->where(['company' => 'РУП «Могилевэнерго»'])
                                          ->get();
       foreach ($mogilevcompanyletters as $item) {
 
@@ -282,7 +284,7 @@
        *
        * */
       $minskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Минскэнерго'])
+                                       ->where(['company' => 'РУП «Минскэнерго»'])
                                        ->get();
       foreach ($minskcompanyletters as $item) {
 
@@ -331,7 +333,7 @@
        *
        * */
       $brestcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Брестэнерго'])
+                                       ->where(['company' => 'РУП «Брестэнерго»'])
                                        ->get();
       /*
        * формируем массив данных для передачи во вьюху
@@ -393,7 +395,7 @@
        *
        * */
       $vitebskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Витебскэнерго'])
+                                         ->where(['company' => 'РУП «Витебскэнерго»'])
                                          ->get();
       foreach ($vitebskcompanyletters as $item) {
 
@@ -432,7 +434,7 @@
        *
        * */
       $grodnokcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Гродноэнерго'])
+                                         ->where(['company' => 'РУП «Гродноэнерго»'])
                                          ->get();
       foreach ($grodnokcompanyletters as $item) {
 
@@ -471,7 +473,7 @@
        *
        * */
       $gomelcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Гомельэнерго'])
+                                       ->where(['company' => 'РУП «Гомельэнерго»'])
                                        ->get();
       foreach ($gomelcompanyletters as $item) {
 
@@ -510,7 +512,7 @@
        *
        * */
       $mogilevcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                         ->where(['company' => 'Могилевэнерго'])
+                                         ->where(['company' => 'РУП «Могилевэнерго»'])
                                          ->get();
       foreach ($mogilevcompanyletters as $item) {
 
@@ -549,7 +551,7 @@
        *
        * */
       $minskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                       ->where(['company' => 'Минскэнерго'])
+                                       ->where(['company' => 'РУП «Минскэнерго»'])
                                        ->get();
       foreach ($minskcompanyletters as $item) {
 
@@ -584,15 +586,89 @@
         }
       }//endforeach
 
-      Excel::create('New file', function ($excel) use ($ar) {
+      Excel::create('table', function ($excel) use ($ar) {
 
-        $excel->sheet('New sheet', function ($excel) use ($ar) {
-          $excel->loadView('table', ['ar' => $ar,]);
+        $excel->sheet('New sheet', function ($sheet) use ($ar) {
+          $sheet->setWidth([
+            'A' => 16,
+            'B' => 16,
+            'C' => 16,
+            'D' => 16,
+            'E' => 16,
+            'F' => 16,
+            'G' => 16,
+            'H' => 16,
+            'I' => 16,
+          ]);
+          $sheet->loadView('tableforexcel', ['ar' => $ar,]);
+
         });
-        //dd($excel);
+
       })->download('xlsx');
     }
+
+    public function letterwayform() {
+      $companyletters = Completter::all();
+      foreach ($companyletters as $item) {
+        $ar[] = $item->number;
+      }
+
+      return view('letterwayform', ['ar' => $ar
+      ]);
+    }
+    public function letterway(Request $request) {
+
+
+      $this->validate($request, [
+        'number'  => 'required|max:10'
+      ]);
+      $number = $request->number;
+      $companyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+                                  ->where('number', $number)->get();
+
+      foreach ($companyletters as $item) {
+
+        $ar[ $item->number ][ 'comletter' ] = $item;
+        if (isset($item->spaletters)) {
+
+          $ar[ $item->number ][ 'spaletter' ] = $item->spaletters;
+
+        }
+        else {
+
+          $ar[ 'mogilev' ][ $item->number ][ 'spaletter' ] = '';
+        }
+        if (isset($item->orders)) {
+
+          $ar[ $item->number ][ 'order' ] = $item->orders;
+        }
+        else {
+
+          $ar[ $item->number ][ 'order' ] = '';
+        }
+        if (isset($item->reports)) {
+
+          $ar[ $item->number ][ 'report' ] = $item->reports;
+        }
+        else {
+
+          $ar[ $item->number ][ 'report' ] = '';
+        }
+      }//endforeach
+
+      return view('searchresult', [
+        'ar' => $ar,
+
+      ]);
+    }
+    public function searchresult(){
+
+
+      return view('searchresult'/*['ar' => $ar
+      ]*/);
+    }
   }
+
 
   class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
 

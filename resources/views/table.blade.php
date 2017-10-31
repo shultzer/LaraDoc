@@ -13,7 +13,7 @@
                         <th colspan="4">Ходатайство Организации</th>
                         <th colspan="2">Письмо ГПО "Белэнерго"</th>
                         <th colspan="2">Приказ Минэнерго</th>
-                        <th rowspan="2" colspan="2">Отчет о приемке</th>
+                        <th colspan="2" rowspan="2" >Отчет о приемке</th>
                     </tr>
                     <tr>
                         <th>№</th>
