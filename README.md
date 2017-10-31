@@ -5,7 +5,7 @@ example http://property.parser.com.ru/
 After verification documents and sending letter with conlusion to State institution necessary to enter this letter to form, whitch save information 
 in database`s table 'spaletters' and update  field foreig key `spaletter_id` in 'completters'. 'spaletters' have relation to 'completters' one to many.
 </p>
-<p>export table to .xlsx</p>
+<p>export table to .xlsx and .docx template for letter with data from db</p>
 <b>Soon</b>
 <p>Methods for saving orders of state institution and saving reports</p>
 
