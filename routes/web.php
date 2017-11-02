@@ -15,11 +15,11 @@
   Route::get('/table', 'IndexController@table')->name('table');
   Route::get('/toexcel', 'IndexController@exportUserList')->name('toexcel');
   Route::get('/addcompletter', 'AdminController@addcompletter')->name('addcompletter');
-  Route::get('/search', 'IndexController@letterwayform')->name('searchform');
+  Route::get('/search', 'IndexController@searchform')->name('searchform');
   //Route::get('/searchresult', 'IndexController@searchresult')->name('searchresult');
 
   Route::post('/addcompletter', 'AdminController@storecompletter')->name('storecompletter');
-  Route::post('/search', 'IndexController@letterway')->name('search');
+  Route::post('/search', 'IndexController@searchway')->name('search');
 
   Route::get('/addspaletter', 'AdminController@addspaletter')
        ->name('addspaletter');

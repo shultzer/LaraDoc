@@ -37,58 +37,58 @@
         </thead>
         <tbody>
         @if(isset($ar))
-            {{--@php(dd($ar))--}}
-            @foreach($ar as $completter)
 
+            @foreach($ar as $item)
+               {{-- @php(dd($item))--}}
                 <tr>
                     <td>
-                        <a href="{{ $completter['comletter']->doc }}"
-                           target="_blank"> {{ $completter['comletter']->number }}</a>
+                        <a href="{{ $item['comletter']->doc }}"
+                           target="_blank"> {{ $item['comletter']->number }}</a>
                     </td>
-                    <td>{{ $completter['comletter']->date }}</td>
+                    <td>{{ $item['comletter']->date }}</td>
                     <td>
-                        @foreach($completter['comletter']->propertys as $property)
+                        @foreach($item['comletter']->propertys as $property)
                             {{ $property->name }} <br>
                         @endforeach
                     </td>
-                    <td>{{ $completter['comletter']->volume }}</td>
+                    <td>{{ $item['comletter']->volume }}</td>
                     <td>
-                        @if(isset($completter['spaletter']->number))
-                            <a href="{{ $completter['spaletter']->doc }}"
-                               target="_blank">{{ $completter['spaletter']->number }}</a>
+                        @if(isset($item['spaletter']->number))
+                            <a href="{{ $item['spaletter']->doc }}"
+                               target="_blank">{{ $item['spaletter']->number }}</a>
                         @else {{ '' }}
                         @endif
                     </td>
                     <td>
-                        @if(isset($completter['spaletter']->date))
-                            {{ $completter['spaletter']->date }}
+                        @if(isset($item['spaletter']->date))
+                            {{ $item['spaletter']->date }}
                         @else {{ '' }}
                         @endif
                     </td>
 
                     <td>
-                        @if(isset($completter['order']->number))
-                            <a href="{{ $completter['order']->doc }}"
-                               target="_blank">{{ $completter['order']->number }}</a>
+                        @if(isset($item['order']->number))
+                            <a href="{{ $item['order']->doc }}"
+                               target="_blank">{{ $item['order']->number }}</a>
                         @else {{ '' }}
                         @endif
                     </td>
                     <td>
-                        @if(isset($completter['order']->date))
-                            {{ $completter['order']->date }}
+                        @if(isset($item['order']->date))
+                            {{ $item['order']->date }}
                         @else {{ '' }}
                         @endif
                     </td>
                     <td>
-                        @if(isset($completter['report']->number))
-                            <a href="{{ $completter['report']->doc }}"
-                               target="_blank"> {{ $completter['report']->number }}</a>
+                        @if(isset($item['report']->number))
+                            <a href="{{ $item['report']->doc }}"
+                               target="_blank"> {{ $item['report']->number }}</a>
                         @else {{ '' }}
                         @endif
                     </td>
                     <td>
-                        @if(isset($completter['report']->date))
-                            {{ $completter['report']->date }}
+                        @if(isset($item['report']->date))
+                            {{ $item['report']->date }}
                         @else {{ '' }}
                         @endif
                     </td>

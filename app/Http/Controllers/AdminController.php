@@ -68,7 +68,7 @@
     }
 
     public function storespaletter(Spaletter $spaletter, Request $request) {
-      /* $this->validate($request, [
+       $this->validate($request, [
          'number' => 'required|unique:spaletters|max:10',
          'date'   => 'required',
          'doc'    => 'required',
@@ -90,7 +90,7 @@
          $res = $assoc_completter->spaletters()->associate($spalet);
          $res->save();
        }
-       $request->session()->flash('status', 'Запись внесена!!!');*/
+       $request->session()->flash('status', 'Запись внесена!!!');
         $company = Completter::where('number', $request->company)->first()->company;
         $date = Completter::where('number', $request->company)->first()->date;
         $number = Completter::where('number', $request->company)->first()->number;
@@ -130,6 +130,7 @@
       $complettersWhithoutorder = Completter::has('spaletters')
                                             ->whereIn('order_id', [0, NULL])
                                             ->get();
+      dump($complettersWhithoutorder);
       return view('addorder', [
         'completters' => $complettersWhithoutorder,
       ]);
@@ -166,7 +167,6 @@
       $ordersWhithoutreport = $order->with('completters.orders')
                                     ->doesntHave('reports')
                                     ->get();
-
       return (view('addreport', [
         'orders' => $ordersWhithoutreport,
       ]));

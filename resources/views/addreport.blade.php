@@ -57,15 +57,14 @@
                         <div class="controls">
                             <select id="selectError" name="order[]" data-rel="chosen" multiple>
                                 <option name="" hidden selected></option>
-                                @if(isset($order))
-                                @foreach($orders as $order)
-                                    <option value="{{ $order->id }}">{{ $order->number }}</option>
-                                @endforeach
-
+                                @if(isset($orders))
+                                    @foreach($orders as $order)
+                                        <option value="{{ $order->id }}">{{ $order->number }}</option>
+                                    @endforeach
                             </select>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="selectError">Ходатайстов организации</label>
+                            <label class="control-label" for="selectError">Ходатайство организации</label>
                             <div class="controls">
                                 <select name="company[]" multiple>
                                     @foreach($order->completters as $completter)
