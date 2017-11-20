@@ -31,6 +31,9 @@
        ->name('storespaletter');
   Route::post('/addreport', 'AdminController@storereport')->name('storereport');
 
+  Route::get('/makespaletterform', 'SpaController@makeletterform')->name('makespaletterform');
+  Route::post('/makespaletter', 'SpaController@makeletter')->name('makespaletter');
+
   Auth::routes();
 
   Route::get('/home', 'HomeController@index')->name('home');

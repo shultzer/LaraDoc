@@ -17,10 +17,10 @@
         $table->text('number');
         $table->text('date');
         $table->text('doc');
-        $table->integer('comletter_id')
+        $table->integer('order_id')
               ->foreign()
               ->references('id')
-              ->on('comletter')
+              ->on('orders')
               ->onDelete('cascade');
         $table->timestamps();
       });

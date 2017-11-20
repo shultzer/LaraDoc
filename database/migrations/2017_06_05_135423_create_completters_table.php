@@ -21,6 +21,9 @@
         $table->text('volume')->nullable();
         $table->text('reason');
         $table->integer('user_id')->foreign()->references('id')->on('users')->onDelete('cascade');
+        $table->integer('spaletters_id')->foreign()->references('id')->on('spaletters')->onDelete('cascade');
+        $table->integer('order_id')->foreign();
+        $table->integer('report_id')->foreign();
         $table->timestamps();
       });
     }

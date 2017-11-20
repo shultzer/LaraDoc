@@ -61,7 +61,7 @@
                 <ul class="nav pull-right">
 
                     <!-- start: Notifications Dropdown -->
-                   {{-- <li class="dropdown hidden-phone">
+                    <li class="dropdown hidden-phone">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-calendar"></i>
 
@@ -71,16 +71,12 @@
                                 <span>Просмотр данных</span>
                             </li>
                             <li>
-                                --}}{{--<a href="#">
-										<span class="header">
-											<span class="title">iOS Development</span>
-											<span class="percent"></span>
-										</span>
-                                    <div class="taskProgress progressSlim red">80</div>
-                                </a>--}}{{--
+                                <a href="{{ route('makespaletterform') }}">
+										Создание письма ГПО "Белэнерго"
+                                </a>
                             </li>
                         </ul>
-                    </li>--}}
+                    </li>
                     <!-- end: Notifications Dropdown -->
                     <!-- start: Message Dropdown -->
                     <li class="dropdown hidden-phone">
