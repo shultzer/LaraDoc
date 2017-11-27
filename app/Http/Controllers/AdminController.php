@@ -8,8 +8,7 @@
     use App\Spaletter;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
-    use SoapClient;
-    use ZipArchive;
+
 
     class AdminController extends Controller {
 
@@ -67,7 +66,7 @@
             ]);
         }
 
-        public function storespaletter (Spaletter $spaletter, Request $request) {
+        public function storespaletter (Request $request) {
             $this->validate($request, [
               'number' => 'required|unique:spaletters|max:10',
               'date'   => 'required',
@@ -103,7 +102,6 @@
                                                     NULL,
                                                   ])
                                                   ->get();
-            dump($complettersWhithoutorder);
             return view('addorder', [
               'completters' => $complettersWhithoutorder,
             ]);
@@ -146,21 +144,22 @@
         }
 
         public function storereport (Request $request) {
+
             $this->validate($request, [
               'number' => 'required|unique:reports|max:10',
               'date'   => 'required',
               'doc'    => 'required',
             ]);
-            $user              = Auth::user();
-            $doc               = $request->file('doc');
-            $fileName          = time() . '_' . $doc->getClientOriginalName();
-            $r                 = $doc->storeAs('reports', $fileName, [ 'disk' => 'docs' ]);
-            $storedoc          = 'docs/' . $r;
-            $report            = $user->reports()->create([
-              'doc'     => $storedoc,
-              'number'  => $request->number,
-              'date'    => $request->date,
-              'company' => $request->company,
+            $user     = Auth::user();
+            $doc      = $request->file('doc');
+            $fileName = time() . '_' . $doc->getClientOriginalName();
+            $r        = $doc->storeAs('reports', $fileName, [ 'disk' => 'docs' ]);
+            $storedoc = 'docs/' . $r;
+
+            $report = $user->reports()->create([
+              'doc'    => $storedoc,
+              'number' => $request->number,
+              'date'   => $request->date,
             ]);
             $assoc_completters = Completter::whereIn('number', $request->company)
                                            ->get();

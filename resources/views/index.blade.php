@@ -1,6 +1,5 @@
 @include('header')
 <div class="box-content">
-
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif

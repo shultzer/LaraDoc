@@ -4,8 +4,11 @@
 
     use App\Completter;
     use App\Order;
+    use App\Report;
     use App\Spaletter;
+    use App\User;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Auth;
     use Maatwebsite\Excel\Facades\Excel;
 
     class IndexController extends Controller {
@@ -24,6 +27,10 @@
         ];
 
         public function index () {
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
 
             $companyletters               = Completter::latest('created_at')
                                                       ->take(5)
@@ -39,10 +46,12 @@
               NULL,
               0,
             ])->get();
-            $complettersWhithoutorder     = Completter::whereIn('order_id', [
-              NULL,
-              0,
-            ])->get();
+            $complettersWhithoutorder     = Completter::WhereHas('spaletters')
+                                                      ->whereIn('order_id', [
+                                                        NULL,
+                                                        0,
+                                                      ])
+                                                      ->get();
             $orderswhithoutreports        = Order::doesntHave('reports')->get();
 
 
@@ -54,11 +63,19 @@
               'complettersWhithoutorder'     => $complettersWhithoutorder,
               'numletters'                   => $numletters,
               'orderswhithoutreports'        => $orderswhithoutreports,
+              'completter'                   => $completter,
+              'spaletter'                    => $spaletter,
+              'order'                        => $order,
+              'report'                       => $report,
             ]);
 
         }
 
         public function table () {
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
             $ar = [];
             /*
              * Получаем из базы жадной загрузкой коллекцию писем Бреста со всеми связями
@@ -321,6 +338,10 @@
 
             return view('table', [
               'ar' => $ar,
+                'completter'=> $completter,
+                'spaletter'=> $spaletter,
+                'order'=> $order,
+                'report'=> $report,
             ]);
 
         }
@@ -607,6 +628,10 @@
         }
 
         public function searchform () {
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
             $companyletters = Completter::all();
             foreach ( $companyletters as $item ) {
                 $ar[] = $item->number;
@@ -614,6 +639,10 @@
 
             return view('letterwayform', [
               'ar' => $ar,
+              'completter'                   => $completter,
+              'spaletter'                    => $spaletter,
+              'order'                        => $order,
+              'report'                       => $report,
             ]);
         }
 
@@ -714,10 +743,10 @@
     }
 
 
-    class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
+    /*class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
 
         public function getFilename () {
             return 'filename';
         }
-    }
+    }*/
 

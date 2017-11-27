@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+    namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Model;
 
-class Property extends Model
-{
+    class Property extends Model {
 
-  protected $table = 'propertys';
-    public function completters(){
+        protected $table = 'propertys';
 
-      return $this->belongsToMany('App\Completter');
+        public function completters () {
 
+            return $this->belongsToMany('App\Completter');
+
+        }
     }
-}

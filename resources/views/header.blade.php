@@ -72,7 +72,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('makespaletterform') }}">
-										Создание письма ГПО "Белэнерго"
+                                    Создание письма ГПО "Белэнерго"
                                 </a>
                             </li>
                         </ul>
@@ -87,27 +87,34 @@
                             <li class="dropdown-menu-title">
                                 <span>Внесение данных</span>
                             </li>
-                            <li>
-                                <a href="{{ route('addcompletter') }}">
-                                    Внесение ходатайства организации
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('addspaletter') }}">
-                                    Внесение письма ГПО "Белэнерго"
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('addorder') }}">
-                                    Внесение приказа Минэнерго
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('addreport') }}">
-                                    Внесение отчета об исполнении приказа
-                                </a>
-                            </li>
-
+                            @can('create', $completter)
+                                <li>
+                                    <a href="{{ route('addcompletter') }}">
+                                        Внесение ходатайства организации
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create', $spaletter)
+                                <li>
+                                    <a href="{{ route('addspaletter') }}">
+                                        Внесение письма ГПО "Белэнерго"
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create', $order)
+                                <li>
+                                    <a href="{{ route('addorder') }}">
+                                        Внесение приказа Минэнерго
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('create', $report)
+                                <li>
+                                    <a href="{{ route('addreport') }}">
+                                        Внесение отчета об исполнении приказа
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 </ul>
@@ -155,27 +162,35 @@
 <div class="container-fluid-full">
     <div class="row-fluid">
 
-        <!-- start: Main Menu -->
+        @if(session('message'))
+            <div class="alert alert-danger">
+                {{ session('message') }}
+            </div>
+    @endif
+
+    <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li><a href="/"><i class="icon-bar-chart"></i><span class="hidden-tablet">Оперативная информация</span></a>
+                    <li><a href="/"><i class="icon-bar-chart"></i><span
+                                    class="hidden-tablet">Оперативная информация</span></a>
                     </li>
-                    <li><a href="/table"><i class="icon-align-justify"></i><span class="hidden-tablet">Сводная таблица</span></a>
+                    <li><a href="/table"><i class="icon-align-justify"></i><span
+                                    class="hidden-tablet">Сводная таблица</span></a>
                     <li><a href="/search"><i class="icon-align-justify"></i><span class="hidden-tablet">Поиск</span></a>
                     </li>
-                   {{-- <li>
-                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
-                                    class="label label-important"> 3 </span></a>
-                        <ul>
-                            <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span
-                                            class="hidden-tablet"> Sub Menu 1</span></a></li>
-                            <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span
-                                            class="hidden-tablet"> Sub Menu 2</span></a></li>
-                            <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
-                                            class="hidden-tablet"> Sub Menu 3</span></a></li>
-                        </ul>
-                    </li>--}}
+                    {{-- <li>
+                         <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
+                                     class="label label-important"> 3 </span></a>
+                         <ul>
+                             <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span
+                                             class="hidden-tablet"> Sub Menu 1</span></a></li>
+                             <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span
+                                             class="hidden-tablet"> Sub Menu 2</span></a></li>
+                             <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
+                                             class="hidden-tablet"> Sub Menu 3</span></a></li>
+                         </ul>
+                     </li>--}}
 
                 </ul>
             </div>

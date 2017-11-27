@@ -12,92 +12,92 @@
         </div>
         <div class="box-content">
         </div>
-    </div><!--/span-->
-    @if(isset($companyletters))
-        @php(dd($companyletters))
-    @endif
-    <table class="table table-striped table-bordered bootstrap-datatable datatable">
-        <thead>
-        <tr>
-            <th colspan="4">Ходатайство Организации</th>
-            <th colspan="2">Письмо ГПО "Белэнерго"</th>
-            <th colspan="2">Приказ Минэнерго</th>
-            <th colspan="2" rowspan="2">Отчет о приемке</th>
-        </tr>
-        <tr>
-            <th>№</th>
-            <th>Дата</th>
-            <th>Имущество</th>
-            <th>Длинна, метры</th>
-            <th>№</th>
-            <th>Дата</th>
-            <th>№</th>
-            <th>Дата</th>
-        </tr>
-        </thead>
-        <tbody>
-        @if(isset($ar))
 
-            @foreach($ar as $item)
-               {{-- @php(dd($item))--}}
-                <tr>
-                    <td>
-                        <a href="{{ $item['comletter']->doc }}"
-                           target="_blank"> {{ $item['comletter']->number }}</a>
-                    </td>
-                    <td>{{ $item['comletter']->date }}</td>
-                    <td>
-                        @foreach($item['comletter']->propertys as $property)
-                            {{ $property->name }} <br>
-                        @endforeach
-                    </td>
-                    <td>{{ $item['comletter']->volume }}</td>
-                    <td>
-                        @if(isset($item['spaletter']->number))
-                            <a href="{{ $item['spaletter']->doc }}"
-                               target="_blank">{{ $item['spaletter']->number }}</a>
-                        @else {{ '' }}
-                        @endif
-                    </td>
-                    <td>
-                        @if(isset($item['spaletter']->date))
-                            {{ $item['spaletter']->date }}
-                        @else {{ '' }}
-                        @endif
-                    </td>
+        @if(isset($companyletters))
+            @php(dd($companyletters))
+        @endif
+        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead>
+            <tr>
+                <th colspan="4">Ходатайство Организации</th>
+                <th colspan="2">Письмо ГПО "Белэнерго"</th>
+                <th colspan="2">Приказ Минэнерго</th>
+                <th colspan="2" rowspan="2">Отчет о приемке</th>
+            </tr>
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Имущество</th>
+                <th>Длинна, метры</th>
+                <th>№</th>
+                <th>Дата</th>
+                <th>№</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if(isset($ar))
 
-                    <td>
-                        @if(isset($item['order']->number))
-                            <a href="{{ $item['order']->doc }}"
-                               target="_blank">{{ $item['order']->number }}</a>
-                        @else {{ '' }}
-                        @endif
-                    </td>
-                    <td>
-                        @if(isset($item['order']->date))
-                            {{ $item['order']->date }}
-                        @else {{ '' }}
-                        @endif
-                    </td>
-                    <td>
-                        @if(isset($item['report']->number))
-                            <a href="{{ $item['report']->doc }}"
-                               target="_blank"> {{ $item['report']->number }}</a>
-                        @else {{ '' }}
-                        @endif
-                    </td>
-                    <td>
-                        @if(isset($item['report']->date))
-                            {{ $item['report']->date }}
-                        @else {{ '' }}
-                        @endif
-                    </td>
-                </tr>
+                @foreach($ar as $item)
+                    {{-- @php(dd($item))--}}
+                    <tr>
+                        <td>
+                            <a href="{{ $item['comletter']->doc }}"
+                               target="_blank"> {{ $item['comletter']->number }}</a>
+                        </td>
+                        <td>{{ $item['comletter']->date }}</td>
+                        <td>
+                            @foreach($item['comletter']->propertys as $property)
+                                {{ $property->name }} <br>
+                            @endforeach
+                        </td>
+                        <td>{{ $item['comletter']->volume }}</td>
+                        <td>
+                            @if(isset($item['spaletter']->number))
+                                <a href="{{ $item['spaletter']->doc }}"
+                                   target="_blank">{{ $item['spaletter']->number }}</a>
+                            @else {{ '' }}
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($item['spaletter']->date))
+                                {{ $item['spaletter']->date }}
+                            @else {{ '' }}
+                            @endif
+                        </td>
+
+                        <td>
+                            @if(isset($item['order']->number))
+                                <a href="{{ $item['order']->doc }}"
+                                   target="_blank">{{ $item['order']->number }}</a>
+                            @else {{ '' }}
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($item['order']->date))
+                                {{ $item['order']->date }}
+                            @else {{ '' }}
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($item['report']->number))
+                                <a href="{{ $item['report']->doc }}"
+                                   target="_blank"> {{ $item['report']->number }}</a>
+                            @else {{ '' }}
+                            @endif
+                        </td>
+                        <td>
+                            @if(isset($item['report']->date))
+                                {{ $item['report']->date }}
+                            @else {{ '' }}
+                            @endif
+                        </td>
+                    </tr>
                 @endforeach
-                @endif
-        </tbody>
-    </table>
-
+            @endif
+            </tbody>
+        </table>
+    </div><!--/span-->
 </div><!--/row-->
 
 @include('footer')

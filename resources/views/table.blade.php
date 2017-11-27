@@ -1,4 +1,5 @@
 @include('header')
+
 <div class="box-content">
     <div class="row-fluid">
         <div class="box span12">
@@ -103,7 +104,7 @@
                     </tr>
                     @if(isset($ar['vitebsk']) && is_array($ar['vitebsk']))
                         @foreach($ar['vitebsk'] as $completter)
-                            @php($ar['vitebsk']['volume'][] = $completter['comletter']->volume)@endphp
+                            @php($ar['vitebsk']['volume'][] = $completter['comletter']->volume)
                             <tr>
                                 <td><a href="{{ $completter['comletter']->doc }}"
                                        target="_blank">{{ $completter['comletter']->number }}</a></td>
@@ -163,7 +164,7 @@
                     </tr>
                     @if(isset($ar['grodno']) && is_array($ar['grodno']))
                         @foreach($ar['grodno'] as $completter)
-                            @php($ar['grodno']['volume'][] = $completter['comletter']->volume)@endphp
+                            @php($ar['grodno']['volume'][] = $completter['comletter']->volume)
                             <tr>
                                 <td><a href="{{ $completter['comletter']->doc }}"
                                        target="_blank">{{ $completter['comletter']->number }}</a></td>
@@ -224,7 +225,7 @@
                     </tr>
                     @if(isset($ar['gomel']) && is_array($ar['gomel']))
                         @foreach($ar['gomel'] as $completter)
-                            @php($ar['gomel']['volume'][] = $completter['comletter']->volume)@endphp
+                            @php($ar['gomel']['volume'][] = $completter['comletter']->volume)
                             <tr>
                                 <td><a href="{{ $completter['comletter']->doc }}"
                                        target="_blank">{{ $completter['comletter']->number }}</a></td>
@@ -285,7 +286,7 @@
                     </tr>
                     @if(isset($ar['mogilev']) && is_array($ar['mogilev']))
                         @foreach($ar['mogilev'] as $completter)
-                            @php($ar['mogilev']['volume'][] = $completter['comletter']->volume)@endphp
+                            @php($ar['mogilev']['volume'][] = $completter['comletter']->volume)
                             <tr>
                                 <td><a href="{{ $completter['comletter']->doc }}"
                                        target="_blank">{{ $completter['comletter']->number }}</a></td>
@@ -346,7 +347,7 @@
                     </tr>
                     @if(isset($ar['minsk']) && is_array($ar['minsk']))
                         @foreach($ar['minsk'] as $completter)
-                            @php($ar['minsk']['volume'][] = $completter['comletter']->volume)@endphp
+                            @php($ar['minsk']['volume'][] = $completter['comletter']->volume)
                             <tr>
                                 <td><a href="{{ $completter['comletter']->doc }}"
                                        target="_blank">{{ $completter['comletter']->number }}</a></td>
@@ -411,7 +412,6 @@
                 </table>
             </div>
         </div><!--/span-->
-
     </div>
 </div>
 @include('footer')

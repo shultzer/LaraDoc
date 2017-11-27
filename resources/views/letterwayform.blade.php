@@ -23,28 +23,21 @@
             <form class="form-horizontal" method="post" action="{{ route('search') }}"
                   enctype="multipart/form-data">
                 <fieldset>
-                     <div class="control-group">
-                         <label class="control-label" for="typeahead">Номер письма</label>
-                         <div class="controls">
-                             <input type="text" class="span6 typeahead" name="number" id="typeahead"  data-provide="typeahead"
-                             data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
-                             "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas",
-                             "Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
-                             "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York",
-                             "North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island",
-                             "South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington",
-                             "West Virginia","Wisconsin","Wyoming"]'>
+                    <div class="control-group">
+                        <label class="control-label" for="typeahead">Номер письма</label>
+                        <div class="controls">
+                            <input type="text" class="span6 typeahead" name="number" id="typeahead">
 
-                         </div>
-                     </div>
+                        </div>
+                    </div>
                     {{ csrf_field() }}
 
-                   {{-- <div class="control-group">
-                        <label class="control-label" for="date01">Дата письма</label>
-                        <div class="controls">
-                            <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
-                        </div>
-                    </div>--}}
+                    {{-- <div class="control-group">
+                         <label class="control-label" for="date01">Дата письма</label>
+                         <div class="controls">
+                             <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
+                         </div>
+                     </div>--}}
                     <div class="form-actions">
                         <button type="submit" class="btn btn-large btn-info">Поиск</button>
                         <button type="reset" class="btn btn-large btn-danger">Очистить</button>

@@ -1,37 +1,46 @@
 <?php
 
-  use Illuminate\Support\Facades\Schema;
-  use Illuminate\Database\Schema\Blueprint;
-  use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Database\Migrations\Migration;
 
-  class CreateSpalettersTable extends Migration {
+    class CreateSpalettersTable extends Migration {
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up() {
-      Schema::create('spaletters', function (Blueprint $table) {
-        $table->increments('id');
-        $table->text('number');
-        $table->text('date');
-        $table->text('doc');
-        $table->integer('order_id')
-              ->foreign()
-              ->references('id')
-              ->on('orders')
-              ->onDelete('cascade');
-        $table->timestamps();
-      });
+        /**
+         * Run the migrations.
+         *
+         * @return void
+         */
+        public function up () {
+
+            Schema::create('spaletters', function (Blueprint $table) {
+                $table->increments('id');
+                $table->text('number');
+                $table->text('date');
+                $table->text('doc');
+                $table->integer('order_id')
+                      ->default(0)
+                      ->foreign()
+                      ->references('id')
+                      ->on('orders')
+                      ->onDelete('cascade');
+                $table->integer('user_id')
+                      ->default(0)
+                      ->foreign()
+                      ->references('id')
+                      ->on('users')
+                      ->onDelete('cascade');
+                $table->timestamps();
+            });
+
+        }
+
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down () {
+            Schema::dropIfExists('spaletters');
+        }
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down() {
-      Schema::dropIfExists('spaletters');
-    }
-  }

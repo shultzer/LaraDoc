@@ -51,32 +51,33 @@
                             <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="selectError">Приказ Минэнерго</label>
-                        <div class="controls">
-                            <select id="selectError" name="order[]" data-rel="chosen" multiple>
-                                <option name="" hidden selected></option>
-                                @if(isset($orders))
-                                    @foreach($orders as $order)
-                                        <option value="{{ $order->id }}">{{ $order->number }}</option>
-                                    @endforeach
-                            </select>
-                        </div>
+                    @if(isset($orders))
                         <div class="control-group">
-                            <label class="control-label" for="selectError">Ходатайство организации</label>
+                            <label class="control-label" for="selectError">Приказ Минэнерго</label>
                             <div class="controls">
-                                <select name="company[]" multiple>
-                                    @foreach($order->completters as $completter)
-                                        <option value="{{ $completter->number }}">№{{ $completter->number }}
-                                            , {{ $completter->company }}</option>
+                                <select id="selectError" name="order[]" data-rel="chosen" multiple>
+                                    <option name="" hidden selected></option>
+                                    @foreach($orders as $order)
+                                        @if(isset($order))
+                                            <option value="{{ $order->id }}">{{ $order->number }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
-                                @endif
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="selectError">Ходатайство организации</label>
+                                <div class="controls">
+                                    <select name="company[]" multiple>
+                                        @foreach($order->completters as $completter)
+                                            <option value="{{ $completter->number }}">№{{ $completter->number }}
+                                                , {{ $completter->company }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endif
                     <div class="control-group">
                         <label class="control-label" for="doc">Прикрепите документ</label>
                         <div class="controls">

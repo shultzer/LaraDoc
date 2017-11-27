@@ -19,7 +19,6 @@ class CreateReportsTable extends Migration
             $table->text('date');
             $table->text('doc');
             $table->integer('user_id');
-            $table->text('company');
             $table->timestamps();
         });
     }

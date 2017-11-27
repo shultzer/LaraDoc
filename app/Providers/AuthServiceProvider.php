@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Completter;
+use App\Order;
+use App\Policies\CompletterPolicy;
+use App\Policies\OrderPolicy;
+use App\Policies\ReportPolicy;
+use App\Policies\SpaletterPolicy;
+use App\Report;
+use App\Spaletter;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -13,7 +23,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Completter::class => CompletterPolicy::class,
+        Spaletter::class => SpaletterPolicy::class,
+        Order::class => OrderPolicy::class,
+        Report::class => ReportPolicy::class,
     ];
 
     /**
@@ -25,6 +38,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
     }
 }
