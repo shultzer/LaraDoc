@@ -647,7 +647,10 @@
         }
 
         public function searchway (Request $request) {
-
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
             $ar = [];
             $this->validate($request, [
               'number' => 'required|max:10',
@@ -732,9 +735,12 @@
                     }
                 }//endforeach
             }
-            //dd($ar);
             return view('searchresult', [
               'ar' => $ar,
+              'completter'                   => $completter,
+              'spaletter'                    => $spaletter,
+              'order'                        => $order,
+              'report'                       => $report,
 
             ]);
         }

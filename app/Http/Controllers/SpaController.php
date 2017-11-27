@@ -65,14 +65,20 @@
             return redirect('/');
         }
 
-        public function addreport (Order $order) {
-            $report               = new Report();
+        public function addreport () {
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
             $ordersWhithoutreport = $order->with('completters.orders')
                                           ->doesntHave('reports')
                                           ->get();
             return ( view('addreport', [
               'orders' => $ordersWhithoutreport,
-              'report' => $report,
+              'completter'                   => $completter,
+              'spaletter'                    => $spaletter,
+              'order'                        => $order,
+              'report'                       => $report,
             ]) );
         }
 
