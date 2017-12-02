@@ -3,6 +3,7 @@
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif
+
     <div class="row-fluid">
         <div class="box span6">
             <div class="box-header">
@@ -24,11 +25,10 @@
                             <td><?=$row->date?></td>
                             <td><?=$row->company?></td>
                             <td>@foreach($row->propertys as $property)
-                                <?=$property->name?> <br>
+                                    <?=$property->name?> <br>
                                 @endforeach
                             </td>
                         </tr>
-
                     @endforeach
                     <tr>
                         <td>Общее количество писем</td>
@@ -105,7 +105,7 @@
                             <td><?=$row->date?></td>
                             <td><?=$row->company?></td>
                             <td>@foreach($row->propertys as $property)
-                                <?=$property->name?> <br>
+                                    <?=$property->name?> <br>
                                 @endforeach
                             </td>
                         </tr>

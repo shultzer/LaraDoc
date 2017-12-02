@@ -18,7 +18,7 @@
     Route::post('/search', 'IndexController@searchway')->name('search');
 
 //Adminroutes
-    Route::get('admin/addcompletter', 'AdminController@addcompletter');
+    //Route::get('admin/addcompletter', 'AdminController@addcompletter');
 
 //Policyroutes
     Route::get('/addcompletter', 'RupController@addcompletter')

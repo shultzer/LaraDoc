@@ -1,35 +1,45 @@
 <?php
 
-  namespace App;
+    namespace App;
 
-  use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Model;
 
-  class Order extends Model {
+    class Order extends Model {
 
-    protected $fillable = [
-      'number',
-      'date',
-      'doc',
-      'user_id'
-    ];
-    public function completters() {
+        protected $fillable = [
+          'number',
+          'date',
+          'doc',
+          'user_id',
+        ];
 
-      return $this->hasMany('App\Completter');
+        public function completters () {
 
+            return $this->hasMany('App\Completter');
+
+        }
+
+        public function spaletters () {
+
+            return $this->hasMany('App\Spaletter');
+
+        }
+
+        public function users () {
+
+            return $this->belongsTo('App\User');
+
+        }
+
+        public function reports () {
+
+            return $this->belongsToMany('App\Report', 'order_report', 'order_id', 'report_id');
+
+        }
+
+        public function orderswithoutreports () {
+
+            return $this->doesntHave('reports')->get();
+
+        }
     }
-    public function spaletters() {
-
-      return $this->hasMany('App\Spaletter');
-
-    }
-    public function users(){
-
-      return $this->belongsTo('App\User');
-
-    }
-    public function reports() {
-
-      return $this->belongsToMany('App\Report', 'order_report', 'order_id','report_id');
-
-    }
-  }

@@ -2,7 +2,10 @@
 
     namespace App\Http\Controllers;
 
+    use App\Completter;
     use App\Order;
+    use App\Report;
+    use App\Spaletter;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Gate;
@@ -11,8 +14,7 @@
 
 
 
-        public function addorder () {
-            $order = new Order();
+        public function addorder (Order $order, Completter $completter, Spaletter $spaletter, Report $report) {
 
             $complettersWhithoutorder = Completter::has('spaletters')
                                                   ->whereIn('order_id', [
@@ -22,7 +24,10 @@
                                                   ->get();
             return view('addorder', [
               'completters' => $complettersWhithoutorder,
-                'order' => $order
+                'order' => $order,
+                'report' => $report,
+                'completter' => $completter,
+                'spaletter' => $spaletter
             ]);
         }
 

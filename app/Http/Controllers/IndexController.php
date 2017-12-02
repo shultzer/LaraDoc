@@ -6,9 +6,8 @@
     use App\Order;
     use App\Report;
     use App\Spaletter;
-    use App\User;
     use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Auth;
+
     use Maatwebsite\Excel\Facades\Excel;
 
     class IndexController extends Controller {
@@ -42,17 +41,38 @@
             $orders                       = Order::latest('created_at')
                                                  ->take(5)
                                                  ->get();
-            $complettersWhithoutspaletter = Completter::whereIn('spaletters_id', [
-              NULL,
-              0,
-            ])->get();
+            $complettersWhithoutspaletter = $completter->complettersWhithoutspaletter();
             $complettersWhithoutorder     = Completter::WhereHas('spaletters')
                                                       ->whereIn('order_id', [
                                                         NULL,
                                                         0,
                                                       ])
-                                                      ->get();
-            $orderswhithoutreports        = Order::doesntHave('reports')->get();
+                                                      ->take(5)->get();
+
+            $complettersWhithoutreports = Completter::with('orders', 'reports')
+                                                    ->whereHas('orders')
+                                                    ->whereIn('report_id', [
+                                                      NULL,
+                                                      0,
+                                                    ])
+                                                    ->get();
+            //dd($complettersWhithoutreports->count());
+            if ( $complettersWhithoutreports->count() != 0 ) {
+
+                foreach ( $complettersWhithoutreports as $item ) {
+
+                    foreach ( $item->orders()->get() as $i ) {
+                        $orderswhithoutreports [] = $i;
+                    }
+
+                }
+                $orderswhithoutreports = array_unique($orderswhithoutreports);
+            }
+            else {
+                $orderswhithoutreports = [];
+            }
+            //$orderswhithoutreports = $order->orderswithoutreports();
+            //dump(array_unique($orderswhithoutreports));
 
 
             return view('index', [
@@ -76,7 +96,7 @@
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-            $ar = [];
+            $ar         = [];
             /*
              * Получаем из базы жадной загрузкой коллекцию писем Бреста со всеми связями
              *
@@ -335,13 +355,75 @@
                 }
             }//endforeach
 
+            /*
+             * Получаем из базы жадной загрузкой коллекцию писем Белтэи со всеми связями
+             *
+             * */
+            $belteicompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+                                             ->where([ 'company' => 'РУП «БелТЭИ»' ])
+                                             ->get();
+            /*
+             * формируем массив данных для передачи во вьюху
+             * */
+            foreach ( $belteicompanyletters as $item ) {
+                /*
+                 * кладем в массив письма Белтэи
+                 * и длинну сетей
+                 *
+                 * */
+                $ar[ 'beltei' ][ $item->number ][ 'comletter' ] = $item;
+                $ar[ 'belteivolume' ][ 'volume' ][]             = $item->volume;
+
+                /*
+                 * если есть связанные письма Белэнерго - дабавляем в массив
+                 *
+                 * */
+                if ( isset($item->spaletters) ) {
+
+                    $ar[ 'beltei' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
+                    $ar[ 'belteivolume' ][ 'spavolume' ][]          = $item->volume;
+                }
+                else {
+                    $ar[ 'beltei' ][ $item->number ][ 'spaletter' ] = '';
+                }
+
+                /*
+                 * если есть связанные приказы - дабавляем в массив
+                 *
+                 * */
+
+                if ( isset($item->orders) ) {
+
+                    $ar[ 'beltei' ][ $item->number ][ 'order' ] = $item->orders;
+                    $ar[ 'belteivolume' ][ 'ordervolume' ][]    = $item->volume;
+                }
+                else {
+
+                    $ar[ 'beltei' ][ $item->number ][ 'order' ] = '';
+                }
+
+                /*
+                 * если есть связанные отчеты - дабавляем в массив
+                 * */
+                if ( isset($item->reports) ) {
+
+                    $ar[ 'beltei' ][ $item->number ][ 'report' ] = $item->reports;
+                    $ar[ 'belteivolume' ][ 'reportvolume' ][]    = $item->volume;
+                }
+                else {
+
+                    $ar[ 'beltei' ][ $item->number ][ 'report' ] = '';
+                }
+
+            }//endforeach
+            //dd($ar);
 
             return view('table', [
-              'ar' => $ar,
-                'completter'=> $completter,
-                'spaletter'=> $spaletter,
-                'order'=> $order,
-                'report'=> $report,
+              'ar'         => $ar,
+              'completter' => $completter,
+              'spaletter'  => $spaletter,
+              'order'      => $order,
+              'report'     => $report,
             ]);
 
         }
@@ -628,21 +710,21 @@
         }
 
         public function searchform () {
-            $completter = new Completter;
-            $spaletter  = new Spaletter;
-            $order      = new Order;
-            $report     = new Report;
+            $completter     = new Completter;
+            $spaletter      = new Spaletter;
+            $order          = new Order;
+            $report         = new Report;
             $companyletters = Completter::all();
             foreach ( $companyletters as $item ) {
                 $ar[] = $item->number;
             }
 
             return view('letterwayform', [
-              'ar' => $ar,
-              'completter'                   => $completter,
-              'spaletter'                    => $spaletter,
-              'order'                        => $order,
-              'report'                       => $report,
+              'ar'         => $ar,
+              'completter' => $completter,
+              'spaletter'  => $spaletter,
+              'order'      => $order,
+              'report'     => $report,
             ]);
         }
 
@@ -651,7 +733,7 @@
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-            $ar = [];
+            $ar         = [];
             $this->validate($request, [
               'number' => 'required|max:10',
             ]);
@@ -736,11 +818,11 @@
                 }//endforeach
             }
             return view('searchresult', [
-              'ar' => $ar,
-              'completter'                   => $completter,
-              'spaletter'                    => $spaletter,
-              'order'                        => $order,
-              'report'                       => $report,
+              'ar'         => $ar,
+              'completter' => $completter,
+              'spaletter'  => $spaletter,
+              'order'      => $order,
+              'report'     => $report,
 
             ]);
         }

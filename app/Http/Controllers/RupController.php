@@ -4,6 +4,9 @@
 
     use App\Completter;
     use App\Property;
+    use App\Spaletter;
+    use App\Order;
+    use App\Report;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Gate;
@@ -12,13 +15,16 @@
     class RupController extends Controller {
 
 
-        public function addcompletter (Property $property) {
-            $completter = new Completter();
+        public function addcompletter (Property $property, Completter $completter, Spaletter $spaletter, Order $order, Report $report) {
+
 
             $item = $property->pluck('name', 'id');
             return view('addcompletter', [
               'item'       => $item,
               'completter' => $completter,
+              'spaletter' => $spaletter,
+              'order' => $order,
+              'report' => $report,
             ]);
         }
 
@@ -37,7 +43,7 @@
               'reason'  => 'required',
             ]);
             $user = Auth::user();
-
+            //dd($request->owner);
             if ( $request->hasFile('doc') ) {
                 $doc = $request->file('doc');
 
@@ -52,6 +58,7 @@
                                    'company' => $request->company,
                                    'volume'  => $request->volume,
                                    'reason'  => $request->reason,
+                                   'owner'  => $request->owner,
                                  ]);
                 $comlet->propertys()->attach($request->get('property'));
             }

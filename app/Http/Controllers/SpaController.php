@@ -66,24 +66,25 @@
         }
 
         public function addreport () {
-            $completter = new Completter;
-            $spaletter  = new Spaletter;
-            $order      = new Order;
-            $report     = new Report;
+            $completter           = new Completter;
+            $spaletter            = new Spaletter;
+            $order                = new Order;
+            $report               = new Report;
             $ordersWhithoutreport = $order->with('completters.orders')
                                           ->doesntHave('reports')
                                           ->get();
             return ( view('addreport', [
-              'orders' => $ordersWhithoutreport,
-              'completter'                   => $completter,
-              'spaletter'                    => $spaletter,
-              'order'                        => $order,
-              'report'                       => $report,
+              'orders'     => $ordersWhithoutreport,
+              'completter' => $completter,
+              'spaletter'  => $spaletter,
+              'order'      => $order,
+              'report'     => $report,
             ]) );
         }
 
         public function storereport (Request $request) {
             $report = new Report();
+
             if ( Gate::denies('create', $report) ) {
                 return redirect()
                   ->route('main')
@@ -118,7 +119,7 @@
             return redirect('/');
         }
 
-        public function makeletterform (Property $property) {
+        public function makeletterform (Property $property, Completter $completter, Spaletter $spaletter, Order $order, Report $report) {
             $item                         = $property->pluck('name', 'id');
             $complettersWhithoutspaletter = Completter::whereIn('spaletters_id', [
               NULL,
@@ -127,20 +128,48 @@
             return view('spa.makeletter', [
               'item'        => $item,
               'completters' => $complettersWhithoutspaletter,
+              'completter'  => $completter,
+              'spaletter'   => $spaletter,
+              'order'       => $order,
+              'report'      => $report,
             ]);
         }
 
         public function makeletter (Request $request) {
-            $company = Completter::where('number', $request->company)
-                                 ->first()->company;
-            $date    = Completter::where('number', $request->company)
-                                 ->first()->date;
-            $number  = Completter::where('number', $request->company)
-                                 ->first()->number;
+            //dd($request->company);
+            if ( count($request->company) > 1 ) {
+                $template = 'templateformany.docx';
+
+                $str = '';
+                foreach ( $request->company as $item ) {
+
+                    $company = Completter::where('number', $item)
+                                         ->first()->company;
+                    $date    = Completter::where('number', $item)
+                                         ->first()->date;
+                    $number  = Completter::where('number', $item)
+                                         ->first()->number;
+
+                    $str .= "$company от $date № $number, ";
+                }
+
+            }
+            else {
+                $template = 'templatefor1.docx';
+                $company  = Completter::where('number', $request->company)
+                                      ->first()->company;
+                $date     = Completter::where('number', $request->company)
+                                      ->first()->date;
+                $number   = Completter::where('number', $request->company)
+                                      ->first()->number;
+                $owner    = Completter::where('number', $request->company)
+                                      ->first()->owner;
+                $str      = "$company от $date № $number";
+            }
 
 
             $zip = new ZipArchive;
-            copy('template.docx', 'doc.docx');
+            copy($template, 'doc.docx');
             if ( $zip->open('doc.docx') === TRUE ) {
                 /*открываем наш шаблон для чтения (он находится вне документа)
                 и помещаеем его содержимое в переменную $content*/
@@ -148,12 +177,18 @@
                 $handle  = fopen("doc/word/document.xml", "r");
                 $content = fread($handle, filesize("doc/word/document.xml"));
                 fclose($handle);
-                /*Далее заменяем все что нам нужно например так */
-                $content = str_replace([
-                  "company",
-                  "date",
-                  "number",
-                ], [ "$company", "$date", "$number" ], $content);
+                /*Далее заменяем все что нам нужно  */
+                if ( isset($owner) ) {
+                    $content = str_replace([ 'str', 'owner' ], [
+                      $str,
+                      $owner,
+                    ], $content);
+
+                }
+                else {
+                    $content = str_replace('str', $str, $content);
+                }
+
 
                 /*Удаляем имеющийся в архиве document.xml*/
                 $zip->deleteName('word/document.xml');

@@ -16,7 +16,7 @@
                 $table->increments('id');
                 $table->text('role');
             });
-            Schema::create('user_role', function (Blueprint $table) {
+            Schema::create('role_user', function (Blueprint $table) {
                 $table->integer('user_id')->index();
                 $table->integer('role_id')->index();
             });

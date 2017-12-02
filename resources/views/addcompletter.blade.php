@@ -50,7 +50,6 @@
                             <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
                         </div>
                     </div>
-
                     <div class="control-group">
                         <label class="control-label" for="selectError">Наименование организации</label>
                         <div class="controls">
@@ -63,6 +62,10 @@
                         </div>
                     </div>
 
+                    <div class="control-group">
+                        <label class="control-label" for="owner">Передающая сторона</label>
+                        <input type="text" name="owner" class="input-xlarge">
+                    </div>
 
                     <div class="control-group">
                         <label class="control-label">Категория имущества</label>

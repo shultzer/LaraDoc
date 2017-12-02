@@ -33,6 +33,7 @@
                   'doc'     => $faker->ImageUrl(),
                   'company' => IndexController::$companylist[ array_rand(IndexController::$companylist) ],
                   'reason'  => '294',
+                  'owner' => 'ОАО "ФФФ"',
                   'user_id' => factory(App\User::class)->create()->id,
                 ]);
 
@@ -40,17 +41,17 @@
                   $propertylist->random()
                 );
             }
-
         }
 
-        private function createuser(){
-            $usertable    = $this->getTable('users');
+        private function createuser () {
+            $usertable = $this->getTable('users');
             \App\User::create([
-              'name' => 'shultz',
+              'name'     => 'shultz',
               'password' => '$2y$10$HSHyDBCksHgATNrvX1KIL.F3b3QASdu9HMzTZN0IxoKkYTwlm3cQi',
-              'email' => 'skorohods@mail.ru'
+              'email'    => 'skorohods@mail.ru',
             ]);
         }
+
         private function getTable ($name) {
 
             $table = DB::table($name);

@@ -47,6 +47,7 @@
                                    'company' => $request->company,
                                    'volume'  => $request->volume,
                                    'reason'  => $request->reason,
+                                   'owner'  => $request->owner,
                                  ]);
                 $comlet->propertys()->attach($request->get('property'));
             }
