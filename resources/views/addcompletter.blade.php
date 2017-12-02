@@ -71,7 +71,7 @@
                         <label class="control-label">Категория имущества</label>
                         <div class="controls">
                             @foreach($item as $key=> $value)
-                                
+
                                 <label class="checkbox inline">
                                     <input type="checkbox" name="property[]" value="{{ $key }}"> {{ $value }}
                                 </label>
@@ -86,6 +86,43 @@
                         </div>
                     </div>
                     {{--основание (радио)--}}
+                    {{--TODO: конкретные основания--}}
+
+                    <div class="control-group">
+                        <label class="control-label" for="dealtype">Вид сделки</label>
+                        <div class="controls">
+                            <select id="dealtype" name="dealtype" data-rel="chosen">
+                                <option name="" selected></option>
+                                <option value="receive">Принять</option>
+                                <option value="transferto">Передать</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="ownership">Форма собственности второй стороны сделки</label>
+                        <div class="controls">
+                            <select id="ownership" name="ownership" data-rel="chosen">
+                                <option name="" selected></option>
+                                <option value="private">Частная</option>
+                                <option value="communal">Коммунальная</option>
+                                <option value="republic">Республиканская</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="ownership">Тип имущества</label>
+                        <div class="controls">
+                            <select id="ownership" name="ownership" data-rel="chosen">
+                                <option name="" selected></option>
+                                <option value="private">Капитальные строения (здания, сооружения)</option>
+                                <option value="communal">Транспортные средства</option>
+                                <option value="republic">Оборудование</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="control-group">
                         <label class="control-label" for="selectError">Основание</label>
                         <div class="controls">

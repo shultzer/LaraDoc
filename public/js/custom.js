@@ -238,7 +238,7 @@ function numberWithCommas(x) {
 		
 function template_functions(){
 	
-	/* ---------- ToDo List Action Buttons ---------- */
+
 	
 	$(".todo-remove").click(function(){
 		

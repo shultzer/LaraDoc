@@ -29,6 +29,17 @@
          *
          * @return mixed
          */
+
+        public function before (User $user) {
+            foreach ( $user->roles as $role ) {
+                if ( $role->role == 'admin' ) {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+
+        }
+
         public function create (User $user) {
             foreach ( $user->roles as $role ) {
                 if ( $role->role == 'spa' ) {

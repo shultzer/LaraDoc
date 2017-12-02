@@ -22,13 +22,14 @@
             return view('addcompletter', [
               'item'       => $item,
               'completter' => $completter,
-              'spaletter' => $spaletter,
-              'order' => $order,
-              'report' => $report,
+              'spaletter'  => $spaletter,
+              'order'      => $order,
+              'report'     => $report,
             ]);
         }
 
         public function storecompletter (Request $request) {
+
             $completter = new Completter();
             if ( Gate::denies('create', $completter) ) {
                 return redirect()
@@ -58,7 +59,7 @@
                                    'company' => $request->company,
                                    'volume'  => $request->volume,
                                    'reason'  => $request->reason,
-                                   'owner'  => $request->owner,
+                                   'owner'   => $request->owner,
                                  ]);
                 $comlet->propertys()->attach($request->get('property'));
             }

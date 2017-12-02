@@ -95,6 +95,7 @@
               'date'   => 'required',
               'doc'    => 'required',
             ]);
+
             $user     = Auth::user();
             $doc      = $request->file('doc');
             $fileName = time() . '_' . $doc->getClientOriginalName();
@@ -137,6 +138,8 @@
 
         public function makeletter (Request $request) {
             //dd($request->company);
+
+            //TODO: use many templates
             if ( count($request->company) > 1 ) {
                 $template = 'templateformany.docx';
 

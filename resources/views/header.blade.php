@@ -60,12 +60,14 @@
                             <li class="dropdown-menu-title">
                                 <span>Шаблоны писем</span>
                             </li>
-                            @if(\Illuminate\Support\Facades\Auth::user()!=NULL AND \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa')
-                                <li>
-                                    <a href="{{ route('makespaletterform') }}">
-                                        Создание письма ГПО "Белэнерго"
-                                    </a>
-                                </li>
+                            @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
+                                @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
+                                    <li>
+                                        <a href="{{ route('makespaletterform') }}">
+                                            Создание письма ГПО "Белэнерго"
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
                         </ul>
                     </li>

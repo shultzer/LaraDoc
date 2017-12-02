@@ -51,4 +51,14 @@
         public function roles () {
             return $this->belongsToMany('App\Role');
         }
+
+        public function isAdmin () {
+            if ( $this->roles()->first()->roles == 'admnin' ) {
+                return TRUE;
+            }
+            else {
+                return FALSE;
+            }
+
+        }
     }

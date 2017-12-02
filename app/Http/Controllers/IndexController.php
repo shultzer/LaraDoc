@@ -7,7 +7,6 @@
     use App\Report;
     use App\Spaletter;
     use Illuminate\Http\Request;
-
     use Maatwebsite\Excel\Facades\Excel;
 
     class IndexController extends Controller {
@@ -25,6 +24,9 @@
           'belenergosetproekt' => 'РУП «Белэнергосетьпроект»',
         ];
 
+        /**
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         */
         public function index () {
             $completter = new Completter;
             $spaletter  = new Spaletter;
@@ -72,7 +74,7 @@
                 $orderswhithoutreports = [];
             }
             //$orderswhithoutreports = $order->orderswithoutreports();
-            //dump(array_unique($orderswhithoutreports));
+            //dump($user->roles);
 
 
             return view('index', [
@@ -360,8 +362,8 @@
              *
              * */
             $belteicompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
-                                             ->where([ 'company' => 'РУП «БелТЭИ»' ])
-                                             ->get();
+                                              ->where([ 'company' => 'РУП «БелТЭИ»' ])
+                                              ->get();
             /*
              * формируем массив данных для передачи во вьюху
              * */
@@ -426,6 +428,7 @@
               'report'     => $report,
             ]);
 
+            //TODO: add other companies
         }
 
         public function exportUserList () {

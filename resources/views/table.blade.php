@@ -477,6 +477,7 @@
                         <td>
                         <td>@if(isset($ar['minskvolume']['reportvolume'])){{ array_sum($ar['minskvolume']['reportvolume']) }}@endif</td>
                     </tr>
+                    {{--TODO: add other companies--}}
                     <tr>
                         <th colspan="3">Итого по Белэнерго</th>
                         <td>{{ $completter['comletter']->sum('volume') }}</td>
