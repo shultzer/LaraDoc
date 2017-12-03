@@ -66,15 +66,39 @@
         }
 
         public function addreport () {
-            $completter           = new Completter;
-            $spaletter            = new Spaletter;
-            $order                = new Order;
-            $report               = new Report;
-            $ordersWhithoutreport = $order->with('completters.orders')
-                                          ->doesntHave('reports')
-                                          ->get();
+            $completter = new Completter;
+            $spaletter  = new Spaletter;
+            $order      = new Order;
+            $report     = new Report;
+            //TODO: incorrect logic orders without reports
+
+
+
+
+            $complettersWhithoutreports = Completter::with('orders', 'reports')
+                                                    ->whereHas('orders')
+                                                    ->whereIn('report_id', [
+                                                      NULL,
+                                                      0,
+                                                    ])
+                                                    ->get();
+
+            if ( $complettersWhithoutreports->count() != 0 ) {
+
+                foreach ( $complettersWhithoutreports as $item ) {
+
+                    foreach ( $item->orders()->get() as $i ) {
+                        $orderswhithoutreports [] = $i;
+                    }
+
+                }
+                $orderswhithoutreports = array_unique($orderswhithoutreports);
+            }
+            else {
+                $orderswhithoutreports = [];
+            }
             return ( view('addreport', [
-              'orders'     => $ordersWhithoutreport,
+              'orders'     => $orderswhithoutreports,
               'completter' => $completter,
               'spaletter'  => $spaletter,
               'order'      => $order,

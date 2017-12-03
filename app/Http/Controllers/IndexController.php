@@ -99,332 +99,7 @@
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-            $ar         = [];
-
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Бреста со всеми связями
-             *
-             * */
-
-            $brestcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                             ->where([ 'company' => 'РУП «Брестэнерго»' ])
-                                             ->get();
-
-            /*
-             * формируем массив данных для передачи во вьюху
-             * */
-            foreach ( $brestcompanyletters as $item ) {
-                /*
-                 * кладем в массив письма бреста
-                 * и длинну сетей
-                 *
-                 * */
-
-                $ar[ 'brest' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'brestvolume' ][ 'volume' ][]             = $item->volume;
-
-                /*
-                 * если есть связанные письма Белэнерго - дабавляем в массив
-                 *
-                 * */
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'brest' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'brestvolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-                    $ar[ 'brest' ][ $item->number ][ 'spaletter' ] = '';
-                }
-
-                /*
-                 * если есть связанные приказы - дабавляем в массив
-                 *
-                 * */
-
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'brest' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'brestvolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'brest' ][ $item->number ][ 'order' ] = '';
-                }
-
-                /*
-                 * если есть связанные отчеты - дабавляем в массив
-                 * */
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'brest' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'brestvolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'brest' ][ $item->number ][ 'report' ] = '';
-                }
-
-            }//endforeach
-
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Витебска со всеми связями
-             *
-             * */
-            $vitebskcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                               ->where([ 'company' => 'РУП «Витебскэнерго»' ])
-                                               ->get();
-            foreach ( $vitebskcompanyletters as $item ) {
-
-                $ar[ 'vitebsk' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'vitebskvolume' ][ 'volume' ][]             = $item->volume;
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'vitebskvolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'spaletter' ] = '';
-                }
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'vitebskvolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'order' ] = '';
-                }
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'vitebskvolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'vitebsk' ][ $item->number ][ 'report' ] = '';
-                }
-            }//endforeach
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Гродно со всеми связями
-             *
-             * */
-            $grodnokcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                               ->where([ 'company' => 'РУП «Гродноэнерго»' ])
-                                               ->get();
-            foreach ( $grodnokcompanyletters as $item ) {
-
-                $ar[ 'grodno' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'grodnovolume' ][ 'volume' ][]             = $item->volume;
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'grodnovolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'spaletter' ] = '';
-                }
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'grodnovolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'order' ] = '';
-                }
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'grodnovolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'grodno' ][ $item->number ][ 'report' ] = '';
-                }
-            }//endforeach
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Гомеля со всеми связями
-             *
-             * */
-            $gomelcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                             ->where([ 'company' => 'РУП «Гомельэнерго»' ])
-                                             ->get();
-
-            foreach ( $gomelcompanyletters as $item ) {
-
-                $ar[ 'gomel' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'gomelvolume' ][ 'volume' ][]             = $item->volume;
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'gomelvolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'spaletter' ] = '';
-                }
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'gomelvolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'order' ] = '';
-                }
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'gomelvolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'gomel' ][ $item->number ][ 'report' ] = '';
-                }
-            }//endforeach
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Могилева со всеми связями
-             *
-             * */
-            $mogilevcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                               ->where([ 'company' => 'РУП «Могилевэнерго»' ])
-                                               ->get();
-            foreach ( $mogilevcompanyletters as $item ) {
-
-                $ar[ 'mogilev' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'mogilevvolume' ][ 'volume' ][]             = $item->volume;
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'mogilevvolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'spaletter' ] = '';
-                }
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'mogilevvolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'order' ] = '';
-                }
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'mogilevvolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'mogilev' ][ $item->number ][ 'report' ] = '';
-                }
-            }//endforeach
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Минска со всеми связями
-             *
-             * */
-            $minskcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                             ->where([ 'company' => 'РУП «Минскэнерго»' ])
-                                             ->get();
-            foreach ( $minskcompanyletters as $item ) {
-
-                $ar[ 'minsk' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'minskvolume' ][ 'volume' ][]             = $item->volume;
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'minskvolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'spaletter' ] = '';
-                }
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'minskvolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'order' ] = '';
-                }
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'minskvolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'minsk' ][ $item->number ][ 'report' ] = '';
-                }
-            }//endforeach
-
-            /*
-             * Получаем из базы жадной загрузкой коллекцию писем Белтэи со всеми связями
-             *
-             * */
-            $belteicompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
-                                              ->where([ 'company' => 'РУП «БелТЭИ»' ])
-                                              ->get();
-            /*
-             * формируем массив данных для передачи во вьюху
-             * */
-            foreach ( $belteicompanyletters as $item ) {
-                /*
-                 * кладем в массив письма Белтэи
-                 * и длинну сетей
-                 *
-                 * */
-                $ar[ 'beltei' ][ $item->number ][ 'comletter' ] = $item;
-                $ar[ 'belteivolume' ][ 'volume' ][]             = $item->volume;
-
-                /*
-                 * если есть связанные письма Белэнерго - дабавляем в массив
-                 *
-                 * */
-                if ( isset($item->spaletters) ) {
-
-                    $ar[ 'beltei' ][ $item->number ][ 'spaletter' ] = $item->spaletters;
-                    $ar[ 'belteivolume' ][ 'spavolume' ][]          = $item->volume;
-                }
-                else {
-                    $ar[ 'beltei' ][ $item->number ][ 'spaletter' ] = '';
-                }
-
-                /*
-                 * если есть связанные приказы - дабавляем в массив
-                 *
-                 * */
-
-                if ( isset($item->orders) ) {
-
-                    $ar[ 'beltei' ][ $item->number ][ 'order' ] = $item->orders;
-                    $ar[ 'belteivolume' ][ 'ordervolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'beltei' ][ $item->number ][ 'order' ] = '';
-                }
-
-                /*
-                 * если есть связанные отчеты - дабавляем в массив
-                 * */
-                if ( isset($item->reports) ) {
-
-                    $ar[ 'beltei' ][ $item->number ][ 'report' ] = $item->reports;
-                    $ar[ 'belteivolume' ][ 'reportvolume' ][]    = $item->volume;
-                }
-                else {
-
-                    $ar[ 'beltei' ][ $item->number ][ 'report' ] = '';
-                }
-
-            }//endforeach
-            //dd($ar);
+            $ar         = $this->build_array(static::$companylist);
 
             return view('table', [
               'ar'         => $ar,
@@ -727,7 +402,7 @@
             foreach ( $companyletters as $item ) {
                 $ar[] = $item->number;
             }
-
+            dd($this->build_array(static::$companylist));
             return view('letterwayform', [
               'ar'         => $ar,
               'completter' => $completter,
@@ -746,6 +421,7 @@
             $this->validate($request, [
               'number' => 'required|max:10',
             ]);
+
             $number         = $request->number;
             $companyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
                                         ->where('number', $number)->get();
@@ -834,6 +510,71 @@
               'report'     => $report,
 
             ]);
+        }
+
+        public function build_array ($companies) {
+
+            $ar = [];
+            foreach ( $companies as $key => $company ) {
+
+                $query = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
+                                   ->where([ 'company' => $company ])
+                                   ->get();
+                foreach ( $query as $item ) {
+                    /*
+                     * кладем в массив письма бреста
+                     * и длинну сетей
+                     *
+                     * */
+
+                    $ar[ $key ][ $item->number ][ 'comletter' ] = $item;
+                    //$ar[ $key ][ 'volume' ][]             = $item->volume;
+
+                    /*
+                     * если есть связанные письма Белэнерго - дабавляем в массив
+                     *
+                     * */
+                    if ( isset($item->spaletters) ) {
+
+                        $ar[ $key ][ $item->number ][ 'spaletter' ] = $item->spaletters;
+                        //$ar[ $key ][ 'spavolume' ][]          = $item->volume;
+                    }
+                    else {
+                        $ar[ $key ][ $item->number ][ 'spaletter' ] = '';
+                    }
+
+                    /*
+                     * если есть связанные приказы - дабавляем в массив
+                     *
+                     * */
+
+                    if ( isset($item->orders) ) {
+
+                        $ar[ $key ][ $item->number ][ 'order' ] = $item->orders;
+                        //$ar[ $key ][ 'ordervolume' ][]    = $item->volume;
+                    }
+                    else {
+
+                        $ar[ $key ][ $item->number ][ 'order' ] = '';
+                    }
+
+                    /*
+                     * если есть связанные отчеты - дабавляем в массив
+                     * */
+                    if ( isset($item->reports) ) {
+
+                        $ar[ $key ][ $item->number ][ 'report' ] = $item->reports;
+                        //$ar[ $key ][ 'reportvolume' ][]    = $item->volume;
+                    }
+                    else {
+
+                        $ar[ $key ][ $item->number ][ 'report' ] = '';
+                    }
+
+                }//endsubforeach
+            }//endmainforeach
+            return $ar;
+
         }
 
 

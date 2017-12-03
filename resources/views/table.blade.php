@@ -34,8 +34,9 @@
                     <tr>
                         <th colspan="10">Брестэнерго</th>
                     </tr>
-                    @if(isset($ar['brest']) && is_array($ar['brest']))
-                        @foreach($ar['brest'] as $completter)
+                    @if(isset($ar['brestenergo']) && is_array($ar['brestenergo']))
+                        @foreach($ar['brestenergo'] as $completter)
+
                             <tr>
                                 <td>
                                     <a href="{{ $completter['comletter']->doc }}"
@@ -91,7 +92,7 @@
                             </tr>
                         @endforeach
 
-                        <tr>
+                        {{--<tr>
                             <th colspan="3">Итого</th>
                             <td>@if(isset($ar['brestvolume']['volume'])){{ array_sum($ar['brestvolume']['volume']) }}@endif
                             <td>
@@ -100,7 +101,7 @@
                             <td>@if(isset($ar['brestvolume']['ordervolume'])){{ array_sum($ar['brestvolume']['ordervolume']) }}@endif
                             <td>
                             <td>@if(isset($ar['brestvolume']['reportvolume'])){{ array_sum($ar['brestvolume']['reportvolume']) }}@endif</td>
-                        </tr>
+                        </tr>--}}
                     @endif
                     <tr>
                         <th colspan="10">Витебскэнерго</th>
@@ -151,7 +152,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        <tr>
+                        {{--<tr>
                             <th colspan="3">Итого</th>
                             <td>@if(isset($ar['vitebskvolume']['volume'])){{ array_sum($ar['vitebskvolume']['volume']) }}@endif
                             <td>
@@ -160,7 +161,7 @@
                             <td>@if(isset($ar['vitebskvolume']['ordervolume'])){{ array_sum($ar['vitebskvolume']['ordervolume']) }}@endif
                             <td>
                             <td>@if(isset($ar['vitebskvolume']['reportvolume'])){{ array_sum($ar['vitebskvolume']['reportvolume']) }}@endif</td>
-                        </tr>
+                        </tr>--}}
                     @endif
                     <tr>
                         <th colspan="10">Гродноэнерго</th>
@@ -213,7 +214,7 @@
                             </tr>
                         @endforeach
                     @endif
-                    <tr>
+                    {{--<tr>
                         <th colspan="3">Итого</th>
                         <td>@if(isset($ar['grodnovolume']['volume'])){{ array_sum($ar['grodnovolume']['volume']) }}@endif
                         <td>
@@ -222,7 +223,7 @@
                         <td>@if(isset($ar['grodnovolume']['ordervolume'])){{ array_sum($ar['grodnovolume']['ordervolume']) }}@endif
                         <td>
                         <td>@if(isset($ar['grodnovolume']['reportvolume'])){{ array_sum($ar['grodnovolume']['reportvolume']) }}@endif</td>
-                    </tr>
+                    </tr>--}}
                     <tr>
                         <th colspan="10">Гомельэнерго</th>
                     </tr>
@@ -274,7 +275,7 @@
                             </tr>
                         @endforeach
                     @endif
-                    <tr>
+                    {{--<tr>
                         <th colspan="3">Итого</th>
                         <td>@if(isset($ar['gomelvolume']['volume'])){{ array_sum($ar['gomelvolume']['volume']) }}@endif
                         <td>
@@ -283,7 +284,7 @@
                         <td>@if(isset($ar['gomelvolume']['ordervolume'])){{ array_sum($ar['gomelvolume']['ordervolume']) }}@endif
                         <td>
                         <td>@if(isset($ar['gomelvolume']['reportvolume'])){{ array_sum($ar['gomelvolume']['reportvolume']) }}@endif</td>
-                    </tr>
+                    </tr>--}}
                     <tr>
                         <th colspan="10">Могилевэнерго</th>
                     </tr>
@@ -335,7 +336,7 @@
                             </tr>
                         @endforeach
                     @endif
-                    <tr>
+                    {{--<tr>
                         <th colspan="3">Итого</th>
                         <td>@if(isset($ar['mogilevvolume']['volume'])){{ array_sum($ar['mogilevvolume']['volume']) }}@endif
                         <td>
@@ -344,7 +345,7 @@
                         <td>@if(isset($ar['mogilevvolume']['ordervolume'])){{ array_sum($ar['mogilevvolume']['ordervolume']) }}@endif
                         <td>
                         <td>@if(isset($ar['mogilevvolume']['reportvolume'])){{ array_sum($ar['mogilevvolume']['reportvolume']) }}@endif</td>
-                    </tr>
+                    </tr>--}}
                     <tr>
                         <th colspan="10">Минскэнерго</th>
                     </tr>
@@ -456,7 +457,7 @@
                             </tr>
                         @endforeach
 
-                        <tr>
+                        {{--<tr>
                             <th colspan="3">Итого</th>
                             <td>@if(isset($ar['brestvolume']['volume'])){{ array_sum($ar['brestvolume']['volume']) }}@endif
                             <td>
@@ -465,9 +466,9 @@
                             <td>@if(isset($ar['brestvolume']['ordervolume'])){{ array_sum($ar['brestvolume']['ordervolume']) }}@endif
                             <td>
                             <td>@if(isset($ar['brestvolume']['reportvolume'])){{ array_sum($ar['brestvolume']['reportvolume']) }}@endif</td>
-                        </tr>
+                        </tr>--}}
                     @endif
-                    <tr>
+                    {{--<tr>
                         <th colspan="3">Итого</th>
                         <td>@if(isset($ar['minskvolume']['volume'])){{ array_sum($ar['minskvolume']['volume']) }}@endif
                         <td>
@@ -476,13 +477,13 @@
                         <td>@if(isset($ar['minskvolume']['ordervolume'])){{ array_sum($ar['minskvolume']['ordervolume']) }}@endif
                         <td>
                         <td>@if(isset($ar['minskvolume']['reportvolume'])){{ array_sum($ar['minskvolume']['reportvolume']) }}@endif</td>
-                    </tr>
+                    </tr>--}}
                     {{--TODO: add other companies--}}
-                    <tr>
+                    {{--<tr>
                         <th colspan="3">Итого по Белэнерго</th>
                         <td>{{ $completter['comletter']->sum('volume') }}</td>
                         <th colspan="6"></th>
-                    </tr>
+                    </tr>--}}
                     </tbody>
                 </table>
             </div>

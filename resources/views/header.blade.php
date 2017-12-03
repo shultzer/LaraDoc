@@ -7,7 +7,7 @@
     <meta name="description" content="Bootstrap Metro Dashboard">
     <meta name="author" content="Dennis Ji">
     <meta name="keyword"
-          content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+          content="">
     <!-- end: Meta -->
     <link href="img/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
     <!-- start: Mobile Specific -->

@@ -40,7 +40,7 @@
 
 <script src="js/jquery.chosen.min.js"></script>
 
-<script src="/Applications/MAMP/htdocs/stateproperty/public/js/jquery.uniform.min.js"></script>
+{{--<script src="js/jquery.uniform.min.js"></script>--}}
 
 <script src="js/jquery.cleditor.min.js"></script>
 
@@ -68,7 +68,7 @@
 
 <script src="js/retina.js"></script>
 
-<script src="js/custom.js"></script>
+{{--<script src="js/custom.js"></script>--}}
 <!-- end: JavaScript-->
 
 </body>
