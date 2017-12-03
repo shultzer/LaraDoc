@@ -8,6 +8,7 @@
     use App\Spaletter;
     use Illuminate\Http\Request;
     use Maatwebsite\Excel\Facades\Excel;
+    use function Sodium\crypto_box_publickey_from_secretkey;
 
     class IndexController extends Controller {
 
@@ -58,7 +59,7 @@
                                                       0,
                                                     ])
                                                     ->get();
-            //dd($complettersWhithoutreports->count());
+
             if ( $complettersWhithoutreports->count() != 0 ) {
 
                 foreach ( $complettersWhithoutreports as $item ) {
@@ -99,13 +100,16 @@
             $order      = new Order;
             $report     = new Report;
             $ar         = [];
+
             /*
              * Получаем из базы жадной загрузкой коллекцию писем Бреста со всеми связями
              *
              * */
-            $brestcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+
+            $brestcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                              ->where([ 'company' => 'РУП «Брестэнерго»' ])
                                              ->get();
+
             /*
              * формируем массив данных для передачи во вьюху
              * */
@@ -115,6 +119,7 @@
                  * и длинну сетей
                  *
                  * */
+
                 $ar[ 'brest' ][ $item->number ][ 'comletter' ] = $item;
                 $ar[ 'brestvolume' ][ 'volume' ][]             = $item->volume;
 
@@ -165,7 +170,7 @@
              * Получаем из базы жадной загрузкой коллекцию писем Витебска со всеми связями
              *
              * */
-            $vitebskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $vitebskcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                                ->where([ 'company' => 'РУП «Витебскэнерго»' ])
                                                ->get();
             foreach ( $vitebskcompanyletters as $item ) {
@@ -204,7 +209,7 @@
              * Получаем из базы жадной загрузкой коллекцию писем Гродно со всеми связями
              *
              * */
-            $grodnokcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $grodnokcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                                ->where([ 'company' => 'РУП «Гродноэнерго»' ])
                                                ->get();
             foreach ( $grodnokcompanyletters as $item ) {
@@ -243,9 +248,10 @@
              * Получаем из базы жадной загрузкой коллекцию писем Гомеля со всеми связями
              *
              * */
-            $gomelcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $gomelcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                              ->where([ 'company' => 'РУП «Гомельэнерго»' ])
                                              ->get();
+
             foreach ( $gomelcompanyletters as $item ) {
 
                 $ar[ 'gomel' ][ $item->number ][ 'comletter' ] = $item;
@@ -282,7 +288,7 @@
              * Получаем из базы жадной загрузкой коллекцию писем Могилева со всеми связями
              *
              * */
-            $mogilevcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $mogilevcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                                ->where([ 'company' => 'РУП «Могилевэнерго»' ])
                                                ->get();
             foreach ( $mogilevcompanyletters as $item ) {
@@ -321,7 +327,7 @@
              * Получаем из базы жадной загрузкой коллекцию писем Минска со всеми связями
              *
              * */
-            $minskcompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $minskcompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                              ->where([ 'company' => 'РУП «Минскэнерго»' ])
                                              ->get();
             foreach ( $minskcompanyletters as $item ) {
@@ -361,7 +367,7 @@
              * Получаем из базы жадной загрузкой коллекцию писем Белтэи со всеми связями
              *
              * */
-            $belteicompanyletters = Completter::with('spaletters.orders', 'orders.reports', 'propertys')
+            $belteicompanyletters = Completter::with('spaletters.orders', 'reports', 'orders.reports', 'propertys')
                                               ->where([ 'company' => 'РУП «БелТЭИ»' ])
                                               ->get();
             /*
