@@ -63,6 +63,16 @@
                             @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
                                 @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
                                     <li>
+                                        <a href="{{ route('make_lease_form') }}">
+                                            Создание письма по арендеГПО "Белэнерго"
+                                        </a>
+                                    </li>
+                                @endif
+                            @endif
+
+                            @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
+                                @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
+                                    <li>
                                         <a href="{{ route('makespaletterform') }}">
                                             Создание письма ГПО "Белэнерго"
                                         </a>

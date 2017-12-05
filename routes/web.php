@@ -43,6 +43,10 @@
     Route::post('/makespaletter', 'SpaController@makeletter')
          ->name('makespaletter');
 
+    Route::get('/make_lease_form', 'SpaController@make_lease_form')
+         ->name('make_lease_form');
+    Route::post('/make_lease_letter', 'SpaController@make_lease_letter')
+         ->name('make_lease_letter');
     Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');

@@ -3,7 +3,9 @@
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif
-
+    <div id="app">
+        <example></example>
+    </div>
     <div class="row-fluid">
         <div class="box span6">
             <div class="box-header">

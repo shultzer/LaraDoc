@@ -73,8 +73,6 @@
             //TODO: incorrect logic orders without reports
 
 
-
-
             $complettersWhithoutreports = Completter::with('orders', 'reports')
                                                     ->whereHas('orders')
                                                     ->whereIn('report_id', [
@@ -231,5 +229,117 @@
             header("Content-Type: application/msword");
             header("Content-Transfer-Encoding: binary");
             readfile($fileName);
+        }
+
+        public function make_lease_form (Completter $completter, Spaletter $spaletter, Order $order,Report $report) {
+            return view('spa.makelease', [
+              'completter' => $completter,
+                'spaletter' => $spaletter,
+                'order' => $order,
+                'report' => $report
+            ]);
+        }
+
+        public function make_lease_letter (Request $request) {
+
+            $type       = $request->type;
+            $contractor = $request->contractor;
+            $period     = $request->period;
+            $wall       = $request->wall;
+
+
+            switch ( $type ) {
+
+                case 'pay':
+
+                    if ( $contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'pay_contractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_contractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'pay_contractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_contractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    elseif ( !$contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'pay_nocontractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_nocontractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'pay_nocontractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_nocontractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    break;
+
+                case 'free':
+
+                    if ( $contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'free_contractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'free_contractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'free_contractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'free_contractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    elseif ( !$contractor ) {
+
+                        if ( $period == 'hourly' ) {
+
+                            $template = 'free_nocontractor_hourly.docx';
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            $template = 'free_nocontractor_mounthly.docx';
+
+                        }
+
+                    }
+                    break;
+            }
         }
     }
