@@ -38,53 +38,100 @@
                          </div>
                      </div>--}}
                     {{ csrf_field() }}
+
+                    <div class="control-group">
+                        <label class="control-label">Вид аренды</label>
+                        <div class="controls">
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="type"  value="pay" class="radio"></span>
+                                возмездно
+                            </label>
+                            <div style="clear:both"></div>
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="type"  value="free" class="radio" ></span>
+                                безвозмездно
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Период аренды</label>
+                        <div class="controls">
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="cont"  value="mounthly" class="radio" ></span>
+                                Длительная
+                            </label>
+                            <div style="clear:both"></div>
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="cont"  value="hourly" class="radio" ></span>
+                                Почасовая
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Наличие стен, потолка</label>
+                        <div class="controls">
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="wall"  value="true" class="radio" ></span>
+                                Есть
+                            </label>
+                            <div style="clear:both"></div>
+                            <label class="radio">
+                                <span class="checked"><input type="radio" name="wall"  value="false" class="radio" ></span>
+                                Нет
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Номер письма организации</label>
                         <div class="controls">
-                            <input type="text" name="number" class="span6 typeahead" id="typeahead">
+                            <input type="text" name="number" class="input-xlarge datepicker" id="typeahead">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="date01">Дата письма организации</label>
                         <div class="controls">
-                            <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
+                            <input type="text" name="date" class="input-xlarge datepicker" id="date01" placeholder="xx.xx.xxxx">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="period">на срок по</label>
                         <div class="controls">
-                            <input type="text" name="period" class="input-xlarge datepicker" id="period" value="">
+                            <input type="text" name="period" class="input-xlarge datepicker" id="period" placeholder="xx.xx.xxxx">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="property">Имущество</label>
                         <div class="controls">
-                            <input type="text" name="property" class="input-xlarge datepicker" id="property" value="">
+                            <input type="text" name="property" class="input-xlarge datepicker" id="property" >
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="arendodatel">Арендодатель:</label>
                         <div class="controls">
-                            <input type="text" name="filial" class="input-xlarge datepicker" id="arendodatel" placeholder="филиал">
-                            <input type="text" name="arendodatel" class="input-xlarge datepicker" id="arendodatel" placeholder="организация">
+                            <input type="text" name="filial" class="input-xlarge datepicker" id="arendodatel"
+                                   placeholder="филиал">
+                            <input type="text" name="arendodatel" class="input-xlarge datepicker" id="arendodatel"
+                                   placeholder="организация">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="addres">Расположенной:</label>
+                        <label class="control-label" for="address">Расположенной:</label>
                         <div class="controls">
-                            <input type="text" name="addres" class="input-xlarge datepicker" id="addres" value="">
+                            <input type="text" name="address" class="input-xlarge datepicker" id="address" placeholder="адрес">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="contractor">Арендатору:</label>
                         <div class="controls">
-                            <input type="text" name="contractor" class="input-xlarge datepicker" id="contractor" value="">
+                            <input type="text" name="contractor" class="input-xlarge datepicker" id="contractor"
+                                   placeholder="наименование юр. лица">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="target">Для размещения:</label>
                         <div class="controls">
-                            <input type="text" name="target" class="input-xlarge datepicker" id="target" value="">
+                            <input type="text" name="target" class="input-xlarge datepicker" id="target" placeholder="цель">
                         </div>
                     </div>
                     <div class="form-actions">

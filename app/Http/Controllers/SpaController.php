@@ -242,12 +242,14 @@
 
         public function make_lease_letter (Request $request) {
 
+
             $type       = $request->type;
             $contractor = $request->contractor;
-            $period     = $request->period;
+            $period     = $request->cont;
             $wall       = $request->wall;
+            $cont       = $request->period;
 
-
+dump($request->request);
             switch ( $type ) {
 
                 case 'pay':
@@ -257,9 +259,11 @@
                         if ( $period == 'hourly' ) {
                             if ( $wall ) {
                                 $template = 'pay_contractor_hourly_wals.docx';
+                                echo "pay_contractor_hourly_wals";
                             }
                             else {
                                 $template = 'pay_contractor_hourly_nowals.docx';
+                                echo "pay_contractor_hourly_nowals";
                             }
 
                         }
@@ -267,9 +271,11 @@
 
                             if ( $wall ) {
                                 $template = 'pay_contractor_mounthly_wals.docx';
+                                echo "pay_contractor_mounthly_wals";
                             }
                             else {
                                 $template = 'pay_contractor_mounthly_nowals.docx';
+                                echo "pay_contractor_mounthly_nowals";
                             }
 
                         }
@@ -280,9 +286,11 @@
                         if ( $period == 'hourly' ) {
                             if ( $wall ) {
                                 $template = 'pay_nocontractor_hourly_wals.docx';
+                                echo "pay_nocontractor_hourly_wals";
                             }
                             else {
                                 $template = 'pay_nocontractor_hourly_nowals.docx';
+                                echo "pay_nocontractor_hourly_nowals";
                             }
 
                         }
@@ -290,9 +298,11 @@
 
                             if ( $wall ) {
                                 $template = 'pay_nocontractor_mounthly_wals.docx';
+                                echo "pay_nocontractor_mounthly_wals";
                             }
                             else {
                                 $template = 'pay_nocontractor_mounthly_nowals.docx';
+                                echo "pay_nocontractor_mounthly_nowals";
                             }
 
                         }
@@ -307,9 +317,11 @@
                         if ( $period == 'hourly' ) {
                             if ( $wall ) {
                                 $template = 'free_contractor_hourly_wals.docx';
+                                echo "free_contractor_hourly_wals";
                             }
                             else {
                                 $template = 'free_contractor_hourly_nowals.docx';
+                                echo "free_contractor_hourly_nowals";
                             }
 
                         }
@@ -317,9 +329,11 @@
 
                             if ( $wall ) {
                                 $template = 'free_contractor_mounthly_wals.docx';
+                                echo "free_contractor_mounthly_wals";
                             }
                             else {
                                 $template = 'free_contractor_mounthly_nowals.docx';
+                                echo "free_contractor_mounthly_nowals";
                             }
 
                         }
@@ -330,11 +344,13 @@
                         if ( $period == 'hourly' ) {
 
                             $template = 'free_nocontractor_hourly.docx';
+                            echo "free_nocontractor_hourly";
 
                         }
                         elseif ( $period == 'mounthly' ) {
 
                             $template = 'free_nocontractor_mounthly.docx';
+                            echo "free_nocontractor_mounthly";
 
                         }
 

@@ -1,4 +1,6 @@
-@include('header')
+@extends('layouts.test')
+
+@section('content')
 <div class="box-content">
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
@@ -117,4 +119,4 @@
         </div>
     </div>
 </div>
-@include('footer')
+@endsection
