@@ -1,4 +1,6 @@
-@include('header')
+@extends('layouts.test')
+
+@section('content')
 <div class="row-fluid sortable">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -81,4 +83,4 @@
 
 </div><!--/row-->
 
-@include('footer')
+@endsection()
