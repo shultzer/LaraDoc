@@ -95,6 +95,7 @@
         }
 
         public function table () {
+
             $completter = new Completter;
             $spaletter  = new Spaletter;
             $order      = new Order;
@@ -109,7 +110,6 @@
               'report'     => $report,
             ]);
 
-            //TODO: add other companies
         }
 
         public function exportUserList () {
@@ -577,14 +577,108 @@
 
         }
 
+        public function make_lease_letter (Request $request) {
+
+            $type       = $request->type;
+            $contractor = $request->contractor;
+            $period     = $request->period;
+            $wall       = $request->wall;
+
+
+            switch ( $type ) {
+
+                case 'pay':
+
+                    if ( $contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'pay_contractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_contractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'pay_contractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_contractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    elseif ( !$contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'pay_nocontractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_nocontractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'pay_nocontractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'pay_nocontractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    break;
+
+                case 'free':
+
+                    if ( $contractor ) {
+
+                        if ( $period == 'hourly' ) {
+                            if ( $wall ) {
+                                $template = 'free_contractor_hourly_wals.docx';
+                            }
+                            else {
+                                $template = 'free_contractor_hourly_nowals.docx';
+                            }
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            if ( $wall ) {
+                                $template = 'free_contractor_mounthly_wals.docx';
+                            }
+                            else {
+                                $template = 'free_contractor_mounthly_nowals.docx';
+                            }
+
+                        }
+
+                    }
+                    elseif ( !$contractor ) {
+
+                        if ( $period == 'hourly' ) {
+
+                            $template = 'free_nocontractor_hourly.docx';
+
+                        }
+                        elseif ( $period == 'mounthly' ) {
+
+                            $template = 'free_nocontractor_mounthly.docx';
+
+                        }
+
+                    }
+                    break;
+            }
+        }
 
     }
-
-
-    /*class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
-
-        public function getFilename () {
-            return 'filename';
-        }
-    }*/
 
