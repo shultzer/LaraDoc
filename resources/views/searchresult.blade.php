@@ -1,4 +1,4 @@
-@include('header')@extends('layouts.test')
+@extends('layouts.test')
 
 @section('content')
     <div class="row-fluid sortable">
@@ -16,7 +16,7 @@
             </div>
 
             @if(isset($companyletters))
-                @php(dd($companyletters))
+                {{--@php(dd($companyletters))--}}
             @endif
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
@@ -41,7 +41,6 @@
                 @if(isset($ar))
 
                     @foreach($ar as $item)
-                        {{-- @php(dd($item))--}}
                         <tr>
                             <td>
                                 <a href="{{ $item['comletter']->doc }}"

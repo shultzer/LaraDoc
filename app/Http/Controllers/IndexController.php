@@ -13,16 +13,16 @@
     class IndexController extends Controller {
 
         public static $companylist = [
-          'brestenergo'        => 'РУП «Брестэнерго»',
-          'vitebskenergo'      => 'РУП «Витебскэнерго»',
-          'grodnoenergo'       => 'РУП «Гродноэнерго»',
-          'gomelenergo'        => 'РУП «Гомельэнерго»',
-          'minskenergo'        => 'РУП «Минскэнерго»',
-          'mogilevenergo'      => 'РУП «Могилевэнерго»',
-          'belenergostroy'     => 'РУП «Белэнергострой»',
+          'brest'        => 'РУП «Брестэнерго»',
+          'vitebsk'      => 'РУП «Витебскэнерго»',
+          'grodno'       => 'РУП «Гродноэнерго»',
+          'gomel'        => 'РУП «Гомельэнерго»',
+          'minsk'        => 'РУП «Минскэнерго»',
+          'mogilev'      => 'РУП «Могилевэнерго»',
+          'belenergostr'     => 'РУП «Белэнергострой»',
           'beltei'             => 'РУП «БелТЭИ»',
           'belnipi'            => 'РУП «Белнипиэнергопром»',
-          'belenergosetproekt' => 'РУП «Белэнергосетьпроект»',
+          'belenergoset' => 'РУП «Белэнергосетьпроект»',
         ];
 
         /**
@@ -101,7 +101,7 @@
             $order      = new Order;
             $report     = new Report;
             $ar         = $this->build_array(static::$companylist);
-
+            //dd($ar);
             return view('table', [
               'ar'         => $ar,
               'completter' => $completter,
@@ -402,7 +402,6 @@
             foreach ( $companyletters as $item ) {
                 $ar[] = $item->number;
             }
-            dd($this->build_array(static::$companylist));
             return view('letterwayform', [
               'ar'         => $ar,
               'completter' => $completter,
@@ -502,6 +501,8 @@
                     }
                 }//endforeach
             }
+
+
             return view('searchresult', [
               'ar'         => $ar,
               'completter' => $completter,

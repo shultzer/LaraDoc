@@ -1,6 +1,4 @@
-@extends('layouts.test')
-
-@section('content')
+@include('header')
 
 <div class="box-content">
     @if(session('status') !== NULL)
@@ -125,4 +123,4 @@
         </div><!--/span-->
     </div>
 </div>
-@endsection()
+@include('footer')
