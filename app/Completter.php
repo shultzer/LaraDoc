@@ -47,8 +47,7 @@
         }
 
         public function complettersWhithoutspaletter () {
-            return $this->WhereHas('spaletters')
-                        ->whereIn('order_id', [
+            return $this->whereIn('spaletters_id', [
                           NULL,
                           0,
                         ])->latest('created_at')->take(5)->get();

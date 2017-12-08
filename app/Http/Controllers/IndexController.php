@@ -19,9 +19,9 @@
           'gomel'        => 'РУП «Гомельэнерго»',
           'minsk'        => 'РУП «Минскэнерго»',
           'mogilev'      => 'РУП «Могилевэнерго»',
-          'belenergostr'     => 'РУП «Белэнергострой»',
-          'beltei'             => 'РУП «БелТЭИ»',
-          'belnipi'            => 'РУП «Белнипиэнергопром»',
+          'belenergostr' => 'РУП «Белэнергострой»',
+          'beltei'       => 'РУП «БелТЭИ»',
+          'belnipi'      => 'РУП «Белнипиэнергопром»',
           'belenergoset' => 'РУП «Белэнергосетьпроект»',
         ];
 
@@ -29,6 +29,7 @@
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
         public function index () {
+
             $completter = new Completter;
             $spaletter  = new Spaletter;
             $order      = new Order;
@@ -65,6 +66,7 @@
                 foreach ( $complettersWhithoutreports as $item ) {
 
                     foreach ( $item->orders()->get() as $i ) {
+
                         $orderswhithoutreports [] = $i;
                     }
 
@@ -74,8 +76,13 @@
             else {
                 $orderswhithoutreports = [];
             }
+
             //$orderswhithoutreports = $order->orderswithoutreports();
-            //dump($user->roles);
+            foreach ( $orderswhithoutreports as $orderswhithoutreport ) {
+
+                dump($orderswhithoutreport->completters->where('report_id', 0));
+            }
+
 
 
             return view('index', [

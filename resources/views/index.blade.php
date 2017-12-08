@@ -5,9 +5,7 @@
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif
-    <div id="app">
-        <example></example>
-    </div>
+    
     <div class="row-fluid">
         <div class="box span6">
             <div class="box-header">
@@ -52,7 +50,7 @@
                     <tr>
                         <th>Ссылка</th>
                         <th>Номер ходатайства</th>
-                        <th>дата хобатайства</th>
+                        <th>дата письма</th>
                         <th>Наименование организации</th>
                     </tr>
                     @foreach($complettersWhithoutspaletter as $row)
@@ -97,8 +95,8 @@
                 <table class="table table-stripped">
                     <tr>
                         <th>Ссылка</th>
-                        <th>Номер ходатайства</th>
-                        <th>дата хобатайства</th>
+                        <th>Номер письма</th>
+                        <th>дата письма</th>
                         <th>Наименование организации</th>
                         <th>Категория имущества</th>
                     </tr>

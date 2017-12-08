@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Госимущество') }}</title>
 
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
@@ -61,7 +61,7 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
                                         <li>
                                             <a href="{{ route('make_lease_form') }}">
-                                                Создание письма по арендеГПО "Белэнерго"
+                                                Создание письма по аренде ГПО "Белэнерго"
                                             </a>
                                         </li>
                                     @endif
@@ -163,13 +163,7 @@
     <div class="container-fluid-full">
         <div class="row-fluid">
 
-            @if(session('message'))
-                <div class="alert alert-danger">
-                    {{ session('message') }}
-                </div>
-        @endif
-
-        <!-- start: Main Menu -->
+            <!-- start: Main Menu -->
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
@@ -178,9 +172,10 @@
                         </li>
                         <li><a href="/table"><i class="icon-align-justify"></i><span
                                         class="hidden-tablet">Сводная таблица</span></a>
-                        <li><a href="/search"><i class="icon-align-justify"></i><span class="hidden-tablet">Поиск</span></a>
+                        <li><a href="/search"><i class="icon-align-justify"></i><span 
+                                        class="hidden-tablet">Поиск</span></a>
                         </li>
-                        {{-- <li>
+                        <!-- <li>
                              <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
                                          class="label label-important"> 3 </span></a>
                              <ul>
@@ -191,7 +186,7 @@
                                  <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
                                                  class="hidden-tablet"> Sub Menu 3</span></a></li>
                              </ul>
-                         </li>--}}
+                         </li> -->
 
                     </ul>
                 </div>
@@ -206,6 +201,12 @@
                 </div>
             </noscript>
             <div id="content" class="span10">
+
+                @if(session('message'))
+                    <div class="alert alert-danger">
+                        {{ session('message') }}
+                    </div>
+                @endif
 
                 @yield('content')
             </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <!-- start: Meta -->
     <meta charset="utf-8">
-    <title>Документооборот-имущество</title>
+    <title>{{ config('app.name', 'Госимущество') }}</title>
     <meta name="description" content="Bootstrap Metro Dashboard">
     <meta name="author" content="Dennis Ji">
     <meta name="keyword"
@@ -64,7 +64,7 @@
                                 @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
                                     <li>
                                         <a href="{{ route('make_lease_form') }}">
-                                            Создание письма по арендеГПО "Белэнерго"
+                                            Создание письма по аренде ГПО "Белэнерго"
                                         </a>
                                     </li>
                                 @endif
@@ -166,13 +166,7 @@
 <div class="container-fluid-full">
     <div class="row-fluid">
 
-        @if(session('message'))
-            <div class="alert alert-danger">
-                {{ session('message') }}
-            </div>
-    @endif
-
-    <!-- start: Main Menu -->
+        <!-- start: Main Menu -->
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
@@ -208,4 +202,9 @@
                     enabled to use this site.</p>
             </div>
         </noscript>
+         @if(session('message'))
+            <div class="alert alert-danger">
+                {{ session('message') }}
+            </div>
+        @endif
         <div id="content" class="span10">
