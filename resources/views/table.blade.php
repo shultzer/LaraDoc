@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach(\App\Http\Controllers\IndexController::$companylist as $key => $value)
+                    @foreach(\App\Http\Controllers\IndexController::getcompanies() as $key => $value)
                         <tr>
                             <th colspan="10">{{ $value }}</th>
                         </tr>

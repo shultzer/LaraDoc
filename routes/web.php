@@ -16,6 +16,10 @@
     Route::get('/toexcel', 'IndexController@exportUserList')->name('toexcel');
     Route::get('/search', 'IndexController@searchform')->name('searchform');
     Route::post('/search', 'IndexController@searchway')->name('search');
+    Route::get('/companies', 'CompaniesController@show')->name('companies');
+    Route::post('/addcompany', 'CompaniesController@store');
+    Route::post('/destroy/{id}', 'CompaniesController@destroy');
+    Route::post('/update/{id}', 'CompaniesController@update');
 
 //Adminroutes
     //Route::get('admin/addcompletter', 'AdminController@addcompletter');

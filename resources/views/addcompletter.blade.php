@@ -57,7 +57,7 @@
                         <div class="controls">
                             <select id="selectError" name="company" data-rel="chosen">
                                 <option name="" selected></option>
-                                @foreach(\App\Http\Controllers\IndexController::$companylist as $key=>$value)
+                                @foreach(\App\Http\Controllers\IndexController::getcompanies() as $key=>$value)
                                     <option name="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>

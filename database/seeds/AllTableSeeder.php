@@ -28,10 +28,10 @@
             for ( $i = 0; $i < 100; $i++ ) {
 
                 $table = Completter::create([
-                  'number'  => $faker->unique->numberBetween(0, 1000),
+                  'number'  => $faker->unique->numberBetween(0, 10000),
                   'date'    => $faker->date(),
                   'doc'     => $faker->ImageUrl(),
-                  'company' => IndexController::$companylist[ array_rand(IndexController::$companylist) ],
+                  'company' => IndexController::getcompanies( array_rand(IndexController::getcompanies())),
                   'reason'  => '294',
                   'owner' => 'ОАО "ФФФ"',
                   'user_id' => factory(App\User::class)->create()->id,

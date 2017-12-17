@@ -108,6 +108,7 @@
         public function storereport (Request $request) {
             $report = new Report();
 
+            // TODO: make forms order and reports in vue
             if ( Gate::denies('create', $report) ) {
                 return redirect()
                   ->route('main')
@@ -130,8 +131,10 @@
               'number' => $request->number,
               'date'   => $request->date,
             ]);
+
             $assoc_completters = Completter::whereIn('number', $request->company)
                                            ->get();
+            dd($assoc_completters);
             foreach ( $assoc_completters as $assoc_completter ) {
                 $res = $assoc_completter->reports()->associate($report);
                 $res->save();
@@ -254,6 +257,7 @@
 
         public function make_lease_letter (Request $request) {
 
+            return response()->json($request);
 
             $type        = $request->type;
             $contractor  = $request->contractor;
@@ -282,7 +286,7 @@
               ], $request->property);
             $filial      = $request->filial;
             $arendodatel = $request->arendodatel;
-            dump($property);
+            //dump($property);
             if ( isset($filial) ) {
                 $filial = str_replace('филиал', 'филиала', $filial);
                 $owner  = $filial . ' ' . $arendodatel;
@@ -953,7 +957,7 @@
             }
 
 
-            dump($template);
+            //dump($template);
             $zip = new ZipArchive;
             copy($template, 'arenda.docx');
             if ( $zip->open('arenda.docx') === TRUE ) {

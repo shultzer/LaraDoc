@@ -2,17 +2,20 @@
 
     namespace App\Http\Controllers;
 
+    use App\Companies;
+    use Excel;
     use App\Completter;
     use App\Order;
     use App\Report;
     use App\Spaletter;
     use Illuminate\Http\Request;
-    use Maatwebsite\Excel\Facades\Excel;
+    //use Maatwebsite\Excel\Facades\Excel;
     use function Sodium\crypto_box_publickey_from_secretkey;
 
     class IndexController extends Controller {
 
-        public static $companylist = [
+        //public static $companylist;
+        /*= [
           'brest'        => 'РУП «Брестэнерго»',
           'vitebsk'      => 'РУП «Витебскэнерго»',
           'grodno'       => 'РУП «Гродноэнерго»',
@@ -23,18 +26,33 @@
           'beltei'       => 'РУП «БелТЭИ»',
           'belnipi'      => 'РУП «Белнипиэнергопром»',
           'belenergoset' => 'РУП «Белэнергосетьпроект»',
-        ];
+        ];*/
 
         /**
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
+
+
+        static function getcompanies ($key = NULL) {
+            $list = [];
+            foreach ( Companies::all() as $item ) {
+                $list [ $item->slug ] = $item->name;
+            }
+            if ( $key == NULL ) {
+                return $list;
+            }
+            else {
+                return $list[ $key ];
+            }
+        }
+
         public function index () {
 
             $completter = new Completter;
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-
+            //dd(IndexController::$companylist);
             $companyletters               = Completter::latest('created_at')
                                                       ->take(5)
                                                       ->get();
@@ -72,17 +90,19 @@
 
                 }
                 $orderswhithoutreports = array_unique($orderswhithoutreports);
+
+                foreach ( $orderswhithoutreports as $orderswhithoutreport ) {
+
+                    $ord[ $orderswhithoutreport->number ] = $orderswhithoutreport->completters->where('report_id', 0);
+
+                }
             }
             else {
-                $orderswhithoutreports = [];
+                $ord = [];
             }
 
-            //$orderswhithoutreports = $order->orderswithoutreports();
-            foreach ( $orderswhithoutreports as $orderswhithoutreport ) {
 
-                dump($orderswhithoutreport->completters->where('report_id', 0));
-            }
-
+            //dump($ord);
 
 
             return view('index', [
@@ -92,7 +112,7 @@
               'complettersWhithoutspaletter' => $complettersWhithoutspaletter,
               'complettersWhithoutorder'     => $complettersWhithoutorder,
               'numletters'                   => $numletters,
-              'orderswhithoutreports'        => $orderswhithoutreports,
+              'orderswhithoutreports'        => $ord,
               'completter'                   => $completter,
               'spaletter'                    => $spaletter,
               'order'                        => $order,
@@ -107,7 +127,7 @@
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-            $ar         = $this->build_array(static::$companylist);
+            $ar         = $this->build_array($this->getcompanies());
             //dd($ar);
             return view('table', [
               'ar'         => $ar,
