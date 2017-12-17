@@ -26,7 +26,9 @@
                         <td>
                             <div class="box-icon">
                                 <button @click="destroy(company.id)" class="btn-danger">удалить</button>
+<!--
                                 <button @click="edit(company.id)" class="btn-primary">редактировать</button>
+-->
                             </div>
                         </td>
                         <div class="modal fade" tabindex="-1" role="dialog" v-bind:id=company.id>
