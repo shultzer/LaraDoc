@@ -14,6 +14,10 @@
 
     class SpaController extends Controller {
 
+        public function dashboard () {
+            return view('admin.dashboard');
+        }
+
         public function addspaletter (Property $property, Completter $completter, Order $order, Report $report) {
             $spaletter                    = new Spaletter();
             $item                         = $property->pluck('name', 'id');

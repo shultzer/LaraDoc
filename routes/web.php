@@ -23,6 +23,7 @@
 
 //Adminroutes
     //Route::get('admin/addcompletter', 'AdminController@addcompletter');
+    Route::get('dashboard', 'SpaController@dashboard')->name('dashboard');
 
 //Policyroutes
     Route::get('/addcompletter', 'RupController@addcompletter')

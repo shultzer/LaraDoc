@@ -8,7 +8,7 @@
             </div>
             <div class="container-fluid">
                 <input type="text" v-model="companyname"/>
-                <button @click="addcompany" class="btn-success btn-large">Добавить</button>
+                <button @click="addcompany" class="btn-success">Добавить</button>
             </div>
             <div class="box-content">
                 <table class="table table-bordered">

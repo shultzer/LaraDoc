@@ -53,30 +53,7 @@
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-calendar"></i>
                             </a>
-                            <ul class="dropdown-menu tasks">
-                                <li class="dropdown-menu-title">
-                                    <span>Шаблоны писем</span>
-                                </li>
-                                @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
-                                    @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
-                                        <li>
-                                            <a href="{{ route('make_lease_form') }}">
-                                                Создание письма по аренде ГПО "Белэнерго"
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endif
-
-                                @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
-                                    @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
-                                        <li>
-                                            <a href="{{ route('makespaletterform') }}">
-                                                Создание письма ГПО "Белэнерго"
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endif
-                            </ul>
+                            
                         </li>
                         <!-- end: Notifications Dropdown -->
                         <!-- start: Message Dropdown -->
@@ -84,39 +61,7 @@
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-envelope"></i>
                             </a>
-                            <ul class="dropdown-menu messages">
-                                <li class="dropdown-menu-title">
-                                    <span>Внесение данных</span>
-                                </li>
-                                @can('create', $completter)
-                                    <li>
-                                        <a href="{{ route('addcompletter') }}">
-                                            Внесение ходатайства организации
-                                        </a>
-                                    </li>
-                                @endcan
-                                @can('create', $spaletter)
-                                    <li>
-                                        <a href="{{ route('addspaletter') }}">
-                                            Внесение письма ГПО "Белэнерго"
-                                        </a>
-                                    </li>
-                                @endcan
-                                @can('create', $order)
-                                    <li>
-                                        <a href="{{ route('addorder') }}">
-                                            Внесение приказа Минэнерго
-                                        </a>
-                                    </li>
-                                @endcan
-                                @can('create', $report)
-                                    <li>
-                                        <a href="{{ route('addreport') }}">
-                                            Внесение отчета об исполнении приказа
-                                        </a>
-                                    </li>
-                                @endcan
-                            </ul>
+                            
                         </li>
                     </ul>
                     <!-- start: User Dropdown -->
@@ -163,22 +108,18 @@
     <div class="container-fluid-full">
         <div class="row-fluid">
 
-            <!-- start: Main Menu -->
+                <!-- start: Main Menu -->
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
-                        <li><a href="/dashboard"><i class="icon-bar-chart"></i><span
-                                        class="hidden-tablet">Админка</span></a>
-                        </li>
                         <li><a href="/"><i class="icon-bar-chart"></i><span
                                         class="hidden-tablet">Оперативная информация</span></a>
                         </li>
                         <li><a href="/table"><i class="icon-align-justify"></i><span
                                         class="hidden-tablet">Сводная таблица</span></a>
-                        <li><a href="/search"><i class="icon-align-justify"></i><span 
-                                        class="hidden-tablet">Поиск</span></a>
+                        <li><a href="/search"><i class="icon-align-justify"></i><span class="hidden-tablet">Поиск</span></a>
                         </li>
-                        <!-- <li>
+                        {{-- <li>
                              <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
                                          class="label label-important"> 3 </span></a>
                              <ul>
@@ -189,7 +130,7 @@
                                  <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
                                                  class="hidden-tablet"> Sub Menu 3</span></a></li>
                              </ul>
-                         </li> -->
+                         </li>--}}
 
                     </ul>
                 </div>
@@ -204,12 +145,8 @@
                 </div>
             </noscript>
             <div id="content" class="span10">
-
-                @if(session('message'))
-                    <div class="alert alert-danger">
-                        {{ session('message') }}
-                    </div>
-                @endif
+                
+           
 
                 @yield('content')
             </div>
