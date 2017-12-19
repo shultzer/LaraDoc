@@ -7,3 +7,4 @@ in database`s table 'spaletters' and update  field foreig key `spaletter_id` in 
 </p>
 <p>export table to .xlsx and .docx template for letter with data from db</p>
 <p>search</p>
+Example of this application - http://parser.com.ru/
