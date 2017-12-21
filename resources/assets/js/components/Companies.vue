@@ -1,6 +1,6 @@
 <template>
-    <div class="row-fluid sortable">
-        <div class="box span12">
+
+        <div class="box span6">
             <div class="box-header">
                 <h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Организации, входящие в
                     состав объединения</h2>
@@ -60,7 +60,6 @@
                 </table>
             </div>
         </div><!--/span-->
-    </div><!--/row-->
 </template>
 
 <script>

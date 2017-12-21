@@ -1,5 +1,8 @@
 @extends('layouts.login')
 
 @section('content')
-    <companies></companies>
+    <div class="row-fluid">
+        <companies></companies>
+        <properties></properties>
+    </div>
 @endsection
