@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"><span>Белэнерго</span></a>
+                <a class="brand" href="/"><span>{{ config('app.name', 'Госимущество') }}</span></a>
 
                 <!-- start: Header Menu -->
                 <div class="nav-no-collapse header-nav">
@@ -61,7 +61,7 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
                                         <li>
                                             <a href="{{ route('make_lease_form') }}">
-                                                Создание письма по аренде ГПО "Белэнерго"
+                                                Создание письма по аренде
                                             </a>
                                         </li>
                                     @endif
@@ -71,7 +71,7 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
                                         <li>
                                             <a href="{{ route('makespaletterform') }}">
-                                                Создание письма ГПО "Белэнерго"
+                                                Создание письма
                                             </a>
                                         </li>
                                     @endif
@@ -98,14 +98,14 @@
                                 @can('create', $spaletter)
                                     <li>
                                         <a href="{{ route('addspaletter') }}">
-                                            Внесение письма ГПО "Белэнерго"
+                                            Внесение письма
                                         </a>
                                     </li>
                                 @endcan
                                 @can('create', $order)
                                     <li>
                                         <a href="{{ route('addorder') }}">
-                                            Внесение приказа Минэнерго
+                                            Внесение приказа
                                         </a>
                                     </li>
                                 @endcan

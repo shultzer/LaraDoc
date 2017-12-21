@@ -42,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="/"><span>Белэнерго</span></a>
+                <a class="brand" href="/"><span>{{ config('app.name', 'Госимущество') }}</span></a>
 
                 <!-- start: Header Menu -->
                 <div class="nav-no-collapse header-nav">
