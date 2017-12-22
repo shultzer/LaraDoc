@@ -2,6 +2,7 @@
 
     use App\Completter;
     use App\Http\Controllers\IndexController;
+    use App\User;
     use Illuminate\Database\Seeder;
     use Faker\Factory;
 
@@ -17,6 +18,7 @@
             $faker = Factory::create();
             $this->createcomletters($faker);
             $this->createuser($faker);
+            $this->attachrole();
 
         }
 
@@ -25,10 +27,10 @@
             $posttable    = $this->getTable('completters');
             $propertylist = \App\Property::pluck('id');
 
-            for ( $i = 0; $i < 100; $i++ ) {
+            for ( $i = 0; $i < 30; $i++ ) {
 
                 $table = Completter::create([
-                  'number'  => $faker->unique->numberBetween(0, 10000),
+                  'number'  => $faker->unique->numberBetween(0, 100),
                   'date'    => $faker->date(),
                   'doc'     => $faker->ImageUrl(),
                   'company' => IndexController::getcompanies( array_rand(IndexController::getcompanies())),
@@ -43,6 +45,11 @@
             }
         }
 
+
+        public function attachrole () {
+            $this->getTable('role_user');
+            User::all()->first()->roles()->attach('5');
+        }
         private function createuser () {
             $usertable = $this->getTable('users');
             \App\User::create([
