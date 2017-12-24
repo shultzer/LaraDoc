@@ -27,6 +27,9 @@
     Route::post('/destroy/{id}', 'PropertyController@destroy');
     Route::post('/update/{id}', 'PropertyController@update');
 
+    Route::get('/getnoncompleteorders', 'SpaController@noncompleteorders');
+    Route::post('/getnoncompleteletters/{order}', 'SpaController@noncompleteletters');
+
 
 //Adminroutes
     //Route::get('admin/addcompletter', 'AdminController@addcompletter');
@@ -57,7 +60,7 @@
 
     Route::get('/make_lease_form', 'SpaController@make_lease_form')
          ->name('make_lease_form');
-    Route::post('/make_lease_letter', 'SpaController@make_lease_letter')
+    Route::get('/make_lease_letter', 'SpaController@make_lease_letter')
          ->name('make_lease_letter');
     Auth::routes();
 

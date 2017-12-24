@@ -69,6 +69,41 @@
             return redirect('/');
         }
 
+        public function noncompleteletters ($orderId) {
+
+            $order   = Order::where('number', 56)->first();
+            $letters = Completter::where('order_id', $order->id)->get();
+            return response()->json($letters);
+
+        }
+
+        public function noncompleteorders () {
+            $complettersWhithoutreports = Completter::with('orders', 'reports')
+                                                    ->whereHas('orders')
+                                                    ->whereIn('report_id', [
+                                                      NULL,
+                                                      0,
+                                                    ])
+                                                    ->get();
+
+            if ( $complettersWhithoutreports->count() != 0 ) {
+
+                foreach ( $complettersWhithoutreports as $item ) {
+
+                    foreach ( $item->orders()->get() as $i ) {
+                        $orderswhithoutreports [] = $i;
+                    }
+
+                }
+                $orderswhithoutreports = array_unique($orderswhithoutreports);
+            }
+            else {
+                $orderswhithoutreports = [];
+            }
+            return response()->json($orderswhithoutreports);
+
+        }
+
         public function addreport () {
             $completter = new Completter;
             $spaletter  = new Spaletter;
@@ -130,7 +165,7 @@
             $r        = $doc->storeAs('reports', $fileName, [ 'disk' => 'docs' ]);
             $storedoc = 'docs/' . $r;
 
-            $report            = $user->reports()->create([
+            $report = $user->reports()->create([
               'doc'    => $storedoc,
               'number' => $request->number,
               'date'   => $request->date,
@@ -261,20 +296,20 @@
 
         public function make_lease_letter (Request $request) {
 
-            return response()->json($request);
 
-            $type        = $request->type;
-            $contractor  = $request->contractor;
-            $period      = $request->cont;
-            $address     = $request->address;
-            $target      = $request->target;
-            $wall        = $request->wall;
-            $cont        = $request->period;
-            $date        = $request->date;
-            $number      = $request->number;
-            $mov         = $request->mov;
-            $dog         = $request->dog;
-            $property    = str_replace([
+            $type       = $request->type;
+            $contractor = $request->contractor;
+            $period     = $request->cont;
+            $address    = $request->address;
+            $target     = $request->target;
+            $wall       = $request->wall;
+            $cont       = $request->period;
+            $date       = $request->date;
+            $number     = $request->number;
+            $mov        = $request->mov;
+            $dog        = $request->dog;
+            return response()->json($type);
+            $property = str_replace([
               'нежилое',
               'помещение',
               'здание',
@@ -288,6 +323,7 @@
                 'части',
                 'оборудования',
               ], $request->property);
+
             $filial      = $request->filial;
             $arendodatel = $request->arendodatel;
             //dump($property);
@@ -299,7 +335,6 @@
                 $owner = $arendodatel;
             }
 
-            //dump ($owner);
             if ( $dog === 'new' ) {
 
                 switch ( $mov ) {
@@ -961,7 +996,6 @@
             }
 
 
-            //dump($template);
             $zip = new ZipArchive;
             copy($template, 'arenda.docx');
             if ( $zip->open('arenda.docx') === TRUE ) {
@@ -1014,7 +1048,7 @@
             // Отдаём вордовский файл
             header("Cache-Control: public");
             //header ("Content-Description: File Transfer");
-            $fileName = "doc.docx";
+            //$fileName = "doc.docx";
             header("Content-Disposition: attachment; filename=$fileName");
             header("Content-Type: application/msword");
             header("Content-Transfer-Encoding: binary");

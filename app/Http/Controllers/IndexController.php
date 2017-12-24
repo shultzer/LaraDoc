@@ -39,6 +39,7 @@
             $order      = new Order;
             $report     = new Report;
             //dd(IndexController::$companylist);
+
             $companyletters               = Completter::latest('created_at')
                                                       ->take(5)
                                                       ->get();

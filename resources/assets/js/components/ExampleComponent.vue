@@ -1,6 +1,6 @@
 <template>
     <div class="box-content">
-        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form class="form-horizontal" enctype="multipart/form-data">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label">Категория имущества</label>
@@ -192,7 +192,7 @@
         },
         methods: {
             createletter: function () {
-                axios.post('/make_lease_letter/', {
+                axios.get('/make_lease_letter/', {
                     contractor: this.contractor,
                     advert: this.advert,
                     move: this.move,

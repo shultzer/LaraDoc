@@ -44,7 +44,7 @@
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Номер отчета</label>
                             <div class="controls">
-                                <input type="text" name="number" class="span6 typeahead" id="typeahead">
+                                <input type="text" name="number" class="span6" id="typeahead">
                             </div>
                         </div>
                         <div class="control-group">
@@ -54,7 +54,8 @@
                             </div>
                         </div>
                         @if(isset($orders))
-                            <div class="control-group">
+                            <addreports></addreports>
+                            {{--<div class="control-group">
                                 <label class="control-label" for="selectError">Приказ Минэнерго</label>
                                 <div class="controls">
                                     <select id="selectError" name="order[]" data-rel="chosen" multiple>
@@ -79,7 +80,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>--}}
                         @endif
                         <div class="control-group">
                             <label class="control-label" for="doc">Прикрепите документ</label>
