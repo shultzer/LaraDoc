@@ -71,7 +71,7 @@
 
         public function noncompleteletters ($orderId) {
 
-            $order   = Order::where('number', 56)->first();
+            $order   = Order::where('number', $orderId)->first();
             $letters = Completter::where('order_id', $order->id)->get();
             return response()->json($letters);
 
