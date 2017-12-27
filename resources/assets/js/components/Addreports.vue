@@ -1,21 +1,19 @@
 <template>
     <div class="control-group">
-        <label class="control-label" for="selectError">Приказ Минэнерго</label>
+        <label class="control-label" for="selectError">Приказ Минэнерго, №</label>
         <div class="controls">
-            <select @change="getletters()" id="selectError" name="order[]" data-rel="chosen" v-model="order">
+            <select @change="getletters()" id="selectError" name="order" data-rel="chosen" v-model="order">
                 <option name="" hidden selected></option>
-                <option v-for="order in orders">{{ order.number }}</option>
-
+                <option v-for="order in orders" v-bind:value="order.id">{{ order.number }}</option>
             </select>
         </div>
         <div class="control-group">
-            <label class="control-label" for="selectError">Ходатайство организации</label>
+            <label class="control-label" for="selectError">Ходатайство организации, №</label>
             <div class="controls">
                 <select name="company[]" multiple v-model="letter">
                     <option name="" hidden selected></option>
-                    <option v-for="letter in letters">{{ letter.number }}</option>
+                    <option v-for="letter in letters" v-bind:value="letter.id">{{ letter.company}}, письмо №{{ letter.number }}</option>
                 </select>
-
             </div>
         </div>
     </div>
@@ -38,25 +36,20 @@
             }
         },
         methods: {
-        getorders(){
-            axios.get('/getnoncompleteorders').then(response => {
-                this.orders = response.data;
-                console.log(this.orders)
-            }).catch(function (error) {
-                console.log(error.response);
-            });
-        },
-            getletters(){
-            axios.post('/getnoncompleteletters/'+this.order).then(response => {
-                this.letters = response.data;
-                console.log(response)
-            }).catch(function (error) {
-                console.log(error.response);
-
-            })
+            getorders() {
+                axios.get('/getnoncompleteorders').then(response => {
+                    this.orders = response.data;
+                }).catch(function (error) {
+                    console.log(error.response);
+                });
+            },
+            getletters() {
+                axios.post('/getnoncompleteletters/' + this.order).then(response => {
+                    this.letters = response.data;
+                }).catch(function (error) {
+                    console.log(error.response);
+                })
             }
-
-
         }
     }
 </script>

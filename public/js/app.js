@@ -2193,8 +2193,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "addreports",
@@ -2217,7 +2215,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/getnoncompleteorders').then(function (response) {
                 _this.orders = response.data;
-                console.log(_this.orders);
             }).catch(function (error) {
                 console.log(error.response);
             });
@@ -2227,7 +2224,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/getnoncompleteletters/' + this.order).then(function (response) {
                 _this2.letters = response.data;
-                console.log(response);
             }).catch(function (error) {
                 console.log(error.response);
             });
@@ -2557,8 +2553,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        dump: function dump() {
+            console.log(this.contractor);
+        },
+
         createletter: function createletter() {
-            axios.get('/make_lease_letter/', {
+            axios.put('/make_lease_letter/', {
                 contractor: this.contractor,
                 advert: this.advert,
                 move: this.move,
@@ -5160,7 +5160,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 40 */
@@ -33066,6 +33066,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('form', {
     staticClass: "form-horizontal",
     attrs: {
+      "method": "post",
       "enctype": "multipart/form-data"
     }
   }, [_c('fieldset', [_c('div', {
@@ -33470,7 +33471,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.wall = "mix"
       }
     }
-  })]), _vm._v("\n                        смешанное\n                    ")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), (!_vm.advert) ? _c('div', {
+  })]), _vm._v("\n                        смешанное\n                    ")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "control-group"
   }, [_c('label', {
     staticClass: "control-label",
@@ -33489,6 +33490,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "input-xlarge datepicker",
     attrs: {
       "type": "text",
+      "disabled": this.advert,
       "name": "contractor",
       "id": "contractor",
       "placeholder": "наименование юр. лица"
@@ -33502,7 +33504,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.contractor = $event.target.value
       }
     }
-  })])]) : _vm._e(), _vm._v(" "), (!_vm.contractor) ? _c('div', {
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "control-group",
     attrs: {
       "id": "advert"
@@ -33523,6 +33525,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "advert"
     }],
     attrs: {
+      "disabled": !!this.contractor,
       "type": "checkbox",
       "value": "true"
     },
@@ -33551,7 +33554,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "clear": "both"
     }
-  })])]) : _vm._e(), _vm._v(" "), _c('div', {
+  })])]), _vm._v(" "), _c('div', {
     staticClass: "control-group"
   }, [_c('label', {
     staticClass: "control-label",
@@ -33739,7 +33742,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "selectError"
     }
-  }, [_vm._v("Приказ Минэнерго")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Приказ Минэнерго, №")]), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('select', {
     directives: [{
@@ -33750,7 +33753,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     attrs: {
       "id": "selectError",
-      "name": "order[]",
+      "name": "order",
       "data-rel": "chosen"
     },
     on: {
@@ -33773,7 +33776,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "selected": ""
     }
   }), _vm._v(" "), _vm._l((_vm.orders), function(order) {
-    return _c('option', [_vm._v(_vm._s(order.number))])
+    return _c('option', {
+      domProps: {
+        "value": order.id
+      }
+    }, [_vm._v(_vm._s(order.number))])
   })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "control-group"
   }, [_c('label', {
@@ -33781,7 +33788,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "selectError"
     }
-  }, [_vm._v("Ходатайство организации")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Ходатайство организации, №")]), _vm._v(" "), _c('div', {
     staticClass: "controls"
   }, [_c('select', {
     directives: [{
@@ -33812,7 +33819,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "selected": ""
     }
   }), _vm._v(" "), _vm._l((_vm.letters), function(letter) {
-    return _c('option', [_vm._v(_vm._s(letter.number))])
+    return _c('option', {
+      domProps: {
+        "value": letter.id
+      }
+    }, [_vm._v(_vm._s(letter.company) + ", письмо №" + _vm._s(letter.number))])
   })], 2)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true

@@ -1,6 +1,6 @@
 <template>
     <div class="box-content">
-        <form class="form-horizontal" enctype="multipart/form-data">
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label">Категория имущества</label>
@@ -149,21 +149,21 @@
                                placeholder="адрес">
                     </div>
                 </div>
-                <div class="control-group" v-if="!advert">
+                <div class="control-group" >
                     <label class="control-label" for="contractor">Арендатору:</label>
                     <div class="controls">
-                        <input type="text" v-model="contractor" name="contractor" class="input-xlarge datepicker"
+                        <input type="text"  :disabled="this.advert" v-model="contractor" name="contractor" class="input-xlarge datepicker"
                                id="contractor"
                                placeholder="наименование юр. лица">
                     </div>
                 </div>
 
-                <div v-if="!contractor" class="control-group" id="advert">
+                <div  class="control-group" id="advert">
                     <label class="control-label">Объявление в интернет</label>
                     <div class="controls">
                         <label class="radio">
                             <span class="checked">
-                                <input type="checkbox" v-model="advert" value="true">
+                                <input :disabled="!!this.contractor" type="checkbox" v-model="advert" value="true">
                             </span>
                         </label>
                         <div style="clear:both"></div>
@@ -191,8 +191,11 @@
             console.log('Component mount.')
         },
         methods: {
+            dump(){
+                console.log(this.contractor)
+            },
             createletter: function () {
-                axios.get('/make_lease_letter/', {
+                axios.put('/make_lease_letter/', {
                     contractor: this.contractor,
                     advert: this.advert,
                     move: this.move,

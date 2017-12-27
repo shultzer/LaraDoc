@@ -71,8 +71,8 @@
 
         public function noncompleteletters ($orderId) {
 
-            $order   = Order::where('number', $orderId)->first();
-            $letters = Completter::where('order_id', $order->id)->get();
+            //$order   = Order::where('number', $orderId)->first();
+            $letters = Completter::where('order_id', $orderId)->get();
             return response()->json($letters);
 
         }
@@ -109,34 +109,10 @@
             $spaletter  = new Spaletter;
             $order      = new Order;
             $report     = new Report;
-            //TODO: incorrect logic orders without reports
 
-
-            $complettersWhithoutreports = Completter::with('orders', 'reports')
-                                                    ->whereHas('orders')
-                                                    ->whereIn('report_id', [
-                                                      NULL,
-                                                      0,
-                                                    ])
-                                                    ->get();
-
-            if ( $complettersWhithoutreports->count() != 0 ) {
-
-                foreach ( $complettersWhithoutreports as $item ) {
-
-                    foreach ( $item->orders()->get() as $i ) {
-                        $orderswhithoutreports [] = $i;
-                    }
-
-                }
-                $orderswhithoutreports = array_unique($orderswhithoutreports);
-            }
-            else {
-                $orderswhithoutreports = [];
-            }
 
             return ( view('addreport', [
-              'orders'     => $orderswhithoutreports,
+
               'completter' => $completter,
               'spaletter'  => $spaletter,
               'order'      => $order,
@@ -146,8 +122,9 @@
 
         public function storereport (Request $request) {
             $report = new Report();
+            //dd($request);
 
-            // TODO: make forms order and reports in vue
+
             if ( Gate::denies('create', $report) ) {
                 return redirect()
                   ->route('main')
@@ -171,9 +148,9 @@
               'date'   => $request->date,
             ]);
 
-            $assoc_completters = Completter::whereIn('number', $request->company)
+            $assoc_completters = Completter::whereIn('id', $request->company)
                                            ->get();
-            dd($assoc_completters);
+            //dd($assoc_completters);
             foreach ( $assoc_completters as $assoc_completter ) {
                 $res = $assoc_completter->reports()->associate($report);
                 $res->save();

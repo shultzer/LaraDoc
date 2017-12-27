@@ -44,44 +44,18 @@
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Номер отчета</label>
                             <div class="controls">
-                                <input type="text" name="number" class="span6" id="typeahead">
+                                <input type="text" name="number"  id="typeahead">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="date01">Дата отчета</label>
                             <div class="controls">
-                                <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
+                                <input type="text" name="date"  id="date01" value="">
                             </div>
                         </div>
-                        @if(isset($orders))
+
                             <addreports></addreports>
-                            {{--<div class="control-group">
-                                <label class="control-label" for="selectError">Приказ Минэнерго</label>
-                                <div class="controls">
-                                    <select id="selectError" name="order[]" data-rel="chosen" multiple>
-                                        <option name="" hidden selected></option>
-                                        @foreach($orders as $order)
-                                            @if(isset($order))
-                                                <option value="">{{ $order->number }}</option>
-                                            @endif
-                                            @foreach($order->completters as $completter)
-                                                <option value="{{ $completter->number }}">№{{ $completter->number }}
-                                                    , {{ $completter->company }}</option>
-                                            @endforeach
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="selectError">Ходатайство организации</label>
-                                    <div class="controls">
-                                        <select name="company[]" multiple>
 
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </div>--}}
-                        @endif
                         <div class="control-group">
                             <label class="control-label" for="doc">Прикрепите документ</label>
                             <div class="controls">
