@@ -1,5 +1,4 @@
 @include('header')
-
 <div class="box-content">
     @if(session('status') !== NULL)
         <div class="alert alert-success">{{ session('status') }}</div>
@@ -10,7 +9,7 @@
                 <h2><i class="halflings-icon white user"></i><span class="break"></span>Документооборот</h2>
             </div>
             <div class="box-content">
-                <a href="{{ route('toexcel') }}">Выгрузить</a>
+                <a href="{{ route('toexcel') }}"><button class="btn btn-danger">Выгрузить</button></a>
                 <table class="table table-striped table-bordered bootstrap-datatable datatable">
                     <thead>
                     <tr>
@@ -63,7 +62,6 @@
                                         @else {{ '' }}
                                         @endif
                                     </td>
-
                                     <td>
                                         @if(isset($completter['order']->number))
                                             <a href="{{ $completter['order']->doc }}"
@@ -92,7 +90,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                             {{--<tr>
                                 <th colspan="3">Итого</th>
                                 <td>@if(isset($ar['brestvolume']['volume'])){{ array_sum($ar['brestvolume']['volume']) }}@endif
@@ -105,12 +102,6 @@
                             </tr>--}}
                         @endif
                     @endforeach
-
-
-
-
-
-
 
                     {{--<tr>
                         <th colspan="3">Итого по Белэнерго</th>

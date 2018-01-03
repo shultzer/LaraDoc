@@ -91,34 +91,34 @@
                             <li class="dropdown-menu-title">
                                 <span>Внесение данных</span>
                             </li>
-                            @can('create', $completter)
-                                <li>
-                                    <a href="{{ route('addcompletter') }}">
-                                        Внесение ходатайства организации
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('create', $spaletter)
-                                <li>
-                                    <a href="{{ route('addspaletter') }}">
-                                        Внесение письма
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('create', $order)
-                                <li>
-                                    <a href="{{ route('addorder') }}">
-                                        Внесение приказа
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('create', $report)
-                                <li>
-                                    <a href="{{ route('addreport') }}">
-                                        Внесение отчета об исполнении приказа
-                                    </a>
-                                </li>
-                            @endcan
+                            {{--@can('create', $completter)--}}
+                            <li>
+                                <a href="{{ route('addcompletter') }}">
+                                    Внесение ходатайства организации
+                                </a>
+                            </li>
+                            {{--@endcan
+                            @can('create', $spaletter)--}}
+                            <li>
+                                <a href="{{ route('addspaletter') }}">
+                                    Внесение письма
+                                </a>
+                            </li>
+                            {{--@endcan
+                            @can('create', $order)--}}
+                            <li>
+                                <a href="{{ route('addorder') }}">
+                                    Внесение приказа
+                                </a>
+                            </li>
+                            {{-- @endcan
+                             @can('create', $report)--}}
+                            <li>
+                                <a href="{{ route('addreport') }}">
+                                    Внесение отчета об исполнении приказа
+                                </a>
+                            </li>
+                            {{--@endcan--}}
                         </ul>
                     </li>
                 </ul>
@@ -170,6 +170,9 @@
         <div id="sidebar-left" class="span2">
             <div class="nav-collapse sidebar-nav">
                 <ul class="nav nav-tabs nav-stacked main-menu">
+                    <li><a href="/dashboard"><i class="icon-bar-chart"></i><span
+                                    class="hidden-tablet">Админка</span></a>
+                    </li>
                     <li><a href="/"><i class="icon-bar-chart"></i><span
                                     class="hidden-tablet">Оперативная информация</span></a>
                     </li>

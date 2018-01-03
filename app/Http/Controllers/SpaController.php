@@ -258,11 +258,11 @@
         }
 
         public function make_lease_form (Completter $completter, Spaletter $spaletter, Order $order, Report $report) {
-            if ( Gate::denies('create', $spaletter) ) {
+            /*if ( Gate::denies('create', $spaletter) ) {
                 return redirect()
                   ->route('main')
                   ->with([ 'message' => 'у вас нет  прав' ]);
-            }
+            }*/
             return view('spa.makelease', [
               'completter' => $completter,
               'spaletter'  => $spaletter,
@@ -273,19 +273,19 @@
 
         public function make_lease_letter (Request $request) {
 
-
+            $template   = '';
             $type       = $request->type;
             $contractor = $request->contractor;
-            $period     = $request->cont;
+            $period     = $request->period;
             $address    = $request->address;
             $target     = $request->target;
             $wall       = $request->wall;
-            $cont       = $request->period;
+            $cont       = $request->cont;
             $date       = $request->date;
             $number     = $request->number;
             $mov        = $request->mov;
             $dog        = $request->dog;
-            return response()->json($type);
+
             $property = str_replace([
               'нежилое',
               'помещение',
@@ -303,7 +303,6 @@
 
             $filial      = $request->filial;
             $arendodatel = $request->arendodatel;
-            //dump($property);
             if ( isset($filial) ) {
                 $filial = str_replace('филиал', 'филиала', $filial);
                 $owner  = $filial . ' ' . $arendodatel;
@@ -312,666 +311,7 @@
                 $owner = $arendodatel;
             }
 
-            if ( $dog === 'new' ) {
-
-                switch ( $mov ) {
-
-                    case 'nomovable':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_pay_contractor_hourly_wals.docx';
-                                            echo "pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_pay_contractor_hourly_nowals.docx';
-                                            echo "pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_pay_contractor_mounthly_wals.docx';
-                                            echo "new_nomovable_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_pay_contractor_mounthly_nowals.docx';
-                                            echo "new_nomovable_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_pay_nocontractor_hourly_wals.docx';
-                                            echo "new_nomovable_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_pay_nocontractor_hourly_nowals.docx';
-                                            echo "new_nomovable_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "new_nomovable_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "new_nomovable_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_free_contractor_hourly_wals.docx';
-                                            echo "new_nomovable_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_free_contractor_hourly_nowals.docx';
-                                            echo "new_nomovable_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_nomovable_free_contractor_mounthly_wals.docx';
-                                            echo "new_nomovable_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_nomovable_free_contractor_mounthly_nowals.docx';
-                                            echo "new_nomovable_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'new_nomovable_free_nocontractor_hourly.docx';
-                                        echo "new_nomovable_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'new_nomovable_free_nocontractor_mounthly.docx';
-                                        echo "new_nomovable_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                    case 'movable':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_movable_pay_contractor_hourly_wals.docx';
-                                            echo "new_movable_pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_pay_contractor_hourly_nowals.docx';
-                                            echo "new_movable_pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_movable_pay_contractor_mounthly_wals.docx';
-                                            echo "new_movable_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_pay_contractor_mounthly_nowals.docx';
-                                            echo "new_movable_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_movable_pay_nocontractor_hourly_wals.docx';
-                                            echo "new_movable_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_pay_nocontractor_hourly_nowals.docx';
-                                            echo "new_movable_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_movable_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "new_movable_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "new_movable_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_movable_free_contractor_hourly_wals.docx';
-                                            echo "new_movable_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_free_contractor_hourly_nowals.docx';
-                                            echo "new_movable_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_movable_free_contractor_mounthly_wals.docx';
-                                            echo "new_movable_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_movable_free_contractor_mounthly_nowals.docx';
-                                            echo "new_movable_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'new_movable_free_nocontractor_hourly.docx';
-                                        echo "new_movable_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'new_movable_free_nocontractor_mounthly.docx';
-                                        echo "new_movable_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                    case 'vehicle':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_pay_contractor_hourly_wals.docx';
-                                            echo "new_vehicle_pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_pay_contractor_hourly_nowals.docx';
-                                            echo "new_vehicle_pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_pay_contractor_mounthly_wals.docx';
-                                            echo "new_vehicle_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_pay_contractor_mounthly_nowals.docx';
-                                            echo "new_vehicle_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_pay_nocontractor_hourly_wals.docx';
-                                            echo "new_vehicle_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_pay_nocontractor_hourly_nowals.docx';
-                                            echo "new_vehicle_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "new_vehicle_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "new_vehicle_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_free_contractor_hourly_wals.docx';
-                                            echo "new_vehicle_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_free_contractor_hourly_nowals.docx';
-                                            echo "new_vehicle_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'new_vehicle_free_contractor_mounthly_wals.docx';
-                                            echo "new_vehicle_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'new_vehicle_free_contractor_mounthly_nowals.docx';
-                                            echo "new_vehicle_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'new_vehicle_free_nocontractor_hourly.docx';
-                                        echo "new_vehicle_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'new_vehicle_free_nocontractor_mounthly.docx';
-                                        echo "new_vehicle_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                }
-            }
-            elseif ( $dog === 'old' ) {
-
-                switch ( $mov ) {
-                    case 'nomovable':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_pay_contractor_hourly_wals.docx';
-                                            echo "old_nomovable_pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_pay_contractor_hourly_nowals.docx';
-                                            echo "old_nomovable_pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_pay_contractor_mounthly_wals.docx';
-                                            echo "old_nomovable_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_pay_contractor_mounthly_nowals.docx';
-                                            echo "old_nomovable_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_pay_nocontractor_hourly_wals.docx';
-                                            echo "old_nomovable_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_pay_nocontractor_hourly_nowals.docx';
-                                            echo "old_nomovable_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "old_nomovable_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "old_nomovable_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_free_contractor_hourly_wals.docx';
-                                            echo "old_nomovable_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_free_contractor_hourly_nowals.docx';
-                                            echo "old_nomovable_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_nomovable_free_contractor_mounthly_wals.docx';
-                                            echo "old_nomovable_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_nomovable_free_contractor_mounthly_nowals.docx';
-                                            echo "old_nomovable_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'old_nomovable_free_nocontractor_hourly.docx';
-                                        echo "old_nomovable_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'old_nomovable_free_nocontractor_mounthly.docx';
-                                        echo "old_nomovable_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                    case 'movable':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_movable_pay_contractor_hourly_wals.docx';
-                                            echo "old_movable_pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_pay_contractor_hourly_nowals.docx';
-                                            echo "old_movable_pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_movable_pay_contractor_mounthly_wals.docx';
-                                            echo "old_movable_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_pay_contractor_mounthly_nowals.docx';
-                                            echo "old_movable_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_movable_pay_nocontractor_hourly_wals.docx';
-                                            echo "old_movable_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_pay_nocontractor_hourly_nowals.docx';
-                                            echo "old_movable_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_movable_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "old_movable_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "old_movable_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_movable_free_contractor_hourly_wals.docx';
-                                            echo "old_movable_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_free_contractor_hourly_nowals.docx';
-                                            echo "old_movable_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_movable_free_contractor_mounthly_wals.docx';
-                                            echo "old_movable_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_movable_free_contractor_mounthly_nowals.docx';
-                                            echo "old_movable_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'old_movable_free_nocontractor_hourly.docx';
-                                        echo "old_movable_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'old_movable_free_nocontractor_mounthly.docx';
-                                        echo "old_movable_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                    case 'vehicle':
-                        switch ( $type ) {
-
-                            case 'pay':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_pay_contractor_hourly_wals.docx';
-                                            echo "old_vehicle_pay_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_pay_contractor_hourly_nowals.docx';
-                                            echo "old_vehicle_pay_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_pay_contractor_mounthly_wals.docx';
-                                            echo "old_vehicle_pay_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_pay_contractor_mounthly_nowals.docx';
-                                            echo "old_vehicle_pay_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_pay_nocontractor_hourly_wals.docx';
-                                            echo "old_vehicle_pay_nocontractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_pay_nocontractor_hourly_nowals.docx';
-                                            echo "old_vehicle_pay_nocontractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_pay_nocontractor_mounthly_wals.docx';
-                                            //echo "old_vehicle_pay_nocontractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_pay_nocontractor_mounthly_nowals.docx';
-                                            echo "old_vehicle_pay_nocontractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                break;
-
-                            case 'free':
-
-                                if ( $contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_free_contractor_hourly_wals.docx';
-                                            echo "old_vehicle_free_contractor_hourly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_free_contractor_hourly_nowals.docx';
-                                            echo "old_vehicle_free_contractor_hourly_nowals";
-                                        }
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        if ( $wall ) {
-                                            $template = 'old_vehicle_free_contractor_mounthly_wals.docx';
-                                            echo "old_vehicle_free_contractor_mounthly_wals";
-                                        }
-                                        else {
-                                            $template = 'old_vehicle_free_contractor_mounthly_nowals.docx';
-                                            echo "old_vehicle_free_contractor_mounthly_nowals";
-                                        }
-
-                                    }
-
-                                }
-                                elseif ( !$contractor ) {
-
-                                    if ( $period == 'hourly' ) {
-
-                                        $template = 'old_vehicle_free_nocontractor_hourly.docx';
-                                        echo "old_vehicle_free_nocontractor_hourly";
-
-                                    }
-                                    elseif ( $period == 'mounthly' ) {
-
-                                        $template = 'old_vehicle_free_nocontractor_mounthly.docx';
-                                        echo "old_vehicle_free_nocontractor_mounthly";
-
-                                    }
-
-                                }
-                                break;
-                        }
-                }
-            }
-
+            $this->buildfilename ($dog, $mov, $type, $cont, $wall, $contractor, $template);
 
             $zip = new ZipArchive;
             copy($template, 'arenda.docx');
@@ -1021,128 +361,85 @@
                 $zip->addFromString('word/document.xml', $content);
                 $zip->close();
             }
-
+            //$fileName = "doc.docx";
+            $fileName = "arenda.docx";
             // Отдаём вордовский файл
             header("Cache-Control: public");
-            //header ("Content-Description: File Transfer");
-            //$fileName = "doc.docx";
+            header("Content-Description: File Transfer");
+            header('X-Accel-Redirect: ' . $fileName);
+            header('Content-Type: application/octet-stream');
             header("Content-Disposition: attachment; filename=$fileName");
             header("Content-Type: application/msword");
             header("Content-Transfer-Encoding: binary");
-            $fileName = "arenda.docx";
             readfile($fileName);
 
         }
 
-        public function getTemplate ($type, $contractor, $period, $wall) {
-
-            switch ( $type ) {
-
-                case 'pay':
-
-                    if ( $contractor ) {
-
-                        if ( $period == 'hourly' ) {
-                            if ( $wall ) {
-                                $template = 'pay_contractor_hourly_wals.docx';
-                                echo "pay_contractor_hourly_wals";
-                            }
-                            else {
-                                $template = 'pay_contractor_hourly_nowals.docx';
-                                echo "pay_contractor_hourly_nowals";
-                            }
-
-                        }
-                        elseif ( $period == 'mounthly' ) {
-
-                            if ( $wall ) {
-                                $template = 'pay_contractor_mounthly_wals.docx';
-                                echo "pay_contractor_mounthly_wals";
-                            }
-                            else {
-                                $template = 'pay_contractor_mounthly_nowals.docx';
-                                echo "pay_contractor_mounthly_nowals";
-                            }
-
-                        }
-
-                    }
-                    elseif ( !$contractor ) {
-
-                        if ( $period == 'hourly' ) {
-                            if ( $wall ) {
-                                $template = 'pay_nocontractor_hourly_wals.docx';
-                                echo "pay_nocontractor_hourly_wals";
-                            }
-                            else {
-                                $template = 'pay_nocontractor_hourly_nowals.docx';
-                                echo "pay_nocontractor_hourly_nowals";
-                            }
-
-                        }
-                        elseif ( $period == 'mounthly' ) {
-
-                            if ( $wall ) {
-                                $template = 'pay_nocontractor_mounthly_wals.docx';
-                                //echo "pay_nocontractor_mounthly_wals";
-                            }
-                            else {
-                                $template = 'pay_nocontractor_mounthly_nowals.docx';
-                                echo "pay_nocontractor_mounthly_nowals";
-                            }
-
-                        }
-
-                    }
+        public function buildfilename ($dog, $mov, $type, $cont, $wall, $contractor, &$template) {
+            $template = '';
+            switch ( $dog ) {
+                case 'new':
+                    $template .= 'new';
+                    break;
+                case 'old':
+                    $template .= 'old';
                     break;
 
+            }
+            switch ( $mov ) {
+                case 'movable':
+                    $template .= '_movable';
+                    break;
+                case 'nomovable':
+                    $template .= '_nomovable';
+                    break;
+                case 'mix':
+                    $template .= '_mix';
+                    break;
+                case 'vehicle':
+                    $template .= '_vehicle';
+                    break;
+
+            }
+            switch ( $type ) {
+                case 'pay':
+                    $template .= '_pay';
+                    break;
                 case 'free':
-
-                    if ( $contractor ) {
-
-                        if ( $period == 'hourly' ) {
-                            if ( $wall ) {
-                                $template = 'free_contractor_hourly_wals.docx';
-                                echo "free_contractor_hourly_wals";
-                            }
-                            else {
-                                $template = 'free_contractor_hourly_nowals.docx';
-                                echo "free_contractor_hourly_nowals";
-                            }
-
-                        }
-                        elseif ( $period == 'mounthly' ) {
-
-                            if ( $wall ) {
-                                $template = 'free_contractor_mounthly_wals.docx';
-                                echo "free_contractor_mounthly_wals";
-                            }
-                            else {
-                                $template = 'free_contractor_mounthly_nowals.docx';
-                                echo "free_contractor_mounthly_nowals";
-                            }
-
-                        }
-
-                    }
-                    elseif ( !$contractor ) {
-
-                        if ( $period == 'hourly' ) {
-
-                            $template = 'free_nocontractor_hourly.docx';
-                            echo "free_nocontractor_hourly";
-
-                        }
-                        elseif ( $period == 'mounthly' ) {
-
-                            $template = 'free_nocontractor_mounthly.docx';
-                            echo "free_nocontractor_mounthly";
-
-                        }
-
-                    }
+                    $template .= '_free';
+                    break;
+                case 'mix':
+                    $template .= '_mix';
                     break;
             }
-            return $template;
+            switch ( $contractor ) {
+                case TRUE:
+                    $template .= '_contractor';
+                    break;
+                case FALSE:
+                    $template .= '_nocontractor';
+                    break;
+
+            }
+            switch ( $cont ) {
+                case 'mounthly':
+                    $template .= '_mounthly';
+                    break;
+                case 'hourly':
+                    $template .= '_hourly';
+                    break;
+            }
+            switch ( $wall ) {
+                case 'true':
+                    $template .= '_walls';
+                    break;
+                case 'false':
+                    $template .= '_nowalls';
+                    break;
+                case 'mix':
+                    $template .= '_mix';
+                    break;
+            }
+            $template .= '.docx';
         }
     }

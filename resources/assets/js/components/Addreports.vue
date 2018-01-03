@@ -1,12 +1,13 @@
 <template>
     <div class="control-group">
-        <label class="control-label" for="selectError">Приказ Минэнерго, №</label>
+        <label class="control-label" for="selectError">Приказ, №</label>
         <div class="controls">
             <select @change="getletters()" id="selectError" name="order" data-rel="chosen" v-model="order">
                 <option name="" hidden selected></option>
                 <option v-for="order in orders" v-bind:value="order.id">{{ order.number }}</option>
             </select>
         </div>
+        <br>
         <div class="control-group">
             <label class="control-label" for="selectError">Ходатайство организации, №</label>
             <div class="controls">

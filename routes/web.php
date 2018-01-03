@@ -60,7 +60,7 @@
 
     Route::get('/make_lease_form', 'SpaController@make_lease_form')
          ->name('make_lease_form');
-    Route::get('/make_lease_letter', 'SpaController@make_lease_letter')
+    Route::post('/make_lease_letter', 'SpaController@make_lease_letter')
          ->name('make_lease_letter');
     Auth::routes();
 

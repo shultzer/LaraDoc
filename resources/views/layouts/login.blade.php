@@ -61,7 +61,39 @@
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-envelope"></i>
                             </a>
-                            
+                            <ul class="dropdown-menu messages">
+                                <li class="dropdown-menu-title">
+                                    <span>Внесение данных</span>
+                                </li>
+                                {{--@can('create', $completter)--}}
+                                <li>
+                                    <a href="{{ route('addcompletter') }}">
+                                        Внесение ходатайства организации
+                                    </a>
+                                </li>
+                                {{--@endcan
+                                @can('create', $spaletter)--}}
+                                <li>
+                                    <a href="{{ route('addspaletter') }}">
+                                        Внесение письма
+                                    </a>
+                                </li>
+                                {{--@endcan
+                                @can('create', $order)--}}
+                                <li>
+                                    <a href="{{ route('addorder') }}">
+                                        Внесение приказа
+                                    </a>
+                                </li>
+                                {{-- @endcan
+                                 @can('create', $report)--}}
+                                <li>
+                                    <a href="{{ route('addreport') }}">
+                                        Внесение отчета об исполнении приказа
+                                    </a>
+                                </li>
+                                {{--@endcan--}}
+                            </ul>
                         </li>
                     </ul>
                     <!-- start: User Dropdown -->
@@ -112,6 +144,9 @@
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
+                        <li><a href="/dashboard"><i class="icon-bar-chart"></i><span
+                                        class="hidden-tablet">Админка</span></a>
+                        </li>
                         <li><a href="/"><i class="icon-bar-chart"></i><span
                                         class="hidden-tablet">Оперативная информация</span></a>
                         </li>
@@ -145,9 +180,6 @@
                 </div>
             </noscript>
             <div id="content" class="span10">
-                
-           
-
                 @yield('content')
             </div>
         </div>
@@ -155,5 +187,62 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- start: JavaScript-->
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery-migrate-1.0.0.min.js"></script>
+
+<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+
+<script src="js/jquery.ui.touch-punch.js"></script>
+
+<script src="js/modernizr.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/jquery.cookie.js"></script>
+
+<script src='js/fullcalendar.min.js'></script>
+
+<script src='js/jquery.dataTables.min.js'></script>
+
+<script src="js/excanvas.js"></script>
+<script src="js/jquery.flot.js"></script>
+<script src="js/jquery.flot.pie.js"></script>
+<script src="js/jquery.flot.stack.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+
+<script src="js/jquery.chosen.min.js"></script>
+
+<script src="js/jquery.uniform.min.js"></script>
+
+<script src="js/jquery.cleditor.min.js"></script>
+
+<script src="js/jquery.noty.js"></script>
+
+<script src="js/jquery.elfinder.min.js"></script>
+
+<script src="js/jquery.raty.min.js"></script>
+
+<script src="js/jquery.iphone.toggle.js"></script>
+
+<script src="js/jquery.uploadify-3.1.min.js"></script>
+
+<script src="js/jquery.gritter.min.js"></script>
+
+<script src="js/jquery.imagesloaded.js"></script>
+
+<script src="js/jquery.masonry.min.js"></script>
+
+<script src="js/jquery.knob.modified.js"></script>
+
+<script src="js/jquery.sparkline.min.js"></script>
+
+<script src="js/counter.js"></script>
+
+<script src="js/retina.js"></script>
+
+<script src="js/custom.js"></script>
+<!-- end: JavaScript-->
 </body>
 </html>

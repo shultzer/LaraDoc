@@ -25,31 +25,18 @@
             <form class="form-horizontal" method="post" action="{{ route('storeorder') }}"
                   enctype="multipart/form-data">
                 <fieldset>
-                    {{-- <div class="control-group">
-                         <label class="control-label" for="typeahead">Номер письма</label>
-                         <div class="controls">
-                             <input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead"
-                             data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
-                             "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas",
-                             "Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi",
-                             "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York",
-                             "North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island",
-                             "South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington",
-                             "West Virginia","Wisconsin","Wyoming"]'>
-                             <p class="help-block">Start typing to activate auto complete!</p>
-                         </div>
-                     </div>--}}
+
                     {{ csrf_field() }}
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Номер приказа</label>
                         <div class="controls">
-                            <input type="text" name="number" class="span6 typeahead" id="typeahead">
+                            <input type="text" name="number" id="typeahead">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="date01">Дата приказа</label>
                         <div class="controls">
-                            <input type="text" name="date" class="input-xlarge datepicker" id="date01" value="">
+                            <input type="text" name="date" id="date01" value="">
                         </div>
                     </div>
 

@@ -64,12 +64,7 @@
                                                 Создание письма по аренде
                                             </a>
                                         </li>
-                                    @endif
-                                @endif
-
-                                @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
-                                    @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'spa' or \Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
-                                        <li>
+                                    <li>
                                             <a href="{{ route('makespaletterform') }}">
                                                 Создание письма
                                             </a>
@@ -88,34 +83,34 @@
                                 <li class="dropdown-menu-title">
                                     <span>Внесение данных</span>
                                 </li>
-                                @can('create', $completter)
+                                {{--@can('create', $completter)--}}
                                     <li>
                                         <a href="{{ route('addcompletter') }}">
                                             Внесение ходатайства организации
                                         </a>
                                     </li>
-                                @endcan
-                                @can('create', $spaletter)
+                                {{--@endcan
+                                @can('create', $spaletter)--}}
                                     <li>
                                         <a href="{{ route('addspaletter') }}">
                                             Внесение письма
                                         </a>
                                     </li>
-                                @endcan
-                                @can('create', $order)
+                                {{--@endcan
+                                @can('create', $order)--}}
                                     <li>
                                         <a href="{{ route('addorder') }}">
                                             Внесение приказа
                                         </a>
                                     </li>
-                                @endcan
-                                @can('create', $report)
+                               {{-- @endcan
+                                @can('create', $report)--}}
                                     <li>
                                         <a href="{{ route('addreport') }}">
                                             Внесение отчета об исполнении приказа
                                         </a>
                                     </li>
-                                @endcan
+                                {{--@endcan--}}
                             </ul>
                         </li>
                     </ul>
@@ -178,24 +173,10 @@
                         <li><a href="/search"><i class="icon-align-justify"></i><span 
                                         class="hidden-tablet">Поиск</span></a>
                         </li>
-                        <!-- <li>
-                             <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span
-                                         class="label label-important"> 3 </span></a>
-                             <ul>
-                                 <li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span
-                                                 class="hidden-tablet"> Sub Menu 1</span></a></li>
-                                 <li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span
-                                                 class="hidden-tablet"> Sub Menu 2</span></a></li>
-                                 <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span
-                                                 class="hidden-tablet"> Sub Menu 3</span></a></li>
-                             </ul>
-                         </li> -->
-
                     </ul>
                 </div>
             </div>
             <!-- end: Main Menu -->
-
             <noscript>
                 <div class="alert alert-block span10">
                     <h4 class="alert-heading">Warning!</h4>
@@ -218,5 +199,62 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- start: JavaScript-->
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery-migrate-1.0.0.min.js"></script>
+
+<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
+
+<script src="js/jquery.ui.touch-punch.js"></script>
+
+<script src="js/modernizr.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/jquery.cookie.js"></script>
+
+<script src='js/fullcalendar.min.js'></script>
+
+<script src='js/jquery.dataTables.min.js'></script>
+
+<script src="js/excanvas.js"></script>
+<script src="js/jquery.flot.js"></script>
+<script src="js/jquery.flot.pie.js"></script>
+<script src="js/jquery.flot.stack.js"></script>
+<script src="js/jquery.flot.resize.min.js"></script>
+
+<script src="js/jquery.chosen.min.js"></script>
+
+<script src="js/jquery.uniform.min.js"></script>
+
+<script src="js/jquery.cleditor.min.js"></script>
+
+<script src="js/jquery.noty.js"></script>
+
+<script src="js/jquery.elfinder.min.js"></script>
+
+<script src="js/jquery.raty.min.js"></script>
+
+<script src="js/jquery.iphone.toggle.js"></script>
+
+<script src="js/jquery.uploadify-3.1.min.js"></script>
+
+<script src="js/jquery.gritter.min.js"></script>
+
+<script src="js/jquery.imagesloaded.js"></script>
+
+<script src="js/jquery.masonry.min.js"></script>
+
+<script src="js/jquery.knob.modified.js"></script>
+
+<script src="js/jquery.sparkline.min.js"></script>
+
+<script src="js/counter.js"></script>
+
+<script src="js/retina.js"></script>
+
+{{--<script src="js/custom.js"></script>--}}
+<!-- end: JavaScript-->
 </body>
 </html>
