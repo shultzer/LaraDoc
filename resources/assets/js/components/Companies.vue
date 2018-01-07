@@ -31,29 +31,6 @@
 -->
                             </div>
                         </td>
-                        <div class="modal fade" tabindex="-1" role="dialog" v-bind:id=company.id>
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Редактирование</h4>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="title">Название:</label>
-                                        <input type="text" name="title" id="title" placeholder="Title Name"
-                                               class="form-control"
-                                               v-model="company.name">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                    </button>
-                                    <button type="button" @click="update(company.id)" class="btn btn-primary">
-                                        Изменить
-                                    </button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-
                     </tr>
 
                     </tbody>
@@ -94,7 +71,7 @@
                 })
             },
             edit(id) {
-                $("#"+id).modal("show");
+
             },
             update(id) {
                 axios.post('update/' + id).then(response => {

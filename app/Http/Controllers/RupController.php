@@ -44,7 +44,7 @@
               'reason'  => 'required',
             ]);
             $user = Auth::user();
-            //dd($request->owner);
+
             if ( $request->hasFile('doc') ) {
                 $doc = $request->file('doc');
 

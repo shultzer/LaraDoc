@@ -30,10 +30,15 @@
     Route::get('/getnoncompleteorders', 'SpaController@noncompleteorders');
     Route::post('/getnoncompleteletters/{order}', 'SpaController@noncompleteletters');
 
+    Route::get('/getuserslist', 'AdminController@userslist');
+    Route::post('/adduser', 'AdminController@adduser');
+    Route::post('/destroyuser/{id}', 'AdminController@destroy');
+    Route::post('/find/{id}', 'AdminController@find');
+    Route::post('/updateuser', 'AdminController@updateuser');
 
 //Adminroutes
     //Route::get('admin/addcompletter', 'AdminController@addcompletter');
-    Route::get('dashboard', 'SpaController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
 //Policyroutes
     Route::get('/addcompletter', 'RupController@addcompletter')

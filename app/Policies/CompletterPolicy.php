@@ -24,8 +24,6 @@
                     return TRUE;
                 }
             }
-            return FALSE;
-
         }
 
         public function create (User $user) {

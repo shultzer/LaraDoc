@@ -83,34 +83,34 @@
                                 <li class="dropdown-menu-title">
                                     <span>Внесение данных</span>
                                 </li>
-                                {{--@can('create', $completter)--}}
+                                @can('create', $completter)
                                     <li>
                                         <a href="{{ route('addcompletter') }}">
                                             Внесение ходатайства организации
                                         </a>
                                     </li>
-                                {{--@endcan
-                                @can('create', $spaletter)--}}
+                                @endcan
+                                @can('create', $spaletter)
                                     <li>
                                         <a href="{{ route('addspaletter') }}">
                                             Внесение письма
                                         </a>
                                     </li>
-                                {{--@endcan
-                                @can('create', $order)--}}
+                                @endcan
+                                @can('create', $order)
                                     <li>
                                         <a href="{{ route('addorder') }}">
                                             Внесение приказа
                                         </a>
                                     </li>
-                               {{-- @endcan
-                                @can('create', $report)--}}
+                                @endcan
+                                @can('create', $report)
                                     <li>
                                         <a href="{{ route('addreport') }}">
                                             Внесение отчета об исполнении приказа
                                         </a>
                                     </li>
-                                {{--@endcan--}}
+                                @endcan
                             </ul>
                         </li>
                     </ul>
@@ -119,7 +119,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
+
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
