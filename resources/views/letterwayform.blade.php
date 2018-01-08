@@ -1,6 +1,7 @@
 @extends('layouts.test')
 
 @section('content')
+
 <div class="row-fluid sortable">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -28,7 +29,7 @@
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Номер письма</label>
                         <div class="controls">
-                            <input type="text" class="span6 typeahead" name="number" id="typeahead">
+                            <input type="text" class="span6 typeahead" placeholder="search..." name="number" id="typeahead">
 
                         </div>
                     </div>

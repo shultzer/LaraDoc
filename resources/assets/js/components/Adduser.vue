@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <input type="text" placeholder="name" v-model="username"/>
             <input type="email" placeholder="email" v-model="email"/>
-            <!--<input type="password" placeholder="password" v-model="pwd"/>-->
+            <input type="password" placeholder="password" v-model="pwd"/>
             <select v-model="role">
                 <option value="1">guest</option>
                 <option value="2">rup</option>

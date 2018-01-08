@@ -7,6 +7,10 @@
         @endif
 
         <div class="row-fluid">
+            <meter value="2" min="0" max="10">2 out of 10</meter><br>
+            <progress value="22" max="100"></progress>
+        </div>
+        <div class="row-fluid">
 
             <div class="box span6">
                 <div class="box-header">

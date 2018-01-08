@@ -30,6 +30,7 @@
     <!-- start: Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
     <!-- end: Favicon -->
+
 </head>
 <body>
 <div id="app">
@@ -50,8 +51,8 @@
 
                         <!-- start: Notifications Dropdown -->
                         <li class="dropdown hidden-phone">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="icon-calendar"></i>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Шаблоны писем
+
                             </a>
                             <ul class="dropdown-menu tasks">
                                 <li class="dropdown-menu-title">
@@ -76,8 +77,8 @@
                         <!-- end: Notifications Dropdown -->
                         <!-- start: Message Dropdown -->
                         <li class="dropdown hidden-phone">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="icon-envelope"></i>
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Внесение данных
+
                             </a>
                             <ul class="dropdown-menu messages">
                                 <li class="dropdown-menu-title">
@@ -162,15 +163,15 @@
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
-                        <li><a href="/dashboard"><i class="icon-bar-chart"></i><span
+                        <li><a href="/dashboard"></i><span
                                         class="hidden-tablet">Админка</span></a>
                         </li>
-                        <li><a href="/"><i class="icon-bar-chart"></i><span
+                        <li><a href="/"><span
                                         class="hidden-tablet">Оперативная информация</span></a>
                         </li>
-                        <li><a href="/table"><i class="icon-align-justify"></i><span
+                        <li><a href="/table"></i><span
                                         class="hidden-tablet">Сводная таблица</span></a>
-                        <li><a href="/search"><i class="icon-align-justify"></i><span 
+                        <li><a href="/search"></i><span
                                         class="hidden-tablet">Поиск</span></a>
                         </li>
                     </ul>

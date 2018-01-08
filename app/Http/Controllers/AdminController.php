@@ -49,12 +49,13 @@
             $role = $request->role;
 
             $item = User::find($id);
+            $item->roles()->sync($role);
             $item->update([
               'name'     => $user,
               'email'    => $email,
               'password' => bcrypt($password),
             ]);
-            $item->roles()->attach($role);
+
 
             return $request;
         }
