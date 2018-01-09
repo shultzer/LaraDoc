@@ -156,9 +156,14 @@
             $order          = new Order;
             $report         = new Report;
             $companyletters = Completter::all();
-            foreach ( $companyletters as $item ) {
-                $ar[] = $item->number;
+            if ($companyletters->count() != 0){
+                foreach ( $companyletters as $item ) {
+                    $ar[] = $item->number;
+                }
+            }else{
+                $ar = [];
             }
+
             return view('letterwayform', [
               'ar'         => $ar,
               'completter' => $completter,

@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Companies;
     use App\Completter;
     use App\Property;
     use App\Spaletter;
@@ -17,10 +18,15 @@
 
         public function addcompletter (Property $property, Completter $completter, Spaletter $spaletter, Order $order, Report $report) {
 
+            $slug_org = Auth::user()->organization;
+            $name_org = Companies::where('slug', $slug_org)->first()->name;
+            $org = [$slug_org, $name_org];
+
 
             $item = $property->pluck('name', 'id');
             return view('addcompletter', [
               'item'       => $item,
+              'org'       => $org,
               'completter' => $completter,
               'spaletter'  => $spaletter,
               'order'      => $order,
@@ -42,6 +48,10 @@
               'doc'     => 'required',
               'company' => 'required',
               'reason'  => 'required',
+              'second_side_form'  => 'required',
+              'typeofdeal'  => 'required',
+
+
             ]);
             $user = Auth::user();
 
@@ -60,6 +70,8 @@
                                    'volume'  => $request->volume,
                                    'reason'  => $request->reason,
                                    'owner'   => $request->owner,
+                                   'typeofdeal'  => $request->typeofdeal,
+                                   'second_side_form'  => $request->second_side_form,
                                  ]);
                 $comlet->propertys()->attach($request->get('property'));
             }

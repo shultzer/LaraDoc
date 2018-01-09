@@ -4,16 +4,21 @@
 
     use App\Completter;
     use App\Order;
-    use App\Property;
     use App\Report;
     use App\Spaletter;
     use App\User;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Gate;
 
     class AdminController extends Controller {
 
 
         public function dashboard (Completter $completter, Spaletter $spaletter, Order $order, Report $report) {
+            if ( Gate::denies('create', $spaletter) ) {
+                return redirect()
+                  ->route('main')
+                  ->with([ 'message' => 'у вас нет  прав' ]);
+            }
             return view('admin.dashboard', [
               'completter' => $completter,
               'spaletter'  => $spaletter,
@@ -35,6 +40,7 @@
             $user = User::create([
               'name'     => $request->name,
               'email'    => $request->email,
+              'organization'    => $request->organization,
               'password' => bcrypt($request->password),
             ]);
             $user->roles()->attach($request->role);

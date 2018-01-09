@@ -17,6 +17,7 @@
         protected $fillable = [
           'name',
           'email',
+          'organization',
           'password',
         ];
 

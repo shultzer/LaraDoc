@@ -21,6 +21,8 @@
         $table->text('volume')->nullable();
         $table->text('reason');
         $table->text('owner');
+        $table->text('typeofdeal');
+        $table->text('second_side_form');
         $table->integer('user_id')->foreign()->references('id')->on('users')->onDelete('cascade');
         $table->integer('spaletters_id')->default(0)->foreign()->references('id')->on('spaletters')->onDelete('cascade');
         $table->integer('order_id')->default(0)->foreign();

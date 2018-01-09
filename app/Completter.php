@@ -16,6 +16,9 @@
           'owner',
           'user_id',
           'spaletter_id',
+          'typeofdeal',
+          'second_side_form',
+
         ];
 
         public function orders () {
@@ -48,8 +51,8 @@
 
         public function complettersWhithoutspaletter () {
             return $this->whereIn('spaletters_id', [
-                          NULL,
-                          0,
-                        ])->latest('created_at')->take(5)->get();
+              NULL,
+              0,
+            ])->latest('created_at')->take(5)->get();
         }
     }

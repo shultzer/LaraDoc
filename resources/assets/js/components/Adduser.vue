@@ -7,6 +7,10 @@
         <div class="container-fluid">
             <input type="text" placeholder="name" v-model="username"/>
             <input type="email" placeholder="email" v-model="email"/>
+            <select v-model="org">
+                <option v-for="comp in comps" :value="comp.slug">{{ comp.name}}</option>
+            </select>
+
             <input type="password" placeholder="password" v-model="pwd"/>
             <select v-model="role">
                 <option value="1">guest</option>
@@ -38,6 +42,7 @@
                             <button @click="edit(user.id)" class="btn-primary">редактировать</button>
                         </div>
                     </td>
+
                     <div class="modal fade" id="updateuser" data-backdrop="false">
                         <div class="modal-header">
                             <h4 class="modal-title">Редактирование</h4>
@@ -79,8 +84,10 @@
         data() {
             return {
                 users: [],
+                comps: [],
                 username: '',
                 email: '',
+                org: '',
                 pwd: '',
                 role: '',
                 user_update: '',
@@ -95,6 +102,7 @@
                 axios.post('/adduser', {
                     name: this.username,
                     email: this.email,
+                    organization: this.org,
                     password: this.pwd,
                     role: this.role
                 }).then(response => {
@@ -104,6 +112,9 @@
             getuserslist() {
                 axios.get('/getuserslist').then(response => {
                     this.users = response.data;
+                });
+                axios.get('/companies').then(response => {
+                    this.comps = response.data;
 
                 })
             },

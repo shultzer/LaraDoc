@@ -37,7 +37,7 @@
                         <div class="control-group">
                             <label class="control-label" for="date01">Дата отчета</label>
                             <div class="controls">
-                                <input type="text" name="date"  id="date01" value="">
+                                <input type="text" name="date"  id="date01" value="<?= date('d.m.Y')?>">
                             </div>
                         </div>
 

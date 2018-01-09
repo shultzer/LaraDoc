@@ -163,9 +163,12 @@
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
-                        <li><a href="/dashboard"></i><span
-                                        class="hidden-tablet">Админка</span></a>
-                        </li>
+                        @if(\Illuminate\Support\Facades\Auth::user()!=NULL)
+                            @if(\Illuminate\Support\Facades\Auth::user()->roles()->first()->role == 'admin')
+                                <li><a href="/dashboard"><span class="hidden-tablet">Админка</span></a>
+                                </li>
+                            @endif
+                        @endif
                         <li><a href="/"><span
                                         class="hidden-tablet">Оперативная информация</span></a>
                         </li>

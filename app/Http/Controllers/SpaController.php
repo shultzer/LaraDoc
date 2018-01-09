@@ -15,7 +15,6 @@
     class SpaController extends Controller {
 
 
-
         public function addspaletter (Property $property, Completter $completter, Order $order, Report $report) {
             $spaletter                    = new Spaletter();
             $item                         = $property->pluck('name', 'id');
@@ -309,7 +308,7 @@
                 $owner = $arendodatel;
             }
 
-            $this->buildfilename ($dog, $mov, $type, $cont, $wall, $contractor, $template);
+            $this->buildfilename($dog, $mov, $type, $cont, $wall, $contractor, $template);
 
             $zip = new ZipArchive;
             copy($template, 'arenda.docx');
@@ -352,7 +351,6 @@
                     $arendodatel,
                     $target,
                   ], $content);
-                //dd($content);
                 /*Удаляем имеющийся в архиве document.xml*/
                 $zip->deleteName('word/document.xml');
                 /*Пакуем созданный нами ранее и закрываем*/
@@ -364,8 +362,6 @@
             // Отдаём вордовский файл
             header("Cache-Control: public");
             header("Content-Description: File Transfer");
-            header('X-Accel-Redirect: ' . $fileName);
-            header('Content-Type: application/octet-stream');
             header("Content-Disposition: attachment; filename=$fileName");
             header("Content-Type: application/msword");
             header("Content-Transfer-Encoding: binary");

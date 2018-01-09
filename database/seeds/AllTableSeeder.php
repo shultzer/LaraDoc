@@ -15,10 +15,11 @@
          */
 
         public function run () {
-            $faker = Factory::create();
-            $this->createcomletters($faker);
-            $this->createuser($faker);
+            //$faker = Factory::create();
+            //$this->createcomletters($faker);
+            $this->createuser();
             $this->attachrole();
+            $this->createroles();
 
         }
 
@@ -33,9 +34,9 @@
                   'number'  => $faker->unique->numberBetween(0, 100),
                   'date'    => $faker->date(),
                   'doc'     => $faker->ImageUrl(),
-                  'company' => IndexController::getcompanies( array_rand(IndexController::getcompanies())),
+                  'company' => IndexController::getcompanies(array_rand(IndexController::getcompanies())),
                   'reason'  => '294',
-                  'owner' => 'ОАО "ФФФ"',
+                  'owner'   => 'ОАО "ФФФ"',
                   'user_id' => factory(App\User::class)->create()->id,
                 ]);
 
@@ -50,12 +51,14 @@
             $this->getTable('role_user');
             User::all()->first()->roles()->attach('5');
         }
+
         private function createuser () {
             $usertable = $this->getTable('users');
             \App\User::create([
-              'name'     => 'shultz',
-              'password' => '$2y$10$HSHyDBCksHgATNrvX1KIL.F3b3QASdu9HMzTZN0IxoKkYTwlm3cQi',
-              'email'    => 'skorohods@mail.ru',
+              'name'         => 'shultz',
+              'password'     => '$2y$10$HSHyDBCksHgATNrvX1KIL.F3b3QASdu9HMzTZN0IxoKkYTwlm3cQi',
+              'email'        => 'skorohods@mail.ru',
+              'organization' => 'admin',
             ]);
         }
 
@@ -65,5 +68,15 @@
             $table->truncate();
 
             return $table;
+        }
+
+        private function createroles () {
+            $roles = [ 'guest', 'rup', 'spa', 'min', 'admin' ];
+            $this->getTable('roles');
+            foreach ( $roles as $role ) {
+                \App\Role::create([
+                  'role' => $role,
+                ]);
+            }
         }
     }

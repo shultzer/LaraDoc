@@ -35,16 +35,15 @@
                         <div class="control-group">
                             <label class="control-label" for="date01">Дата письма</label>
                             <div class="controls">
-                                <input type="text" name="date" id="date01" value="">
+                                <input type="text" name="date" id="date01" value="<?= date('d.m.Y')?>">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="selectError">Наименование организации</label>
                             <div class="controls">
                                 <select id="selectError" name="company" data-rel="chosen">
-                                    <option name="" selected></option>
                                     @foreach(\App\Http\Controllers\IndexController::getcompanies() as $key=>$value)
-                                        <option name="{{ $key }}">{{ $value }}</option>
+                                        <option name="{{ $key }}" <?php ( $key == $org[ 0 ] ? 'selected' : '' )?>>{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,7 +60,6 @@
                             <label class="control-label">Категория имущества</label>
                             <div class="controls">
                                 @foreach($item as $key=> $value)
-
                                     <label class="checkbox inline">
                                         <input type="checkbox" name="property[]" value="{{ $key }}"> {{ $value }}
                                     </label>
@@ -81,7 +79,7 @@
                         <div class="control-group">
                             <label class="control-label" for="dealtype">Вид сделки</label>
                             <div class="controls">
-                                <select id="dealtype" name="dealtype" data-rel="chosen">
+                                <select id="dealtype" name="typeofdeal" data-rel="chosen">
                                     <option name="" selected></option>
                                     <option value="receive">Принять</option>
                                     <option value="transferto">Передать</option>
@@ -93,7 +91,7 @@
                             <label class="control-label" for="ownership">Форма собственности второй стороны
                                 сделки</label>
                             <div class="controls">
-                                <select id="ownership" name="ownership" data-rel="chosen">
+                                <select id="ownership" name="second_side_form" data-rel="chosen">
                                     <option name="" selected></option>
                                     <option value="private">Частная</option>
                                     <option value="communal">Коммунальная</option>
@@ -102,7 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        {{--<div class="control-group">
                             <label class="control-label" for="ownership">Тип имущества</label>
                             <div class="controls">
                                 <select id="ownership" name="ownership" data-rel="chosen">
@@ -112,14 +110,13 @@
                                     <option value="republic">Оборудование</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>--}}
 
                         <div class="control-group">
                             <label class="control-label" for="selectError">Основание</label>
                             <div class="controls">
                                 <select id="selectError" name="reason" data-rel="chosen">
                                     <option name="" selected></option>
-                                    <option value="231">231 Распоряжение</option>
                                     <option value="294">294 Указ</option>
                                     <option value="50">50 Указ</option>
                                 </select>

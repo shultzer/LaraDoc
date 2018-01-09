@@ -15,6 +15,7 @@
             Schema::create('roles', function (Blueprint $table) {
                 $table->increments('id');
                 $table->text('role');
+                $table->timestamps();
             });
             Schema::create('role_user', function (Blueprint $table) {
                 $table->integer('user_id')->index();
@@ -29,6 +30,6 @@
          */
         public function down () {
             Schema::dropIfExists('roles');
-            Schema::dropIfExists('user_role');
+            Schema::dropIfExists('role_user');
         }
     }
