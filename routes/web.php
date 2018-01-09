@@ -19,7 +19,7 @@
 
     Route::get('/companies', 'CompaniesController@show')->name('companies');
     Route::post('/addcompany', 'CompaniesController@store');
-    Route::post('/destroy/{id}', 'CompaniesController@destroy');
+    Route::delete('/destroy/{id}', 'CompaniesController@destroy');
     Route::post('/update/{id}', 'CompaniesController@update');
 
     Route::get('/properties', 'PropertyController@show')->name('companies');

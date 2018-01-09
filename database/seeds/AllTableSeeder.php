@@ -20,6 +20,7 @@
             $this->createuser();
             $this->attachrole();
             $this->createroles();
+            $this->createcompanies();
 
         }
 
@@ -59,6 +60,13 @@
               'password'     => '$2y$10$HSHyDBCksHgATNrvX1KIL.F3b3QASdu9HMzTZN0IxoKkYTwlm3cQi',
               'email'        => 'skorohods@mail.ru',
               'organization' => 'admin',
+            ]);
+        }
+        private function createcompanies () {
+            $this->getTable('companies');
+            \App\Companies::create([
+              'name'         => 'Админ',
+              'slug' =>'admin'
             ]);
         }
 

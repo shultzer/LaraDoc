@@ -43,7 +43,6 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" href="/"><span>{{ config('app.name', 'Госимущество') }}</span></a>
-
                 <!-- start: Header Menu -->
 
                 <!-- end: Header Menu -->
@@ -58,7 +57,7 @@
     <div class="container-fluid-full">
         <div class="row-fluid">
 
-                <!-- start: Main Menu -->
+            <!-- start: Main Menu -->
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
@@ -68,12 +67,12 @@
                                 </li>
                             @endif
                         @endif
-                        <li><a href="/"><i class="icon-bar-chart"></i><span
+                        <li><a href="/"><span
                                         class="hidden-tablet">Оперативная информация</span></a>
                         </li>
-                        <li><a href="/table"><i class="icon-align-justify"></i><span
+                        <li><a href="/table"><span
                                         class="hidden-tablet">Сводная таблица</span></a>
-                        <li><a href="/search"><i class="icon-align-justify"></i><span class="hidden-tablet">Поиск</span></a>
+                        <li><a href="/search"><span class="hidden-tablet">Поиск</span></a>
                         </li>
                         {{-- <li>
                              <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span

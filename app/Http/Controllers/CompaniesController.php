@@ -85,6 +85,7 @@ class CompaniesController extends Controller
      */
     public function destroy($id)
     {
-        Companies::destroy($id);
+        $deleted = Companies::destroy($id);
+        return response()->json($deleted);
     }
 }

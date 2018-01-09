@@ -1,42 +1,42 @@
 <template>
 
-        <div class="box span6">
-            <div class="box-header">
-                <h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Организации, входящие в
-                    состав объединения</h2>
+    <div class="box span6">
+        <div class="box-header">
+            <h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Организации, входящие в
+                состав объединения</h2>
 
-            </div>
-            <div class="container-fluid">
-                <input type="text" v-model="companyname"/>
-                <button @click="addcompany" class="btn-success">Добавить</button>
-            </div>
-            <div class="box-content">
-                <table class="table table-bordered">
+        </div>
+        <div class="container-fluid">
+            <input type="text" v-model="companyname"/>
+            <button @click="addcompany" class="btn-success">Добавить</button>
+        </div>
+        <div class="box-content">
+            <table class="table table-bordered">
 
-                    <thead>
-                    <tr>
-                        <th>Организация</th>
-                        <th>Действия</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <thead>
+                <tr>
+                    <th>Организация</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
 
-                    <tr v-for="company in companies">
-                        <td>{{ company.name}}</td>
-                        <td>
-                            <div class="box-icon">
-                                <button @click="destroy(company.id)" class="btn-danger">удалить</button>
-<!--
-                                <button @click="edit(company.id)" class="btn-primary">редактировать</button>
--->
-                            </div>
-                        </td>
-                    </tr>
+                <tr v-for="company in companies">
+                    <td>{{ company.name}}</td>
+                    <td>
+                        <div class="box-icon">
+                            <button @click="destroy(company.id)" class="btn-danger">удалить</button>
+                            <!--
+                                                            <button @click="edit(company.id)" class="btn-primary">редактировать</button>
+                            -->
+                        </div>
+                    </td>
+                </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div><!--/span-->
+                </tbody>
+            </table>
+        </div>
+    </div><!--/span-->
 </template>
 
 <script>
@@ -45,7 +45,7 @@
         */
         created() {
             axios.get('/companies').then(response => {
-                    this.companies = response.data
+                this.companies = response.data
             })
         },
         data() {
@@ -64,7 +64,8 @@
                 })
             },
             destroy(id) {
-                axios.post('destroy/' + id).then(response => {
+                axios.delete('/destroy/' + id).then(response => {
+                    console.log(response);
                     axios.get('/companies').then(response => {
                         this.companies = response.data
                     })
